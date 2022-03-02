@@ -1,0 +1,127 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400px;
+    color: #333333;
+}
+.box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 50px);
+    background-image: url('../assets/img/main.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-top: 66px;
+}
+@media screen and (max-width: 2000px) {
+    .box {
+        background: #ffffff;
+    }
+}
+.conteiner {
+   padding: 0 165px;
+}
+.header__box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media screen and (max-width: 2000px) {
+    .header__box {
+        flex-direction: column;
+    }
+}
+.nav__list{
+    font-size: 41px;
+    line-height: 54px;
+    font-weight: 500;
+    display: flex;
+    gap: 150px;
+}
+.nav__list_link {
+    text-decoration: none;
+    color: #333333;
+}
+.nav__list_link:hover{
+    background-color: #333333;
+    color: white;
+}
+.logo__img{
+    width:450px;
+    height: 136px;
+}
+@media screen and (max-width: 2000px) {
+    .logo__img {
+        margin-bottom: 100px;
+    }
+}
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: end;
+    margin-top: 288px;
+    width: 1100px;
+    margin-left: auto;
+}
+.main__title{
+    text-transform: uppercase;
+    font-size: 164px;
+    line-height: 163px;
+    font-weight: 900;
+}
+.line{
+    margin-top: 86px;
+    width: 953px;
+    height: 32px;
+    background-color: #00b4ff;
+    border: none;
+    margin-left: auto;
+}
+.main__info_title{
+    margin-top: 85px;
+    font-family: Roboto;
+    text-align: end;
+    font-size: 82px;
+    line-height: 122px;
+    font-weight: 700;
+    color: #181818;
+}
+.main__info_text{
+    margin-top: 39px;
+    font-family: Roboto;
+    font-size: 41px;
+    line-height: 54px;
+    font-weight: 400;
+}
+.main__info_link{
+    text-decoration: none;
+    margin-top: 60px;
+    font-size: 41px;
+    line-height: 68px;
+    font-weight: 600;
+    color: #333333;
+}
+.main__info_social{
+    margin-top: 57px;
+    display: flex;
+    gap: 24px;
+    justify-content: end;
+}
+.now{
+    justify-content: flex-end;
+    margin-top: 207px;
+    display: flex;
+    align-items: center;
+    gap: 31px;
+}
+.now__text{
+    line-height: 0;
+    font-family: Acme;
+    font-size: 58.4px;
+    font-weight: 400;
+}
+.footer{
+  margin-top: auto;
+}
