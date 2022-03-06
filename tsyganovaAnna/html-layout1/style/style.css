@@ -1,0 +1,162 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+header {
+  height: 8vh;
+  display: flex;
+  justify-content: space-between;
+}
+header * {
+  padding: 0.5% 5%;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-around;
+  padding-left: 10px;
+  font-size: 1rem;
+  font-family: Acme;
+}
+.navLink {
+  padding: 10px 6px;
+  font-weight: bold;
+}
+.navLink:hover, .navLink:focus-visible {
+  background: black;
+  color: white;
+}
+a {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
+.menu {
+  display: none;
+}
+main {
+  position: relative;
+  background-image: url('../assets/dogs.png');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-attachment: fixed; 
+  background-size: contain;
+  margin: 0 5%;
+  height: calc(100vh - 8vh);
+}
+.mainText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 30%;
+  float: right;
+  gap: 1rem;
+  margin-top: 5%;
+}
+.dogsMain {
+  display: none;
+}
+.mainText * {
+  margin: 0;
+  text-align: right;
+}
+.title {
+  font-size: calc(2.5rem + 2.5vh);
+  font-family: Montserrat;
+  color: rgb(51, 51, 51);
+  line-height: 1;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.line {
+  background-color: rgb(0, 180, 255);
+  width: 88%;
+  height: 2vh;
+}
+.subtitle {
+  font-size: calc(1rem + 2.5vh);
+  font-family: Roboto;
+  color: rgb(24, 24, 24);
+  font-weight: bold;  
+  text-transform: uppercase;
+}
+.description {
+  font-size: calc(0.5rem + 1.1vh);
+  font-family: Roboto;
+  color: rgb(51, 51, 51);
+  line-height: 1.333;
+}
+.web {
+  font-size: 1.1rem;
+  font-family: Montserrat;
+  color: rgb(51, 51, 51);
+  font-weight: bold;
+}
+.socialMedia {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+.socialMedia > a{
+  width: 10%;
+}
+.socialMediaIcon {
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+  padding-top: 3px;
+}
+.startButton {
+  margin: 10% 0;
+  font-size: 1.3rem;
+  font-family: Acme;
+  color: rgb(51, 51, 51);
+  display: inline-flex;
+  gap: 1rem;
+  text-transform: uppercase
+}
+.startButton > img {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+@media screen and (max-width: 1200px) {
+  .mainText {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 768px) {
+  main {
+    background-image: none;
+  }
+  .dogsMain {
+    display: block;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-attachment: fixed; 
+    background-size: contain;
+    width: 100%;
+  }
+  .mainText {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 576px) {
+  main {
+    background: white;
+  }
+  nav {
+    display: none;
+  }
+  .dogsMain {
+    display: none;
+  }
+  .mainText {
+    width: 100%;
+  }
+  .menu {
+    display: block;
+  }
+}
