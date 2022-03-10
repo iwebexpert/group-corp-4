@@ -1,0 +1,902 @@
+{
+	"info": {
+		"_postman_id": "67d6f8d1-0a4e-419b-a306-e5ed24765520",
+		"name": "cms",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Проверка на получение валидных данных от сервера\r",
+									"let scheme = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\"id\", \"name\",\"email\",\"password\",\"role\"],\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\"type\": \"integer\"},\r",
+									"        \"name\": {\"type\": \"string\"},\r",
+									"        \"email\": {\"type\": \"string\"},\r",
+									"        \"password\": {\"type\": \"string\"},\r",
+									"        \"role\": {\"type\": \"string\"}\r",
+									"    }\r",
+									"}\r",
+									"pm.test(\"Scheme User is valid\", function() {\r",
+									"    pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Elena",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "1223331@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "22222",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "user",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change data user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"name\": \"David\",\r\n      \"password\": \"39338\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove one user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User with settings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id/?_embed=settings",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id",
+								""
+							],
+							"query": [
+								{
+									"key": "_embed",
+									"value": "settings"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pages",
+			"item": [
+				{
+					"name": "Get all pages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Проверка на получение валидных данных от сервера\r",
+									"let scheme = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\"id\", \"url\",\"title\",\"content\",\"userId\"],\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\"type\": \"integer\"},\r",
+									"        \"url\": {\"type\": \"string\"},\r",
+									"        \"title\": {\"type\": \"string\"},\r",
+									"        \"content\": {\"type\": \"string\"},\r",
+									"        \"userId\": {\"type\": \"integer\"}\r",
+									"    }\r",
+									"}\r",
+									"pm.test(\"Scheme User is valid\", function() {\r",
+									"    pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get pages to author",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Проверка на получение валидных данных от сервера\r",
+									"let scheme = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"items\": {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\"id\", \"url\",\"title\",\"content\",\"userId\"],\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\"type\": \"integer\"},\r",
+									"        \"url\": {\"type\": \"string\"},\r",
+									"        \"title\": {\"type\": \"string\"},\r",
+									"        \"content\": {\"type\": \"string\"},\r",
+									"        \"userId\": {\"type\": \"integer\"}\r",
+									"    }\r",
+									"}\r",
+									"}\r",
+									"pm.test(\"Scheme User is valid\", function() {\r",
+									"    pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages/?userId=3",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								""
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new page",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"url\": \"page6\", \r\n\"title\": \"Page6\", \r\n\"content\": \"Some content...\", \r\n\"userId\": 3 \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/pages",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change data page",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n     \"content\": \"Change content...\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/pages/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove one page",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get pages with comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages?_embed=comments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages"
+							],
+							"query": [
+								{
+									"key": "_embed",
+									"value": "comments"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all comments to page №3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages/:id/?_embed=comments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								":id",
+								""
+							],
+							"query": [
+								{
+									"key": "_embed",
+									"value": "comments"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Get all comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/comments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Проверка на получение валидных данных от сервера\r",
+									"let scheme = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\"id\", \"pageId\",\"userId\",\"content\"],\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\"type\": \"integer\"},\r",
+									"        \"pageId\": {\"type\": \"integer\"},\r",
+									"        \"userId\": {\"type\": \"integer\"},\r",
+									"        \"content\": {\"type\": \"string\"}\r",
+									"    }\r",
+									"}\r",
+									"pm.test(\"Scheme User is valid\", function() {\r",
+									"    pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/comments/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comment to author",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/comments/?userId=2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments",
+								""
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2",
+									"description": "get all comments to author"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n      \"pageId\": 2,\r\n      \"userId\": 1,\r\n      \"content\": \"My comment #4...\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/comments/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change data comment",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"content\": \"My comment #2 changed\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/comments/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove one comment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/comments/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all comments to page № 3 and author № 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/comments?pageId=3&userId=2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "pageId",
+									"value": "3"
+								},
+								{
+									"key": "userId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Settings",
+			"item": [
+				{
+					"name": "Get all settings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/settings",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one setting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Проверка на получение валидных данных от сервера\r",
+									"let scheme = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\"id\", \"theme\",\"userId\"],\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\"type\": \"integer\"},\r",
+									"        \"theme\": {\"type\": \"string\"},\r",
+									"        \"userId\": {\"type\": \"integer\"}\r",
+									"    }\r",
+									"}\r",
+									"pm.test(\"Scheme User is valid\", function() {\r",
+									"    pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/settings/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new settings",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n      \"theme\": \"light\",\r\n      \"userId\": 2\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/settings",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change data setting",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"theme\": \"dark\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/settings/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove one setting",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/settings/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get settings with data User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/settings/?_expand=user&userId=3",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								""
+							],
+							"query": [
+								{
+									"key": "_expand",
+									"value": "user"
+								},
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Проверка на ошибки при выполнении запроса",
+					"pm.test(\"Status (collection) response in not error\", function() {",
+					"        pm.response.to.not.be.error;",
+					"});",
+					"// Проверка ответа сервера в формате JSON",
+					"pm.test(\"Response (collection) format is JSON\", function() {",
+					"        pm.response.to.be.json;",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
