@@ -1,0 +1,614 @@
+.title {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 188px;
+  background-color: white;
+}
+
+@media  screen and (max-width: 576px){
+  .title {
+    margin: 30px 1%;
+  }
+}
+.title__menu {
+  display: flex;
+  padding: 0%;
+  margin: 0;
+}
+@media  screen and (max-width: 576px){
+  .title__menu{
+    position: relative;
+    display: inline-block;
+  }
+  .title__menu:hover .titke__content{
+    display: block;
+  } 
+}
+.titke__content {
+  display: flex;
+  gap: 15px;
+  font-family: 'Roboto Slab', serif;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #373838;
+  align-items: center;
+}
+
+.titke__content div {
+  padding: 10px;
+}
+
+.titke__content div:hover {
+  cursor: pointer;
+  background-color: #9b242d;
+  color: #f1efec;
+  transition: background-color 1s, color 1s;
+}
+
+@media  screen and (max-width: 576px){
+  .titke__content {
+    text-align: right;
+    display: none;
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 300%;
+    height: auto;
+    background-color: white;
+  }
+}
+
+@media  screen and (max-width: 576px){
+  .titke__content div {
+    display: block;
+  }
+}
+
+.title__icon{
+  visibility: hidden;
+}
+@media  screen and (max-width: 576px){
+  .title__icon {
+    visibility: visible;
+  }
+}
+/*------------------End Header--------------------*/
+
+.main__content {
+  /* padding: 1em; */
+  display: grid;
+  width: 100%;
+  height: auto;
+  grid-template-areas:
+    'welcome welcome welcome welcome welcome'
+    'logo logo anthill donate donate'
+    'sign sign sign . .'
+    'grass grass grass facebook .';
+  grid-template-columns: 0.4fr repeat(3, 0.8fr) 0.4fr;
+  grid-template-rows: 1.6fr repeat(3, 0.6fr);
+  background-image: url(img/layer_17_291.png);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+}
+@media  screen and (max-width: 576px){
+  
+  .main__content{
+    width: 100%;
+    height: auto; 
+    grid-template-areas:
+    'welcome welcome welcome'
+    'sign sign sign'
+    'donate donate donate'
+    '. logo facebook'
+    'grass grass grass';
+    grid-template-columns:repeat(3, 1fr);
+    grid-template-rows: 1.6fr repeat(4, 0.6fr);
+    background-image:none;
+  }
+    
+}
+.main__title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(img/backgriund.png);
+  grid-area: welcome;
+}
+.main__title-welcome {
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+  font-size: 50px;
+  line-height: 1.2;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.main__title-par {
+  padding: 10px;
+  font-family: 'Roboto Slab', serif;
+  font-size: 24px;
+  line-height: 38px;
+  font-weight: 100;
+  text-transform: none;
+  color: #ffffff;
+}
+.main__title-donate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  text-decoration: none;
+  width: 281px;
+  height: 69px;
+  background-color: #ffffff;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 6px solid rgba(0, 0, 0, 0.06);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #46a651;
+}
+
+.main__title-donate:hover {
+  background-color: #fa89af;
+  color: #373838;
+  transition: background-color 0.5s linear, color 0.5s linear;
+}
+.main__logo {
+  padding: 5em;
+  grid-area: logo;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: white;
+}
+.main__picter-anthill {
+  width: 100%;
+  height: 100%;
+  grid-area: anthill;
+}
+@media  screen and (max-width: 576px){
+  .main__picter-anthill{
+    display: none;
+  }
+}
+.main__request {
+  display: flex;
+  justify-content: center;
+  padding: 5em;
+  flex-direction: column;
+  grid-area: donate;
+  background-color: #9b242d;
+}
+
+
+.main__request-donate {
+  text-align: left;
+  font-family: 'Roboto Slab';
+  font-size: 40px;
+  line-height: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  padding: 10px;
+}
+
+@media  screen and (max-width: 752px){
+  .main__request-donate {
+    line-height: 40px;
+  }
+}
+.main__request-par {
+  font-family: 'Roboto Slab';
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #ffffff;
+  padding: 10px;
+}
+.main__email {
+    display: flex;
+    padding: 2em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #46a651;
+    grid-area: sign;
+    animation: ChangeColor 5s infinite ease;
+}
+
+.main__email-conteiner {
+    display: flex;
+    flex-direction: row;
+    width: 100;
+    height: auto;
+}
+.main__email-sign {
+    font-family: 'Roboto Slab';
+    padding: 1em 0;
+    font-size: 40px;
+    line-height: 22px;
+    font-weight: 700;
+    color: #ffffff;
+}
+@media  screen and (max-width: 752px){
+  .main__email-sign {
+    line-height: 40px;
+  }
+}
+.main__email-conteiner input {
+    border: transparent solid 1px;
+}
+.main__email-value {
+    background-color: #5ec069;  
+}
+
+.main__email-value::placeholder {
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #bee9c3;
+}
+
+
+.main__email-button {
+    font-family: Roboto;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+    color: white;
+    background-color: #487e4e
+}
+.main__email-button:hover{
+    cursor: pointer;
+    background-color: aliceblue;
+    color: #373838;
+}
+.main__email-par {
+    font-family: Roboto;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+    color: #ffffff;
+    padding: 1em 0;
+    text-align: right;
+    width: 70%;
+    height: auto;
+}
+
+.main__grass {
+  width: 100%;
+  height: 100%;
+  grid-area: grass;
+}
+.main__facebook {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #3b5997;
+  grid-area: facebook;
+}
+
+.main__facebook-text {
+  margin: 30px;
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.main__second-content {
+  padding-bottom: 10%;
+  gap: 10px;
+  display: grid;
+  width: 100%;
+  height: auto;
+  grid-template-areas: 
+  'event event event event event'
+  '. cal1 cal2 cal3 .';
+  grid-template-columns: 0.4fr repeat(3, 0.8fr) 0.4fr;
+  grid-template-rows: 2fr 3fr;
+}
+
+@media  screen and (max-width: 576px){
+  .main__second-content {
+    grid-template-areas:
+    'event'
+    'cal1'
+    'cal2'
+    'cal3';
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4,2fr);
+  }
+}
+
+@media  screen and (max-width: 576px){
+  .main__second-content  .main__calendar-1,
+  .main__second-content  .main__calendar-2{
+    padding: 3%;
+    border-bottom: #373838 solid 1px;
+  }
+}
+
+.main__second-content>div{
+  text-align: center;
+}
+.main__events {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  grid-area: event;
+  font-family: 'Roboto Slab';
+  font-size: 50px;
+  line-height: 1.2;
+  font-weight: 300;
+  color: #373838;
+}
+
+.main__calendar-1 {
+  grid-area: cal1;
+}
+.main__calendar-fig {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.main__calendar-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 88px;
+  height: 88px;
+  background-color: #373838;
+  font-family: 'Roboto Slab';
+  font-size: 36px;
+  line-height: 1.2;
+  font-weight: 700;
+  transition: background-color 1s linear;
+  color: #ffffff;
+}
+.main__calendar-trieng {
+  width: 0; 
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #373838;
+  transition: border-top 1s linear;
+}
+.main__calendar-month {
+  padding: 15px;
+  font-family: 'Roboto Slab';
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #9b242d;
+}
+.main__calendar-title {
+  font-family: 'Roboto Slab';
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #373838;
+
+}
+.main__calendar-par {
+  padding: 15px;
+  font-family: Roboto;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #373838;
+}
+
+.main__calendar-2 {
+  grid-area: cal2;
+}
+.main__calendar-3 {
+  grid-area: cal3;
+}
+.main__colendar-button {
+  background-color: #373838;
+  border: transparent solid 1px;
+  font-family: Roboto;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #ffffff;
+  transition: background-color 1s linear;
+}
+.main__calendar:hover .main__calendar-number, 
+.main__calendar:hover .main__colendar-button {
+  background-color:#9b242d;
+}
+.main__calendar:hover .main__calendar-trieng {
+  border-top: 20px solid #9b242d;
+}
+
+.main__calendar:hover .main__colendar-button {
+  cursor: pointer;
+}
+
+
+.footer { 
+  background-color: #373838;
+}
+.footer__content {
+  max-width: 1212px;
+  margin: 0 auto;
+}
+.footer_-content-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+  gap: 15px;
+  font-family: 'Roboto Slab';
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #f1efec;
+}
+.footer_-content-main div {
+  padding: 1%;
+  transition: background-color 0.5s linear;
+}
+.footer_-content-main div:hover {
+  background-color: #9b242d;
+  cursor: pointer;
+}
+@media  screen and (max-width: 576px){
+  .footer_-content-main{
+    display: none;
+  }
+}
+.footer__content-nav {
+  display: grid;
+  grid-template-areas: 
+  'social letter contact';
+  grid-template-columns: repeat(3,1fr);
+  padding: 3% 0;
+}
+@media  screen and (max-width: 576px){
+  .footer__content-nav{
+    grid-template-areas: 
+  '. social .'
+  '. letter .'
+  '. contact .';
+  grid-template-columns: repeat(3,1fr);
+  }
+}
+.footer__content-social {
+  font-family: 'Roboto Slab';
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #c6c6c6;
+  grid-area: social;
+  text-align: left;
+}
+.footer__content-title {
+  font-family: 'Roboto Slab';
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #c6c6c6;
+  padding: 3% 0;
+}
+.footer__content-img {
+  padding: 0%;
+  margin: 0;
+  display: flex;
+  gap: 5px;
+
+}
+.footer__content-img div{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.5s linear, height 0.5s linear;
+}
+
+.footer__content-img div:hover {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+}
+.footer__content-facebook {
+  background-color: #3b5997;
+}
+.footer__content-twitter {
+  background-color: #3ec2f3;
+}
+.footer__content-google {
+  background-color: #e44c41;
+}
+.footer__content-letter {
+  grid-area: letter;
+  text-align: left;
+}
+.footer__content-letter-enter {
+  display: flex;
+  gap: 0;
+  max-width: 324px;
+  max-height: 40px;
+  width: 100%;
+  height: 100%;
+}
+.footer__content-letter-enter input {
+  border: transparent solid 1px;
+}
+.footer__content-letter-enter-email {
+  background-color: #494949;
+  padding: 3%;
+}
+.footer__content-letter-enter-button {
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  background-color: #848484;
+  color: #373838;
+  transition: background-color 0.5s linear, color 0.5s linear;
+}
+
+.footer__content-letter-enter-button:hover {
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #9b242d;
+}
+.footer__content-contact {
+  grid-area: contact;
+  text-align: right;
+}
+.footer__content-contact-adress {
+  font-family: 'Open Sans';
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #848484;
+}
+@media  screen and (max-width: 576px){
+  .footer__content-contact{
+    text-align: left;
+  }
+}
+.footer__content-sourse {
+  text-align: center;
+  font-family: 'Roboto Slab';
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #777777;
+  padding: 3%;
+}
+
+@keyframes ChangeColor{
+  0%{
+    background-color: #46a651;
+  }
+  25%{
+    background-color: #6ed37c;
+  }
+  50%{
+    background-color: #c6ffcd;
+  }
+  75%{
+    background-color: #6ed37c;
+  }
+  100%{
+    background-color: #46a651;
+  }
+}
