@@ -5,6 +5,25 @@
   background-color: white;
 }
 
+@media  screen and (max-width: 576px){
+  .title {
+    margin: 30px 1%;
+  }
+}
+.title__menu {
+  display: flex;
+  padding: 0%;
+  margin: 0;
+}
+@media  screen and (max-width: 576px){
+  .title__menu{
+    position: relative;
+    display: inline-block;
+  }
+  .title__menu:hover .titke__content{
+    display: block;
+  } 
+}
 .titke__content {
   display: flex;
   gap: 15px;
@@ -30,7 +49,30 @@
 
 @media  screen and (max-width: 576px){
   .titke__content {
+    text-align: right;
     display: none;
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 300%;
+    height: auto;
+    background-color: white;
+  }
+}
+
+@media  screen and (max-width: 576px){
+  .titke__content div {
+    display: block;
+  }
+}
+
+.title__icon{
+  visibility: hidden;
+}
+@media  screen and (max-width: 576px){
+  .title__icon {
+    visibility: visible;
   }
 }
 /*------------------End Header--------------------*/
@@ -275,6 +317,26 @@
   grid-template-rows: 2fr 3fr;
 }
 
+@media  screen and (max-width: 576px){
+  .main__second-content {
+    grid-template-areas:
+    'event'
+    'cal1'
+    'cal2'
+    'cal3';
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4,2fr);
+  }
+}
+
+@media  screen and (max-width: 576px){
+  .main__second-content  .main__calendar-1,
+  .main__second-content  .main__calendar-2{
+    padding: 3%;
+    border-bottom: #373838 solid 1px;
+  }
+}
+
 .main__second-content>div{
   text-align: center;
 }
@@ -490,6 +552,7 @@
 }
 .footer__content-letter-enter-email {
   background-color: #494949;
+  padding: 3%;
 }
 .footer__content-letter-enter-button {
   font-family: Roboto;
