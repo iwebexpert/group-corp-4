@@ -1,0 +1,74 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "password": "1234",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "name": "Ivan",
+      "email": "ivan1234@domain.local",
+      "password": "123456",
+      "role": "admin"
+    },
+    {
+      "name": "Sergey",
+      "email": "Q@Q.com",
+      "password": "787878",
+      "role": "user",
+      "id": 4
+    },
+    {
+      "name": "Roman",
+      "email": "rr@rr.com",
+      "password": "123123",
+      "role": "admin",
+      "id": 5
+    }
+  ],
+  "pages": [
+    {
+      "id": 2,
+      "url": "about",
+      "title": "About",
+      "content": "Some content...",
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "url": "page1",
+      "title": "Page1",
+      "content": "1111111111111",
+      "userId": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "pageId": 4,
+      "userId": 2,
+      "content": "My comment #3..."
+    },
+    {
+      "pageId": "2",
+      "userId": "4",
+      "content": "My comment #12312",
+      "id": 3
+    }
+  ],
+  "settings": [
+    {
+      "id": 1,
+      "theme": "light",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "theme": "dark",
+      "userId": 2
+    }
+  ]
+}
