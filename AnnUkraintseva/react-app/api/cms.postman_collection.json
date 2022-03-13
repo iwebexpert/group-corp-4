@@ -1,0 +1,902 @@
+{
+	"info": {
+		"_postman_id": "9532b054-9f0d-42c7-a466-9e57fcdce3a8",
+		"name": "AnnaUkraintseva",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let template = `\r",
+									"<table>\r",
+									"    <tr>\r",
+									"        <td>#</td>\r",
+									"        <td>Name</td>\r",
+									"        <td>Email</td>\r",
+									"        <td>Password</td>\r",
+									"        <td>Role</td>\r",
+									"    </tr>\r",
+									"    {{#each response}}\r",
+									"        <tr>\r",
+									"        <td>{{id}}</td>\r",
+									"        <td>{{name}}</td>\r",
+									"        <td>{{email}}</td>\r",
+									"        <td>{{passvord}}</td>\r",
+									"        <td>{{role}}</td>\r",
+									"    </tr>\r",
+									"    {{/each}}\r",
+									"</table>\r",
+									"`;\r",
+									"\r",
+									"pm.visualizer.set(template,{\r",
+									"    response:pm.response.json()\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let scheme={\r",
+									"    \"type\":\"object\",\r",
+									"    \"required\": [\"id\",\"name\",\"email\",\"password\",\"role\"],\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\"type\":\"integer\"},\r",
+									"        \"\": {\"type\":\"string\"},\r",
+									"        \"\": {\"type\":\"string\"},\r",
+									"        \"\": {\"type\":\"string\"},\r",
+									"        \"\": {\"type\":\"string\"},\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Scheme User is valid\", function(){\r",
+									"    pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/{{UserId}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"{{UserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Jul",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "Jul12345@domain.local",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "09876",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "UserId",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Oleg",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "4876987",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "UserId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User with settings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/2/?_embed=settings",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"2",
+								""
+							],
+							"query": [
+								{
+									"key": "_embed",
+									"value": "settings"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pages",
+			"item": [
+				{
+					"name": "Get all pages",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/pages",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Pages",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let scheme={\r",
+									"    \"type\":\"object\",\r",
+									"    \"required\": [\"id\",\"url\",\"title\",\"content\",\"userId\"],\r",
+									"    \"properties\": {\r",
+									"        \"id\": {\"type\":\"integer\"},\r",
+									"        \"url\": {\"type\":\"string\"},\r",
+									"        \"title\": {\"type\":\"string\"},\r",
+									"        \"content\": {\"type\":\"string\"},\r",
+									"        \"userId\": {\"type\":\"integer\"},\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Scheme User is valid\", function(){\r",
+									"    pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/pages/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch pages",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/pages/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete pages",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post pages",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\": \"home\",\r\n    \"title\": \"Home\",\r\n    \"content\": \"Some content home...\",\r\n    \"userId\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/pages?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get users pages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages?userId=2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pages comment 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages/3/comments ",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								"3",
+								"comments "
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pages with comment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages/?_embed=comments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								""
+							],
+							"query": [
+								{
+									"key": "_embed",
+									"value": "comments"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Get all comment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/comments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/comments/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch comment",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pageId\": 3,\r\n    \"userId\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/comments/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post comments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pageId\": 4,\r\n    \"userId\": 3,\r\n    \"content\": \"My comment #10...\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/comments?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete comments",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/comments/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment third Pages and second User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/comments?pageId=3&userId=2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "pageId",
+									"value": "3"
+								},
+								{
+									"key": "userId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Settings",
+			"item": [
+				{
+					"name": "Get all setting",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/settings",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/settings/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch setting",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 4,\r\n    \"theme\": \"dark\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/settings/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post setting",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"theme\": \"light\",\r\n    \"userId\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/settings?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete settings",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/settings/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Settings with User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/settings/?userId=3&_expand=user",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								""
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								},
+								{
+									"key": "_expand",
+									"value": "user"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"State is Ok\", function(){",
+					"    pm.response.to.not.be.error;",
+					"});",
+					"",
+					"pm.test (\"Response is json\", function(){",
+					"    pm.response.to.be.json;",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "UserId",
+			"value": "2",
+			"type": "string"
+		},
+		{
+			"key": "PagesId",
+			"value": "3",
+			"type": "string"
+		}
+	]
+}
