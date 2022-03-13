@@ -1,0 +1,666 @@
+{
+	"info": {
+		"_postman_id": "85eaacc3-9c66-45f9-8fcf-9af786b8009f",
+		"name": "cms homework",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}users",
+							"host": [
+								"{{BASE_URL}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}users/1?userId=1",
+							"host": [
+								"{{BASE_URL}}users"
+							],
+							"path": [
+								"1"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Olga",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "olga2022@domain.local",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "user",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}users",
+							"host": [
+								"{{BASE_URL}}users"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "4",
+									"description": "4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Vasy",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}users/6",
+							"host": [
+								"{{BASE_URL}}users"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delite user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}users?userId=2",
+							"host": [
+								"{{BASE_URL}}users"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all users with settings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}users/3/?_embed=settings ",
+							"host": [
+								"{{BASE_URL}}users"
+							],
+							"path": [
+								"3",
+								""
+							],
+							"query": [
+								{
+									"key": "_embed",
+									"value": "settings "
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pages",
+			"item": [
+				{
+					"name": "all pages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}pages",
+							"host": [
+								"{{BASE_URL}}pages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all pages by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test('title is equal', function(){\r",
+									"//     pm.expect(pm.response.json().id).to.equal(pm.variables.)\r",
+									"// });\r",
+									"\r",
+									"const response = pm.response.json()\r",
+									"\r",
+									"const responseId = response.every((item)=> {item['url'] === true})\r",
+									"\r",
+									"console.log(response)\r",
+									"console.log(responseId)\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}pages?userId=3",
+							"host": [
+								"{{BASE_URL}}pages"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}pages/4",
+							"host": [
+								"{{BASE_URL}}pages"
+							],
+							"path": [
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post page",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "page2",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Page2",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Some content...",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}pages",
+							"host": [
+								"{{BASE_URL}}pages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit page",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "url",
+									"value": "page3",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Page3",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Some content...",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}pages/4",
+							"host": [
+								"{{BASE_URL}}pages"
+							],
+							"path": [
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delite page",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}pages/4",
+							"host": [
+								"{{BASE_URL}}pages"
+							],
+							"path": [
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all pages with comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}pages/?_embed=comments ",
+							"host": [
+								"{{BASE_URL}}pages"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "_embed",
+									"value": "comments "
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "all comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}comments",
+							"host": [
+								"{{BASE_URL}}comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}comments/1",
+							"host": [
+								"{{BASE_URL}}comments"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add comments",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "edit comments",
+					"request": {
+						"method": "PATCH",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "delite comments",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "all comments by page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}pages/3/comments",
+							"host": [
+								"{{BASE_URL}}pages"
+							],
+							"path": [
+								"3",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all comments by page and by user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}comments?pageId=3&userId=2",
+							"host": [
+								"{{BASE_URL}}comments"
+							],
+							"query": [
+								{
+									"key": "pageId",
+									"value": "3"
+								},
+								{
+									"key": "userId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Settings",
+			"item": [
+				{
+					"name": "all settings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}settings",
+							"host": [
+								"{{BASE_URL}}settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one settings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}settings/3",
+							"host": [
+								"{{BASE_URL}}settings"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add settings",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "theme",
+									"value": "dark",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}settings",
+							"host": [
+								"{{BASE_URL}}settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit settings",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "theme",
+									"value": "light",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}settings/4",
+							"host": [
+								"{{BASE_URL}}settings"
+							],
+							"path": [
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delite settings",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}settings/3",
+							"host": [
+								"{{BASE_URL}}settings"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all setiings with date of user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}settings/?userId=3&_expand=user",
+							"host": [
+								"{{BASE_URL}}settings"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								},
+								{
+									"key": "_expand",
+									"value": "user"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status ok\", function(){",
+					"pm.response.to.be.ok",
+					"})",
+					"",
+					"pm.test(\"Status 200\", function(){",
+					"pm.expect(pm.response.code).to.equal(200)",
+					"})",
+					"",
+					"pm.test(\"Not error\", function(){",
+					"pm.response.to.not.be.error",
+					"})",
+					"",
+					"pm.test(\"json?\", function(){",
+					"pm.response.to.be.json",
+					"})"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000/",
+			"type": "string"
+		}
+	]
+}
