@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./normalize.css" />
+    <link rel="stylesheet" href="./css.css" />
+    <link rel="stylesheet" href="./theme.css" />
+    <title>homework2</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__top">
+        <div class="container">
+          <a class="logo" href="/">
+            <picture>
+              <source class="logo__img" srcset="./img/logo_mobi.png" media="(max-width: 1024px)" />
+
+              <img class="logo__img" src="./img/logo.png" alt="logo" />
+            </picture>
+          </a>
+
+          <nav class="menu">
+            <ul class="list">
+              <li class="list__item">
+                <a class="list__link list__link--active" href="#">Home</a>
+              </li>
+              <li class="list__item">
+                <a class="list__link" href="#">About us</a>
+              </li>
+              <li class="list__item">
+                <a class="list__link" href="#">Projects</a>
+              </li>
+              <li class="list__item">
+                <a class="list__link" href="#">Blog</a>
+              </li>
+              <li class="list__item">
+                <a class="list__link" href="#">Events</a>
+              </li>
+              <li class="list__item">
+                <a class="list__link" href="#">Gallery</a>
+              </li>
+              <li class="list__item">
+                <a class="list__link" href="#">Contact us</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="burger">
+            <div class="burger__btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-list"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+                />
+              </svg>
+            </div>
+
+            <div class="burger__btn hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-x-lg"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
+                />
+              </svg>
+            </div>
+
+            <!-- <nav class="burger__menu hidden"> -->
+            <ul class="burger__menu hidden">
+              <li class="burger__item">
+                <a class="burger__link" href="#">Home</a>
+              </li>
+              <li class="burger__item">
+                <a class="burger__link" href="#">About us</a>
+              </li>
+              <li class="burger__item">
+                <a class="burger__link" href="#">Projects</a>
+              </li>
+              <li class="burger__item">
+                <a class="burger__link" href="#">Blog</a>
+              </li>
+              <li class="burger__item">
+                <a class="burger__link" href="#">Events</a>
+              </li>
+              <li class="burger__item">
+                <a class="burger__link" href="#">Gallery</a>
+              </li>
+              <li class="burger__item">
+                <a class="burger__link" href="#">Contact us</a>
+              </li>
+            </ul>
+            <!-- </nav> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="hero">
+        <h1>Welcome to my charity</h1>
+
+        <h2>Lorem Ipsum is simply dummy text of the printing and typesetting.</h2>
+
+        <button class="hero__button" type="button">Donate now</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="grid">
+        <div class="one">
+          <div class="grid__logo">
+            <img src="./img/logo.png" alt="logo" />
+          </div>
+        </div>
+        <div class="two"></div>
+        <div class="three">
+          <div class="three__text">Donate Now !</div>
+
+          <div class="three__subtext">Lorem Ipsum is simply dummy text.</div>
+        </div>
+        <div class="four">
+          <div class="text">Sign up to newsletter</div>
+
+          <div class="four__input">
+            <input type="text" />
+
+            <button>Subscribe</button>
+          </div>
+
+          <div class="subtext">
+            Lorem Ipsum is simply dummy text of the printing and typeset ing industry. Lorem Ipsum
+            has been the industry's standard dummy text ever since the 1500s, when an unknown
+            printer took a galley of type and scrambled
+          </div>
+        </div>
+        <div class="five"></div>
+        <div class="six"></div>
+        <div class="seven">
+          <span>f</span>
+
+          <p>Like Now !</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="main__content">
+          <span class="main__title">Our Events</span>
+
+          <div class="deck">
+            <div class="card">
+              <div class="card__number">18</div>
+              <div class="card__text">October</div>
+              <div class="card__title">Lorem Ipsum is simply</div>
+              <div class="card__subtitle">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                Ipsum has been the industry's standard unchanged
+              </div>
+
+              <button class="card__btn">More</button>
+            </div>
+
+            <div class="card">
+              <div class="card__number">18</div>
+              <div class="card__text">October</div>
+              <div class="card__title">Lorem Ipsum is simply</div>
+              <div class="card__subtitle">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                Ipsum has been the industry's standard unchanged
+              </div>
+
+              <button class="card__btn">More</button>
+            </div>
+
+            <div class="card">
+              <div class="card__number">18</div>
+              <div class="card__text">October</div>
+              <div class="card__title">Lorem Ipsum is simply</div>
+              <div class="card__subtitle">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                Ipsum has been the industry's standard unchanged
+              </div>
+
+              <button class="card__btn">More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__wrapper">
+        <div class="footer__top">
+          <ul class="footer__list">
+            <li class="footer__item">
+              <a class="footer__link footer__link--active" href="#">Home</a>
+            </li>
+            <li class="footer__item">
+              <a class="footer__link" href="#">About us</a>
+            </li>
+            <li class="footer__item">
+              <a class="footer__link" href="#">Projects</a>
+            </li>
+            <li class="footer__item">
+              <a class="footer__link" href="#">Blog</a>
+            </li>
+            <li class="footer__item">
+              <a class="footer__link" href="#">Events</a>
+            </li>
+            <li class="footer__item">
+              <a class="footer__link" href="#">Gallery</a>
+            </li>
+            <li class="footer__item">
+              <a class="footer__link" href="#">Contact us</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__center">
+          <div class="socials">
+            <span class="text">Follow Us</span>
+
+            <div class="socials__actions">
+              <a class="socials__item facebook" href="#">
+                <img src="./img/f.png" alt="" />
+              </a>
+
+              <a class="socials__item twitter" href="#">
+                <img src="./img/t.png" alt="" />
+              </a>
+
+              <a class="socials__item google" href="#">
+                <img src="./img/g.png" alt="" />
+              </a>
+            </div>
+          </div>
+
+          <label class="news">
+            <span class="text">News letter</span>
+
+            <div class="news__input">
+              <input type="text" />
+
+              <button>Subscribe</button>
+            </div>
+          </label>
+
+          <div class="contacts">
+            <span class="text">Contact Us</span>
+
+            <ul>
+              <li>Address</li>
+              <li>New Street</li>
+              <li>ph :xxxxx-xxx-xxx</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__bottom">My Charity © 2013 Allright Reserved</div>
+      </div>
+    </footer>
+
+    <script src="./js.js"></script>
+  </body>
+</html>
