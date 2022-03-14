@@ -105,3 +105,4 @@ dist
 
 # For IDE
 .idea/
+.vscode/

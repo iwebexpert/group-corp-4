@@ -1,0 +1,300 @@
+body 
+	margin: 0 
+	padding: 0 
+header 
+	height: 8vh 
+	display: flex
+	justify-content: space-between 
+	* 
+		margin: auto
+nav 
+	display: flex 
+	align-items: center 
+	justify-content: space-around 
+	font-family: "Roboto Slab"
+	font-size: calc(0.5rem + 0.7vh)
+	text-transform: uppercase 
+.navLink 
+	padding: 6px 10px 
+.navLink:hover, .navLink:focus
+	background: rgb(155, 36, 45)
+	color: white 
+	border-radius: 2px
+a 
+	color: black
+	cursor: pointer 
+	text-decoration: none 
+.menu
+	display: none
+section 
+	height: 100vh 
+	color: white 
+	font-family: "Roboto Slab" 
+	text-align: center 
+.firstSection
+	display: flex
+	justify-content: center
+	align-items: center
+	flex-direction: column
+	background-image: url('../assets/Layer.png')
+	background-repeat: no-repeat
+	background-position: center center
+	background-size: cover
+	line-height: 1.2 
+	gap: 1rem
+	*
+		margin: 0 1%
+	& > h1
+		font-size: calc(2.125rem + 1.8vh) 
+		font-weight: bold 
+		text-transform: uppercase 
+	& > h2 
+		font-size: calc(0.5rem + 1.8vh) 
+		font-weight: 100 
+	& > a
+		background: white
+		border-radius: 20px
+		padding: 10px 30px
+		font-size: calc(0.5rem + 2.0vh)
+		font-family: "Open Sans"
+		color: rgb(70, 166, 81)
+		font-weight: bold
+		margin-top: 2rem
+.secondSection
+	display: grid
+	grid-template-areas: "a b c" "d d e" "f f g"
+	grid-template-rows: repeat(3, calc(100% /3))
+	grid-template-columns: repeat(3, calc(100% /3))
+	*
+		display: flex
+		flex-direction: column
+		justify-content: center
+		align-items: center
+	& > img
+		object-fit: cover
+		width: 100%
+		height: 100%
+	& > img:nth-child(1)
+		width: 70%
+		height: auto
+		margin: auto
+	& > div > p
+		font-family: Roboto
+		font-size: calc(0.4rem + 0.9vh)
+		opacity: 0.8
+		width: 80%
+.firstPicture:hover
+	animation: animation-logo 1s infinite
+@keyframes animation-logo
+	0%
+		transform: scale(1.0)
+	50%
+	  transform: scale(1.2)
+	100%
+		transform: scale(1.0)
+.firstColorBlock
+	background-color: rgb(155, 36, 45)
+	z-index: 3
+	grid-area: c
+	*
+		margin: 0
+.secondColorBlock
+	background: #46a651
+	z-index: 4
+	grid-area: d
+	text-align: right
+	animation: change-background 3s infinite
+@keyframes change-background
+	0%   
+		background: #429b4c
+	12.5%
+		background: #33883d		
+	25%
+		background: #2e8038	
+	50%   
+		background: #2b6d33	
+	62.5%
+		background: #2e8038
+	75%
+		background: #33883d
+	100%
+		background: #429b4c
+.thirdColorBlock
+	background-color: rgb(59, 89, 151)
+	z-index: 5
+	grid-area: g
+	& > img
+		width: 8%
+.fieldGroup
+	display: flex
+	flex-direction: row
+	& > input
+		padding: 10px
+		background: rgb(94, 192, 105)
+		border: none
+	& > input::placeholder
+		color: rgb(65, 155, 75)
+	& > button
+		padding: 9px
+		background: rgb(52, 142, 62)
+		border: none
+		color: white
+.thirdPicture
+	grid-area: e
+	grid-column-start: 3
+	grid-column-end: 4
+	grid-row-start: 2
+	grid-row-end: 3
+.fourthPicture
+	grid-column-start: 1
+	grid-column-end: 3
+	grid-row-start: 3
+	grid-row-end: 4
+.thirdSection
+	display: flex
+	flex-direction: column
+	justify-content: center
+	color: rgb(55, 56, 56)
+	& > h1 
+		font-size: calc(2.6rem + 1.8vh) 
+		line-height: 1.2 
+		font-weight: 100
+		margin: 5% 0
+.infoBlocks
+	display: flex
+	justify-content: space-evenly
+	padding: 0 1%
+	gap: 1rem
+	height: 60vh
+	& > div:hover .backgroundBlocks
+		background-image: url('../assets/OctBlockRed.svg')
+.infoBlockItem
+	*
+		font-weight: 100
+		font-family: "Roboto Slab"
+	& > h2, h3, p
+		margin: auto
+	& > h2 
+		color: rgb(155, 36, 45) 
+		line-height: 1.2
+		font-size: calc(1rem + 1.6vh)
+		margin: 1% 0
+	& > h3
+		font-size: calc(0.7rem + 1.0vh)
+		margin-top: 3%
+		margin-bottom: 1%
+	& > p
+		font-size: calc(0.8rem + 0.3vh)
+		font-family: Roboto
+	&:hover .backgroundBlocks
+		background-image: url('../assets/OctBlockRed.svg')
+.backgroundBlocks
+	background-image: url('../assets/OctBlock.svg')
+	background-repeat: no-repeat
+	background-position: center
+	background-size: contain
+	height: 25%
+	display: flex
+	justify-content: center
+	align-items: center
+	& > span
+		color: white
+		font-size: calc(1.7rem + 0.9vh)
+		font-family: "Roboto Slab"
+		margin-bottom: 10px
+.thirdSectionButton
+	padding: 10px 20px
+	background: rgb(55, 56, 56)
+	color: white
+	display: inline-block
+	margin-top: 13%
+	text-transform: uppercase 
+	font-family: Roboto
+	&:hover, &:focus
+		background: rgb(155, 36, 45)
+footer
+	display: flex
+	flex-direction: column
+	gap: 2rem
+	background: rgb(55, 56, 56)
+	font-family: "Roboto Slab"
+	color: rgb(119, 119, 119)
+	padding: 3% 0
+	text-align: center
+.socialMedia
+	margin-right: 8px
+	&:hover
+		position: relative
+		animation: rotate 1s infinite
+@keyframes rotate
+	0%
+		transform: rotate(0deg)
+	100%
+		transform: rotate(360deg)
+.contactBlock
+	display: flex
+	justify-content: space-around
+	text-align: left
+.navFooter 
+	justify-content: space-evenly
+	width: 70%
+	margin: auto
+	& > a
+		color: rgb(119, 119, 119)
+		text-transform: lowercase
+		padding: 5px 10px
+		&:first-letter
+			text-transform: uppercase
+		&:hover, &:focus
+			color: white
+.contactBlockEmail
+	& > div > input
+		background: rgb(73, 73, 73)
+		color: white
+	& > div > button
+		background: rgb(155, 36, 45)
+	& > div > input::placeholder
+		color: rgb(119, 119, 119)
+.contactUsBlock
+	*
+		text-align: end
+	& > small
+		display: block
+@media screen and (max-width: 865px)
+	nav
+		padding: 0 1% 	
+	.backgroundBlocks
+		height: 22%
+@media screen and (max-width: 768px)
+	header nav
+		display: none
+	header img
+		margin-left: 3%
+		margin-right: 3%
+		height: 70%
+	.menu
+		display: block
+@media screen and (max-width: 576px)
+	.secondSection
+		grid-template-areas: "d d c" "a b e" "f f g"
+	header nav
+		display: none
+	.menu
+		display: block
+	footer
+		gap: 1rem
+	.contactBlock
+		flex-direction: column
+		align-items: center
+		text-align: center
+	.backgroundBlocks
+		height: 20%
+	.contactUsBlock
+		*
+			text-align: center
+@media screen and (max-width: 420px)
+	.secondSection
+		grid-template-areas: "d d d" "a b c" "e f g"
+	nav
+		display: none
+			
