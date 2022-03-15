@@ -32,7 +32,7 @@
   "comments": [
     { "id": 1, "pageId": 3, "userId": 2, "content": "My comment #1..." },
     { "id": 1, "pageId": 3, "userId": 3, "content": "My comment #2..." },
-    { "id": 1, "pageId": 4, "userId": 2, "content": "My comment #3..." }``
+    { "id": 1, "pageId": 4, "userId": 2, "content": "My comment #3..." }
   ],
   "settings": [
     { "id": 1, "theme": "light", "userId": 1 },
