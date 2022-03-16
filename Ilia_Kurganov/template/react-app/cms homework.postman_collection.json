@@ -24,21 +24,42 @@
 				},
 				{
 					"name": "one user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let scheme = {\r",
+									"        \"id\": {\"type\": \"integer\"},\r",
+									"        \"name\": {\"type\": \"string\"},\r",
+									"        \"email\": {\"type\": \"string\"},\r",
+									"        \"password\": {\"type\": \"string\"},\r",
+									"        \"role\": {\"type\": \"string\"}\r",
+									"    }\r",
+									"\r",
+									"pm.test(\"Scheme is valid\", function() {\r",
+									"    pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}users/1?userId=1",
+							"raw": "{{BASE_URL}}users/:userId",
 							"host": [
 								"{{BASE_URL}}users"
 							],
 							"path": [
-								"1"
+								":userId"
 							],
-							"query": [
+							"variable": [
 								{
 									"key": "userId",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -113,12 +134,18 @@
 							]
 						},
 						"url": {
-							"raw": "{{BASE_URL}}users/6",
+							"raw": "{{BASE_URL}}users/:userId",
 							"host": [
 								"{{BASE_URL}}users"
 							],
 							"path": [
-								"6"
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -134,11 +161,14 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "{{BASE_URL}}users?userId=2",
+							"raw": "{{BASE_URL}}users/:userId",
 							"host": [
 								"{{BASE_URL}}users"
 							],
-							"query": [
+							"path": [
+								":userId"
+							],
+							"variable": [
 								{
 									"key": "userId",
 									"value": "2"
@@ -154,18 +184,24 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}users/3/?_embed=settings ",
+							"raw": "{{BASE_URL}}users/:userId/?_embed=settings ",
 							"host": [
 								"{{BASE_URL}}users"
 							],
 							"path": [
-								"3",
+								":userId",
 								""
 							],
 							"query": [
 								{
 									"key": "_embed",
 									"value": "settings "
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "2"
 								}
 							]
 						}
@@ -239,12 +275,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}pages/4",
+							"raw": "{{BASE_URL}}pages/:page",
 							"host": [
 								"{{BASE_URL}}pages"
 							],
 							"path": [
-								"4"
+								":page"
+							],
+							"variable": [
+								{
+									"key": "page",
+									"value": "7"
+								}
 							]
 						}
 					},
@@ -325,12 +367,18 @@
 							]
 						},
 						"url": {
-							"raw": "{{BASE_URL}}pages/4",
+							"raw": "{{BASE_URL}}pages/:page",
 							"host": [
 								"{{BASE_URL}}pages"
 							],
 							"path": [
-								"4"
+								":page"
+							],
+							"variable": [
+								{
+									"key": "page",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -342,12 +390,18 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}pages/4",
+							"raw": "{{BASE_URL}}pages/:page",
 							"host": [
 								"{{BASE_URL}}pages"
 							],
 							"path": [
-								"4"
+								":page"
+							],
+							"variable": [
+								{
+									"key": "page",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -401,12 +455,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}comments/1",
+							"raw": "{{BASE_URL}}comments/:comment",
 							"host": [
 								"{{BASE_URL}}comments"
 							],
 							"path": [
-								"1"
+								":comment"
+							],
+							"variable": [
+								{
+									"key": "comment",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -416,7 +476,28 @@
 					"name": "add comments",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "hello guys my name is ilia",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}comments",
+							"host": [
+								"{{BASE_URL}}comments"
+							]
+						}
 					},
 					"response": []
 				},
@@ -424,7 +505,32 @@
 					"name": "edit comments",
 					"request": {
 						"method": "PATCH",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "text",
+									"value": "new",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}comments/:comment",
+							"host": [
+								"{{BASE_URL}}comments"
+							],
+							"path": [
+								":comment"
+							],
+							"variable": [
+								{
+									"key": "comment",
+									"value": "2"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -432,7 +538,22 @@
 					"name": "delite comments",
 					"request": {
 						"method": "DELETE",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}comments/:comment",
+							"host": [
+								"{{BASE_URL}}comments"
+							],
+							"path": [
+								":comment"
+							],
+							"variable": [
+								{
+									"key": "comment",
+									"value": "2"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -442,13 +563,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}pages/3/comments",
+							"raw": "{{BASE_URL}}pages/:page/comments",
 							"host": [
 								"{{BASE_URL}}pages"
 							],
 							"path": [
-								"3",
+								":page",
 								"comments"
+							],
+							"variable": [
+								{
+									"key": "page",
+									"value": "3"
+								}
 							]
 						}
 					},
@@ -503,12 +630,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}settings/3",
+							"raw": "{{BASE_URL}}settings/:setting",
 							"host": [
 								"{{BASE_URL}}settings"
 							],
 							"path": [
-								"3"
+								":setting"
+							],
+							"variable": [
+								{
+									"key": "setting",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -564,12 +697,18 @@
 							]
 						},
 						"url": {
-							"raw": "{{BASE_URL}}settings/4",
+							"raw": "{{BASE_URL}}settings/:setting",
 							"host": [
 								"{{BASE_URL}}settings"
 							],
 							"path": [
-								"4"
+								":setting"
+							],
+							"variable": [
+								{
+									"key": "setting",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -581,12 +720,18 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}settings/3",
+							"raw": "{{BASE_URL}}settings/:setting",
 							"host": [
 								"{{BASE_URL}}settings"
 							],
 							"path": [
-								"3"
+								":setting"
+							],
+							"variable": [
+								{
+									"key": "setting",
+									"value": "2"
+								}
 							]
 						}
 					},
