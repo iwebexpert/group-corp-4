@@ -1,0 +1,1517 @@
+{
+	"info": {
+		"_postman_id": "f93584ca-b690-44d1-8568-0b2321f30a38",
+		"name": "Site collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/users",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Anna\",\n        \"email\": \"anna1234@domain.local\",\n        \"password\": \"1234\",\n        \"role\": \"admin\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Ivan\",\n        \"email\": \"ivan1234@domain.local\",\n        \"password\": \"123456\",\n        \"role\": \"admin\"\n    },\n    {\n        \"name\": \"Sergey\",\n        \"email\": \"Q@Q.com\",\n        \"password\": \"787878\",\n        \"role\": \"user\",\n        \"id\": 4\n    },\n    {\n        \"name\": \"Roman\",\n        \"email\": \"rr@rr.com\",\n        \"password\": \"123123\",\n        \"role\": \"admin\",\n        \"id\": 5\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"Anna\",\n    \"email\": \"anna1234@domain.local\",\n    \"password\": \"1234\",\n    \"role\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create new user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "id",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"name\": \"Anna\",\n    \"email\": \"anna1234@domain.local\",\n    \"password\": \"1234\",\n    \"role\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/users",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\r\n    \"id\": 2,\r\n    \"name\": \"Ivan\",\r\n    \"email\": \"ivan1234@domain.local\",\r\n    \"password\": \"123456\",\r\n    \"role\": \"admin\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Get user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									"pm.test(\"id is equal\", function(){\r",
+									"  pm.expect(parseInt(pm.environment.get(\"id\"))).to.equal(pm.response.json().id);\r",
+									"});\r",
+									"\r",
+									"let scheme = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"required\": [\"id\", \"name\", \"username\", \"email\", \"password\", ],\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\"type\": \"integer\"},\r",
+									"    \"name\": {\"type\": \"string\"},\r",
+									"    \"username\": {\"type\": \"string\"},\r",
+									"    \"email\": {\"type\": \"string\"},\r",
+									"    \"password\": {\"type\": \"string\"},\r",
+									"    \"role\": {\"type\": \"string\"},\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Scheme user is valid\", function(){\r",
+									"  pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/users/:id",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [
+								{}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\r\n    \"id\": 1,\r\n    \"name\": \"Anna\",\r\n    \"email\": \"anna1234@domain.local\",\r\n    \"password\": \"1234\",\r\n    \"role\": \"admin\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Change user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "123456@local.local",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-user-header-pass",
+								"value": "fdhksdahfkjsadhfksadhfiuifgdsagdsfag",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user with settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-user-header-pass",
+								"value": "fdhksdahfkjsadhfksadhfiuifgdsagdsfag",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id/?_embed=settings",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id",
+								""
+							],
+							"query": [
+								{
+									"key": "_embed",
+									"value": "settings"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pages",
+			"item": [
+				{
+					"name": "Get all pages",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"id\": 2,\n    \"url\": \"about\",\n    \"title\": \"About\",\n    \"content\": \"Some content...\",\n    \"userId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/pages",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									"pm.test(\"userID is equal\", function(){\r",
+									"  pm.expect(parseInt(pm.environment.get(\"id\"))).to.equal(pm.response.json().id);\r",
+									"});\r",
+									"\r",
+									"let scheme = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"required\": [\"id\", \"url\", \"title\", \"content\", \"userId\", ],\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\"type\": \"integer\"},\r",
+									"    \"url\": {\"type\": \"string\"},\r",
+									"    \"title\": {\"type\": \"string\"},\r",
+									"    \"content\": {\"type\": \"string\"},\r",
+									"    \"userId\": {\"type\": \"integer\"},\r",
+									"  }\r",
+									"};\r",
+									"pm.test(\"Scheme user is valid\", function(){\r",
+									"  pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "123456@local.local",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/pages/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-user-header-pass",
+								"value": "fdhksdahfkjsadhfksadhfiuifgdsagdsfag",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/pages/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all pages for user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									"pm.test(\"userID is equal\", function(){\r",
+									"  pm.expect(parseInt(pm.environment.get(\"id\"))).to.equal(pm.response.json().id);\r",
+									"});\r",
+									"\r",
+									"let scheme = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"required\": [\"id\", \"url\", \"title\", \"content\", \"userId\", ],\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\"type\": \"integer\"},\r",
+									"    \"url\": {\"type\": \"string\"},\r",
+									"    \"title\": {\"type\": \"string\"},\r",
+									"    \"content\": {\"type\": \"string\"},\r",
+									"    \"userId\": {\"type\": \"integer\"},\r",
+									"  }\r",
+									"};\r",
+									"pm.test(\"Scheme user is valid\", function(){\r",
+									"  pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages?userId=1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all comments for one page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									"pm.test(\"userID is equal\", function(){\r",
+									"  pm.expect(parseInt(pm.environment.get(\"id\"))).to.equal(pm.response.json().id);\r",
+									"});\r",
+									"\r",
+									"let scheme = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"required\": [\"id\", \"url\", \"title\", \"content\", \"userId\", ],\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\"type\": \"integer\"},\r",
+									"    \"url\": {\"type\": \"string\"},\r",
+									"    \"title\": {\"type\": \"string\"},\r",
+									"    \"content\": {\"type\": \"string\"},\r",
+									"    \"userId\": {\"type\": \"integer\"},\r",
+									"  }\r",
+									"};\r",
+									"pm.test(\"Scheme user is valid\", function(){\r",
+									"  pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages/:id/comments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								":id",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all page with comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									"pm.test(\"userID is equal\", function(){\r",
+									"  pm.expect(parseInt(pm.environment.get(\"id\"))).to.equal(pm.response.json().id);\r",
+									"});\r",
+									"\r",
+									"let scheme = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"required\": [\"id\", \"url\", \"title\", \"content\", \"userId\", ],\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\"type\": \"integer\"},\r",
+									"    \"url\": {\"type\": \"string\"},\r",
+									"    \"title\": {\"type\": \"string\"},\r",
+									"    \"content\": {\"type\": \"string\"},\r",
+									"    \"userId\": {\"type\": \"integer\"},\r",
+									"  }\r",
+									"};\r",
+									"pm.test(\"Scheme user is valid\", function(){\r",
+									"  pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pages/?_embed=comments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pages",
+								""
+							],
+							"query": [
+								{
+									"key": "_embed",
+									"value": "comments"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Get all comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/comments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"id\": 2,\n    \"url\": \"about\",\n    \"title\": \"About\",\n    \"content\": \"Some content...\",\n    \"userId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/comments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"pm.test(\"userID is equal\", function () {\r",
+									"    pm.expect(parseInt(pm.environment.get(\"id\"))).to.equal(pm.response.json().id);\r",
+									"});\r",
+									"\r",
+									"let scheme = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"required\": [\"id\", \"pageId\", \"userId\", \"content\",],\r",
+									"    \"properties\": {\r",
+									"        \"id\": { \"type\": \"integer\" },\r",
+									"        \"pageId\": { \"type\": \"string\" },\r",
+									"        \"userId\": { \"type\": \"integer\" },\r",
+									"        \"content\": { \"type\": \"string\" },\r",
+									"    }\r",
+									"};\r",
+									"pm.test(\"Scheme user is valid\", function () {\r",
+									"    pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/comments/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change comment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "123456@local.local",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/comments/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-user-header-pass",
+								"value": "fdhksdahfkjsadhfksadhfiuifgdsagdsfag",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/comments/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all coments for one page with one user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									"pm.test(\"userID is equal\", function(){\r",
+									"  pm.expect(parseInt(pm.environment.get(\"id\"))).to.equal(pm.response.json().id);\r",
+									"});\r",
+									"\r",
+									"let scheme = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"required\": [\"id\", \"url\", \"title\", \"content\", \"userId\", ],\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\"type\": \"integer\"},\r",
+									"    \"url\": {\"type\": \"string\"},\r",
+									"    \"title\": {\"type\": \"string\"},\r",
+									"    \"content\": {\"type\": \"string\"},\r",
+									"    \"userId\": {\"type\": \"integer\"},\r",
+									"  }\r",
+									"};\r",
+									"pm.test(\"Scheme user is valid\", function(){\r",
+									"  pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/comments?pageId=3&userId=2 ",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "pageId",
+									"value": "3"
+								},
+								{
+									"key": "userId",
+									"value": "2 "
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Settings",
+			"item": [
+				{
+					"name": "Get all settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/settings",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new setting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"id\": 2,\n    \"url\": \"about\",\n    \"title\": \"About\",\n    \"content\": \"Some content...\",\n    \"userId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/settings",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									"pm.test(\"userID is equal\", function(){\r",
+									"  pm.expect(parseInt(pm.environment.get(\"id\"))).to.equal(pm.response.json().id);\r",
+									"});\r",
+									"\r",
+									"let scheme = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"required\": [\"id\", \"theme\", \"userId\", ],\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\"type\": \"integer\"},\r",
+									"    \"theme\": {\"type\": \"string\"},\r",
+									"    \"userId\": {\"type\": \"integer\"},\r",
+									"  }\r",
+									"};\r",
+									"pm.test(\"Scheme user is valid\", function(){\r",
+									"  pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/settings/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change setting",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "123456@local.local",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/settings/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete setting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-user-header-pass",
+								"value": "fdhksdahfkjsadhfksadhfiuifgdsagdsfag",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/settings/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get settings with data user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response format is JSON\", function(){\r",
+									"\tpm.response.to.be.json;\r",
+									"});\r",
+									"pm.test(\"userID is equal\", function(){\r",
+									"  pm.expect(parseInt(pm.environment.get(\"id\"))).to.equal(pm.response.json().id);\r",
+									"});\r",
+									"\r",
+									"let scheme = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"required\": [\"id\", \"url\", \"title\", \"content\", \"userId\", ],\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\"type\": \"integer\"},\r",
+									"    \"url\": {\"type\": \"string\"},\r",
+									"    \"title\": {\"type\": \"string\"},\r",
+									"    \"content\": {\"type\": \"string\"},\r",
+									"    \"userId\": {\"type\": \"integer\"},\r",
+									"  }\r",
+									"};\r",
+									"pm.test(\"Scheme user is valid\", function(){\r",
+									"  pm.response.to.have.jsonSchema(scheme);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/settings/?userId=3&_expand=user",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								""
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								},
+								{
+									"key": "_expand",
+									"value": "user"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//Test",
+					"pm.test(\"Status (collection) request is ok\", function(){",
+					"  pm.response.to.be.ok;",
+					"  pm.response.to.not.be.error;",
+					"  pm.expect(pm.response.code).to.equal(200);",
+					"});",
+					"",
+					"//JSON",
+					"pm.test(\"Response (collection) format is JSON\", function(){",
+					"  pm.response.to.be.json;",
+					"});",
+					"",
+					"//Haader JSON",
+					"pm.test(\"Content-Type (collection) is JSON\", function(){",
+					"  pm.response.to.have.header(\"Content-Type\");",
+					"  pm.response.to.be.header(\"Content-Type\", \"application/json; charset=utf-8\");",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "https://jsonplaceholder.typicode.com",
+			"type": "string"
+		}
+	]
+}
