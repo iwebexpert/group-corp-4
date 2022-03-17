@@ -1,19 +1,14 @@
-body {
-    margin: 0;
-    padding: 0;
-}
-img {
-    width: 100%;
-    height: 100%;
-}
 .app {
-    width: 100%;
-    background-color: #000;
-    color: #fff;
-    font-size: 2rem;
+    height: 100%;
+    padding: 2rem 1rem;
+    margin: 0 auto;
+    font-size: 1.2rem;
 }
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.app--light {
+    color: #000;
+    background: rgb(160 160 160 / 20%);
+}
+.app--dark {
+    background: rgba(0, 0, 0, 90%);
+    color: #fff;
 }
