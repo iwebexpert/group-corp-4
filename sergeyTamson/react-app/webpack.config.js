@@ -58,4 +58,12 @@ module.exports = {
 
     new Dotenv(),
   ],
+
+  externals: {
+    Config: JSON.stringify(
+      process.env.npm_lifecycle_event === 'dev'
+        ? require('./src/config/config.development.env.json')
+        : require('./src/config/config.production.env.json'),
+    ),
+  },
 }
