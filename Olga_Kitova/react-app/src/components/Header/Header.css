@@ -1,0 +1,20 @@
+header {
+    display: flex;
+    justify-content: flex-end;
+}
+.header__btn {
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+}
+.header__btn--light {
+    background: rgba(0, 0, 0, 90%);
+    border: 1px solid rgba(0, 0, 0, 90%);
+    color: #fff;
+}
+.header__btn--dark {
+    color: #000;
+    background: rgb(255 255 255);
+    border: 1px solid rgb(255 255 255);
+}

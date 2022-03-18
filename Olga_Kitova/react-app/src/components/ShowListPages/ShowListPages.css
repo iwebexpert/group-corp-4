@@ -1,0 +1,27 @@
+.table {
+    display: block;
+    overflow: auto;
+    table-layout: fixed;
+    width:100%
+}
+th,td {
+    border: 1px solid #caa34e;
+    padding: .6rem;
+}
+.td-content-small {
+    word-break: break-all;
+}
+.button__show {
+    cursor: pointer;
+    border: none;
+    background: #caa34e;
+    padding: 1rem;
+    border-radius: 5px;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 5px 5px 10px #623f3f; 
+    font-size: .7rem;
+}
+.button__show--delete {
+    background: #ff4d07;
+}
