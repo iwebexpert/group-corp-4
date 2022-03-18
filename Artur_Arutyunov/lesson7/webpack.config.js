@@ -12,10 +12,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      components: path.join(__dirname, 'src', 'components'),
-      config: path.join(__dirname, 'src', 'config'),
-      pages: path.join(__dirname, 'src', 'pages'),
-      hooks: path.join(__dirname, 'src', 'hooks'),
+        components: path.join(__dirname, 'src', 'components'),
+        config: path.join(__dirname, 'src', 'config'),
+        pages: path.join(__dirname, 'src', 'pages'),
+        hooks: path.join(__dirname, 'src', 'hooks'),
     },
   },
 
@@ -53,7 +53,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
-      title: 'App v1',
+      title: 'Form',
     }),
     new MiniCssExtractPlugin({
       filename: 'index.css',
