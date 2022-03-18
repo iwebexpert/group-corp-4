@@ -1,14 +1,13 @@
 import React, { Fragment } from 'react'
 import ReactDOM from 'react-dom'
-
-import App from 'components/App'
-
-import './index.css'
-import './index.scss'
+import { ThemeContextProvider } from './contexts/theme-context/theme-context'
+import App from './components/App'
 
 ReactDOM.render(
   <Fragment>
-    <App />
+    <ThemeContextProvider>
+      <App />
+    </ThemeContextProvider>
   </Fragment>,
   document.querySelector('#root'),
 )
