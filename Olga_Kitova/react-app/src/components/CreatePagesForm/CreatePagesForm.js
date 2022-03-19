@@ -26,6 +26,11 @@ export default function CreatePagesForm({addOnPagesObject}) {
         setAddUserId(event.target.value)
     }
     const handleOnSubmit = () => {
+        //Validate data
+        if(!addUrl || !addTitle || !addContent) {
+            alert('Не заполнены обязательные поля');
+            return;
+        }
         const data = {
             id: uuidv4(),
             url: addUrl,
@@ -56,7 +61,12 @@ export default function CreatePagesForm({addOnPagesObject}) {
             </div>
             <div>
                 <label htmlFor="content">Содержимое страницы</label>
-                <textarea rows="10" id="content" onChange={handleAddContentChange} value={addContent}  />
+                <textarea 
+                rows="10"
+                 id="content" 
+                 onChange={handleAddContentChange} 
+                 value={addContent}
+                 disabled={addTitle.length < 1}  />
             </div>
             <div>
                 <label htmlFor="userId">Идентификатор пользователя</label>
@@ -70,6 +80,10 @@ export default function CreatePagesForm({addOnPagesObject}) {
   )
 }
 //Props types
+CreatePagesForm.defaultProps = {
+    addOnPagesObject: () => {},
+  }
+
 CreatePagesForm.propTypes = {
-    addOnPagesObject: PropTypes.func
+    addOnPagesObject: PropTypes.func.isRequired
 }
