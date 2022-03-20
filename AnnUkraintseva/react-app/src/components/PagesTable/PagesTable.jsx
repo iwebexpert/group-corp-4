@@ -1,17 +1,17 @@
 import React from 'react'
 import { ThemeContextConsumer } from '../../contexts/ThemeContexts'
+import PropTypes from 'prop-types'
 
-export default function PagesTable({
+export function PagesTable({
   pages,
   onDeletePages,
-  onChangePages,
+  getElemForChange,
 }) {
   return (
     <>
     <ThemeContextConsumer>
       {(context)=>(
-        <div className={"table table-"+context.theme}>
-          <button className={"themeButton themeButton-"+ context.theme} onClick={context.toggleTheme}>Переключить тему ({context.theme})</button>
+        <div className={"tableForm tableForm-"+context.theme}>
           <h1>Заявки на оборудование</h1>
       <table className="table">
         <thead>
@@ -34,12 +34,13 @@ export default function PagesTable({
               <td>{obj.content}</td>
               <td>{obj.userId}</td>
               <td>
-                <input type="button" onClick={() => onDeletePages(obj.id)} value="Удалить" />
+                <input className={'buttonDelete buttonDelete-'+context.theme} type="button" onClick={() => onDeletePages(obj.id)} value="Удалить" />
               </td>
               <td>
                 <input
+                className={'buttonUpdate buttonUpdate-'+context.theme}
                   type="button"
-                  onClick={() => onChangePages(obj.id)}
+                  onClick={() => getElemForChange(obj)}
                   value="Редактировать"
                 />
               </td>
@@ -51,8 +52,26 @@ export default function PagesTable({
         </div>
         
       )}
-    </ThemeContextConsumer>
-      
+    </ThemeContextConsumer>      
     </>
   )
+}
+
+PagesTable.defaultProps={
+  pages:[],
+  onDeletePages: ()=>{},
+  getElemForChange: ()=>{},
+}
+
+
+PagesTable.propTypes={
+  pages: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string,
+    userId: PropTypes.number.isRequired,
+  })),
+  onDeletePages: PropTypes.func,
+  getElemForChange:PropTypes.func,
 }

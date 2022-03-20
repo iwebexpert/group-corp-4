@@ -8,12 +8,13 @@
     background-color:rgb(71, 71, 71) ;
     color: white;
 }
+
+
 .fragmentForm-dark, .inputText-dark, .inputButton-dark {
     transition: background-color 0.5s linear, color 0.5s linear;
 }
 div {
-    padding: 10px;
-    
+    padding: 10px;    
 }
 
 input, textarea{ 
@@ -41,15 +42,29 @@ input, textarea{
 input{
     text-align: end;
 }
-.buttonAdd {
+.buttons {
     text-align: center;
+}
+
+input[type=button] {
+    padding: 2%;
+    transition: background-color 0.5s linear, color 1s ease;
+}
+
+input, textarea {
+    background-color: rgb(206, 220, 224);
+}
+
+input[type=button]:hover {
+    cursor: pointer;
+    background-color: rgb(105, 114, 131);
+    color: aliceblue;
 }
 
 .fragmentForm {
     width: 100%;
     height: auto;
 }
-
-.textTitle {
+.changeTitle {
     text-align: center;
 }
