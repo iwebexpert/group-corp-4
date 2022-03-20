@@ -1,3 +1,28 @@
-.form-dark {
-  background-color: brown;
+.form {
+  width: 500px;
+  padding: 15px;
+
+  &__light {
+    background: var(--color-main);
+  }
+
+  &__dark {
+    background: var(--color-bg);
+  }
+
+  &__col {
+    margin: 0 0 25px 0;
+  }
+
+  &__item {
+    &:not(:last-child) {
+      margin: 0 0 20px 0;
+    }
+  }
+
+  &__actions {
+    > :not(:last-child) {
+      margin: 0 15px 0 0;
+    }
+  }
 }

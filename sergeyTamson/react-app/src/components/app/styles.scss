@@ -1,0 +1,7 @@
+.content {
+  &__item {
+    &:not(:last-child) {
+      margin: 0 0 35px 0;
+    }
+  }
+}

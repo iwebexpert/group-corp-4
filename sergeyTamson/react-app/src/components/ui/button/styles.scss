@@ -1,0 +1,12 @@
+.btn {
+  background: var(--color-btn);
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+
+  &:hover {
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+}

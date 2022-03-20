@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  height: 48px;
+  margin: 0 0 16px 0;
+
+  &__light {
+    background: var(--color-text);
+  }
+
+  &__dark {
+    background: var(--color-bg);
+  }
+
+  .thema {
+    width: 30px;
+    height: 30px;
+    color: var(--color-btn);
+    cursor: pointer;
+  }
+}

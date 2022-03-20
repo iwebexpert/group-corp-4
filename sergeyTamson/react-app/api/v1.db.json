@@ -31,17 +31,24 @@
   ],
   "pages": [
     {
-      "id": 2,
-      "url": "about",
-      "title": "About",
-      "content": "Some content...",
+      "id": 1,
+      "url": "/main",
+      "title": "Главная",
+      "content": "Главная страница",
       "userId": 1
     },
     {
+      "id": 2,
+      "url": "/about",
+      "title": "О нас",
+      "content": "страница описания нашего продукта",
+      "userId": 2
+    },
+    {
       "id": 3,
-      "url": "page1",
-      "title": "Page1",
-      "content": "1111111111111",
+      "url": "/contacts",
+      "title": "Контакты",
+      "content": "наши контакты",
       "userId": 2
     }
   ],

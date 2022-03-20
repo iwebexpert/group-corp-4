@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
 import ReactDOM from 'react-dom'
+import App from './components/app/App.jsx'
 import { ThemeContextProvider } from './contexts/theme-context/theme-context'
-import App from './components/App'
+import './styles/index.scss'
+import './styles/normalize.css'
 
 ReactDOM.render(
   <Fragment>
