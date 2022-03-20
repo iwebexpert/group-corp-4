@@ -73,7 +73,12 @@ export default function EditPagesForm({editPagesObject, editOnPagesObjectFunc })
             </div>
             <div>
                 <label htmlFor="contentEdit">Содержимое страницы</label>
-                <textarea rows="10" id="contentEdit" onChange={handleEditContentChange} value={editContent}  />
+                <textarea
+                 rows="10" 
+                 id="contentEdit" 
+                 onChange={handleEditContentChange} 
+                 value={editContent}
+                 disabled={editTitle?.length < 1}  />
             </div>
             <div>
                 <label htmlFor="userIdEdit">Идентификатор пользователя</label>
@@ -88,7 +93,17 @@ export default function EditPagesForm({editPagesObject, editOnPagesObjectFunc })
   )
 }
 //Props types
+EditPagesForm.defaultProps = {
+    editPagesObject: {},
+    editOnPagesObjectFun: () => {},
+  }
+
 EditPagesForm.propTypes = {
-    editPagesObject: PropTypes.object,
-    editOnPagesObjectFunc: PropTypes.func
+    editPagesObject: PropTypes.shape({
+        url:PropTypes.string,
+        title: PropTypes.string,
+        content: PropTypes.string,
+        userId: PropTypes.number
+    }),
+    editOnPagesObjectFunc: PropTypes.func.isRequired
 }

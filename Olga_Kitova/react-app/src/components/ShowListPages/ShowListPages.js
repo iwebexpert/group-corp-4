@@ -42,8 +42,18 @@ export default function ShowListPages({addPages, deleteOnPagesObject, getOnPages
   )
 }
 //Props types
+ShowListPages.defaultProps = {
+    addPages: [],
+    deleteOnPagesObject: () => {},
+    getOnPagesObject: () => {}
+  }
 ShowListPages.propTypes = {
-  addPages: PropTypes.array,
-  deleteOnPagesObject: PropTypes.func,
-  getOnPagesObject: PropTypes.func,
+  addPages: PropTypes.arrayOf(PropTypes.shape({
+    url:PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    userId: PropTypes.number.isRequired
+  })),
+  deleteOnPagesObject: PropTypes.func.isRequired,
+  getOnPagesObject: PropTypes.func.isRequired,
 }

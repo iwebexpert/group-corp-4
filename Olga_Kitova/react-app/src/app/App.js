@@ -4,16 +4,28 @@ import Header from 'components/Header'
 import CreatePagesForm from 'components/CreatePagesForm'
 import ShowListPages from 'components/ShowListPages'
 import EditPagesForm from 'components/EditPagesForm'
+import Loading from 'components/Loading'
 //Context
 import { Context, ContextProvider} from '../context/Context'
 
 export default function App() {
-  const [addPages, setAddPages] = useState(JSON.parse(localStorage.getItem('addPages')) || []);
+  const [addPages, setAddPages] = useState([]);
   const [editPagesObject, setEditPagesObject] = useState({});
+  const [load, setLoad] = useState(true);
+  let NODE_ENV = process.env.NODE_ENV;
 
+  // Change show/hide Loading component
+  const changeLoad = () => {
+    setLoad(!load)
+  }
+  // Get data pages json
+  const getDataPagesToJSON = () => {
+    fetch('api/pages').then(res => res.json()).then(data => setAddPages(data));
+    changeLoad();
+  }
   // Add page
   const addOnPagesObject = (data) => {
-    setAddPages([...addPages, data])
+    setAddPages([...addPages, data]);
   }
   // Delete page
   const deleteOnPagesObject = (id) => {
@@ -42,8 +54,12 @@ it to an intermediate variable to send to the editing component ) */
   }
 
   useEffect(() => {
-     localStorage.setItem('addPages', JSON.stringify(addPages));
-  },[addPages])
+     if(NODE_ENV === 'development') {
+       setTimeout(getDataPagesToJSON, 1000)
+     } else {
+      getDataPagesToJSON()
+     }
+  },[])
   
   return (
     <ContextProvider>
@@ -52,12 +68,16 @@ it to an intermediate variable to send to the editing component ) */
      <div className={'app app--' + value.theme}>
       <Header />
       <hr />
-      <CreatePagesForm addOnPagesObject={addOnPagesObject}/>
-      <hr />
-      <ShowListPages addPages={addPages} deleteOnPagesObject={deleteOnPagesObject} getOnPagesObject={getOnPagesObject} />
-      <br />
-      <hr />
-      <EditPagesForm editPagesObject={editPagesObject} editOnPagesObjectFunc={editOnPagesObjectFunc}/>
+     { load && NODE_ENV === 'development' ? <Loading /> : 
+      <>
+        <CreatePagesForm addOnPagesObject={addOnPagesObject}/>
+        <hr />
+        <ShowListPages addPages={addPages} deleteOnPagesObject={deleteOnPagesObject} getOnPagesObject={getOnPagesObject} />
+        <br />
+        <hr />
+        <EditPagesForm editPagesObject={editPagesObject} editOnPagesObjectFunc={editOnPagesObjectFunc}/>
+     </>
+     }
     </div>)
     }
     </Context.Consumer>

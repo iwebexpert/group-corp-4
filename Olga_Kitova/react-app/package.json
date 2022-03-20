@@ -4,7 +4,9 @@
   "description": "cms",
   "main": "src/index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --port 3001 --open",
+    "api-server": "cross-env NODE_ENV=development json-server --port 3000 --watch ./api/v1.db.json",
+    "dev-server": "cross-env NODE_ENV=development webpack-dev-server --port 3001 --open",
+    "start": "npm run api-server & npm run dev-server",
     "watch": "cross-env NODE_ENV=development webpack --watch",
     "dev": "cross-env NODE_ENV=development webpack",
     "build": "cross-env NODE_ENV=production webpack"
@@ -28,6 +30,7 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
+    "json-server": "^0.17.0",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
