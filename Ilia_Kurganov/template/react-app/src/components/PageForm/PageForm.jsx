@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect,  useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types';
 import { Consumer } from '../../context/ThemeContext'
 import './PageForm.scss'
 
-function PageForm ({ addRows }){
+const PageForm = ({ addRows }) => {
   const [url, setUrl] = useState('')
   const [title, setTitle] = useState('')
   const [userId, setUserId] = useState('')
-  const [content, setContent] = useState('')
+  const [content, setContent] = useState('') 
 
   const handleOnClick = () => {  
+
     if (url && title && userId && content) {
 
       const page = {
@@ -51,10 +52,12 @@ function PageForm ({ addRows }){
         <div className="field">
           <label htmlFor="content">Content</label>
           <textarea
+            disabled={ title ? false : true }
+            placeholder={ !title ? 'Заполните поле title' : 'Content' }
             name="content"
             cols="30"
             rows="10"
-            value={content}
+            value={ !title ? 'Заполните поле title' : content }
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
         </div>

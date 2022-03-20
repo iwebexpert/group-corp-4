@@ -7,7 +7,8 @@
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch",
-    "start": "webpack-dev-server --mode development --port 9000 --open"
+    "start": "webpack-dev-server --mode development --port 9000 --open",
+    "start-api": "json-server --port 3000 --watch ./Ilia_Kurganov/template/react-app/v1.db.json"
   },
   "author": "",
   "license": "ISC",

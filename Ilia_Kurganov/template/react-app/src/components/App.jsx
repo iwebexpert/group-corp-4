@@ -1,11 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PageTable from './PageTable/PageTable'
 import PageForm from './PageForm/PageForm'
+import { Loader } from './Loader/Loader'
+
 
 import './App.scss'
 
 export const App = () => {
   const [tableRows, setTableRows] = useState([])
+  const [fetching, setFetching] = useState(false)  
+
+  useEffect(()=> {
+    const mode = process.env.NODE_ENV
+    const timer = mode === 'development'? 0 : 1000
+
+    let waitFetch = setTimeout(()=>{   
+      timer && setFetching((state) => !state)
+      fetch('/api/pages')
+          .then((respone) => respone.json())
+          .then((data) => setTableRows(data)) 
+    }, timer)
+
+    timer && setFetching((state) => !state)  
+
+    return () => {
+      clearTimeout(waitFetch)
+    }
+  }, [])
 
   const addRows = (row) => {
     setTableRows((rows) => {
@@ -21,7 +42,9 @@ export const App = () => {
   return (
     <>
       <div className='inner'>
-        <PageTable tableRows={tableRows} delitePage={delitePage} />
+        {fetching ? <Loader/> : 
+          <PageTable tableRows={tableRows} delitePage={delitePage} />
+        }
         <PageForm addRows={addRows} />
       </div>
     </>
