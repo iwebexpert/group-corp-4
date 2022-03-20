@@ -11,6 +11,7 @@ module.exports = {
   },
 
   resolve: {
+    extensions: ['.js', '.jsx'],
     alias: {
       components: path.join(__dirname, 'src', 'components'),
       redux: path.join(__dirname, 'src', 'redux')

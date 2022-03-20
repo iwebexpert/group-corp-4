@@ -1,0 +1,18 @@
+.themeButton-dark {
+    background-color:rgb(41, 37, 37) ;
+    color: white;
+}
+
+.headerStyle {
+    text-align: right;
+}
+
+.headerStyle-dark {
+    background-color: rgb(37, 34, 32);
+    color: beige;
+}
+
+
+.headerStyle-dark, .themeButton-dark{
+    transition: background-color 0.5s linear, color 0.5s linear;
+}
