@@ -1,5 +1,6 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
+import PropTypes from 'prop-types'
 import './styles.scss'
 
 const Modal = ({ children, open, setOpen }) => {
@@ -20,6 +21,11 @@ const Modal = ({ children, open, setOpen }) => {
       document.body,
     )
   )
+}
+
+Modal.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func,
 }
 
 export default Modal

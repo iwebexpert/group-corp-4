@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { ThemeContextConsumer } from '../../contexts/theme-context/theme-context'
 import CreatePageForm from '../create-page-form/create-page-form'
-import Modal from '../modal/modal.component'
+import Modal from '../modal/modal.jsx'
+import './styles.scss'
 
 const PageTable = ({ page, setPage, handleEditPage }) => {
   const [open, setOpen] = useState(false)
-  const [dataObj, setDataObj] = useState(false)
+  const [dataObj, setDataObj] = useState({})
 
   const onDeletePage = (id) => {
     const filteredItems = page.filter((item) => item.id !== id)
@@ -19,15 +19,11 @@ const PageTable = ({ page, setPage, handleEditPage }) => {
 
   return (
     <>
-      <ThemeContextConsumer>
-        {(context) => <button onClick={context.toggleTheme}>Сменить тему ({context.theme})</button>}
-      </ThemeContextConsumer>
-
       <h1>Список всех страниц</h1>
 
       <table className="table">
         <thead>
-          <tr>
+          <tr className="head">
             <th>#</th>
             <th>URL</th>
             <th>Название</th>
@@ -40,7 +36,7 @@ const PageTable = ({ page, setPage, handleEditPage }) => {
 
         <tbody>
           {page.map((obj) => (
-            <tr key={obj.id}>
+            <tr key={obj.id} className="row">
               <td>{obj.id}</td>
               <td>{obj.url}</td>
               <td>{obj.title}</td>

@@ -1,0 +1,36 @@
+.loading {
+  padding: 75px 0 0 0;
+  &__item {
+    display: flex;
+    max-width: 250px;
+    margin: 0 auto;
+    align-items: center;
+    transform: rotate(-0.05turn);
+
+    animation: rotate;
+    animation-fill-mode: forwards;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    g {
+      fill: var(--color-bg);
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(-0.05turn);
+  }
+  25% {
+    transform: rotate(0.1turn);
+  }
+  50% {
+    transform: rotate(-0.05turn);
+  }
+  75% {
+    transform: rotate(0.1turn);
+  }
+  100% {
+    transform: rotate(-0.05turn);
+  }
+}
