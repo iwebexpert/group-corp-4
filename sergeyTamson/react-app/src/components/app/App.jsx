@@ -20,20 +20,23 @@ const App = () => {
   console.log('NODE_ENV', process.env.NODE_ENV)
 
   useEffect(() => {
-    window.setTimeout(() => {
-      fetch('/api/pages')
-        .then((res) => res.json())
-        .then((data) => {
-          setPage(data)
-        })
-    }, 2000)
+    window.setTimeout(
+      () => {
+        fetch('/api/pages')
+          .then((res) => res.json())
+          .then((data) => {
+            setPage(data)
+          })
+      },
+      process.env.NODE_ENV === 'development' ? 2000 : 0,
+    )
   }, [])
 
   return (
     <div>
       <Header />
 
-      {!page.length && process.env.NODE_ENV === 'development' && <Loading />}
+      {!page.length && <Loading />}
 
       {page.length !== 0 && (
         <div className="content">
