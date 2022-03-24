@@ -1,4 +1,3 @@
-import EditPagesForm from "./EditPagesForm"
-import './EditPagesForm.css'
+import EditPagesForm from './EditPagesForm'
 
 export default EditPagesForm

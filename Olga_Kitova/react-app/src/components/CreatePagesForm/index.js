@@ -1,4 +1,3 @@
-import CreatePagesForm from "./CreatePagesForm"
-import './CreatePagesForm.css'
+import CreatePagesForm from './CreatePagesForm'
 
 export default CreatePagesForm
