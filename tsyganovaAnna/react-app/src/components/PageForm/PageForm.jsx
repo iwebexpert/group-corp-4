@@ -44,6 +44,7 @@ export default function PageForm({ page, onChangeData }) {
               type="string"
               id="content"
               value={content}
+              disabled={!title}
               onChange={handlePageContentChange}
             />
           </div>
