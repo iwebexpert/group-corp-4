@@ -1,10 +1,13 @@
+import { useTheme } from '@mui/material'
 import React from 'react'
 import './styles.scss'
 
 const Loading = () => {
+  const theme = useTheme()
+
   return (
     <div className="loading">
-      <div className="loading__item">
+      <div className={'loading__item ' + theme.palette.mode}>
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280.000000 925.000000">
           <g transform="translate(0.000000,925.000000) scale(0.100000,-0.100000)" stroke="none">
             <path

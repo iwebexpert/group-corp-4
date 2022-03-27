@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { ThemeContextConsumer } from '../../contexts/theme-context/theme-context'
-import TextArea from '../lib/form/form-fields/textarea'
-import TextField from '../lib/form/form-fields/textfield'
-import Button from '../ui/button/button'
 import PropTypes from 'prop-types'
 import './styles.scss'
+import { Button, TextField, useTheme } from '@mui/material'
 
 const CreatePageForm = ({ onAddPage, item, textButton, onOpen }) => {
   const [pageUrl, setPageUrl] = useState(item?.url)
   const [pageTitle, setPageTitle] = useState(item?.title)
   const [pageContent, setPageContent] = useState(item?.content)
   const [pageUserId, setPageUserIdt] = useState(item?.userId)
+
+  const theme = useTheme()
 
   const handlePageUrlChange = (event) => {
     setPageUrl(event.target.value)
@@ -49,58 +48,64 @@ const CreatePageForm = ({ onAddPage, item, textButton, onOpen }) => {
   }
 
   return (
-    <ThemeContextConsumer>
-      {(context) => (
-        <div className={'form form__' + context.theme}>
-          <div className="form__col">
-            <div className="form__item">
-              <TextField
-                type="url"
-                value={pageUrl}
-                onChange={handlePageUrlChange}
-                placeholder="URL"
-              />
-            </div>
-
-            <div className="form__item">
-              <TextField
-                type="text"
-                value={pageTitle}
-                onChange={handlePageTitleChange}
-                placeholder="Название"
-              />
-            </div>
-
-            <div className="form__item">
-              <TextArea
-                type="text"
-                value={pageContent}
-                onChange={handlePageContentChange}
-                placeholder="Контент"
-                disabled={!Boolean(pageTitle)}
-              />
-            </div>
-
-            <div className="form__item">
-              <TextField
-                type="text"
-                value={pageUserId}
-                onChange={handlePageUserIdChange}
-                placeholder="ID пользователя"
-              />
-            </div>
-          </div>
-
-          <div className="form__actions">
-            <Button type="button" onClick={handleSubmit} text={textButton} />
-
-            {textButton != 'создать страницу' && (
-              <Button type="button" onClick={handleClose} text="Закрыть" />
-            )}
-          </div>
+    <div className={'form form__' + theme.palette.mode}>
+      <div className="form__col">
+        <div className="form__item">
+          <TextField
+            fullWidth
+            type="url"
+            label="URL"
+            defaultValue={pageUrl}
+            onChange={handlePageUrlChange}
+            color="primary"
+            variant="outlined"
+          />
         </div>
-      )}
-    </ThemeContextConsumer>
+
+        <div className="form__item">
+          <TextField
+            fullWidth
+            label="Название"
+            defaultValue={pageTitle}
+            onChange={handlePageTitleChange}
+            color="primary"
+          />
+        </div>
+
+        <div className="form__item">
+          <TextField
+            fullWidth
+            label="Контент"
+            defaultValue={pageContent}
+            onChange={handlePageContentChange}
+            disabled={!Boolean(pageTitle)}
+            color="primary"
+          />
+        </div>
+
+        <div className="form__item">
+          <TextField
+            fullWidth
+            label="ID пользователя"
+            defaultValue={pageUserId}
+            onChange={handlePageUserIdChange}
+            color="primary"
+          />
+        </div>
+      </div>
+
+      <div className="form__actions">
+        <Button color="primary" type="button" onClick={handleSubmit}>
+          {textButton}
+        </Button>
+
+        {textButton != 'создать страницу' && (
+          <Button color="secondary" type="button" onClick={handleClose}>
+            Закрыть
+          </Button>
+        )}
+      </div>
+    </div>
   )
 }
 
@@ -115,11 +120,11 @@ CreatePageForm.propTypes = {
   onAddPage: PropTypes.func,
   item: PropTypes.objectOf(
     PropTypes.shape({
-      id: PropTypes.any,
-      url: PropTypes.string,
-      title: PropTypes.string,
-      content: PropTypes.string,
-      userId: PropTypes.string,
+      id: PropTypes.any.isRequired,
+      url: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      userId: PropTypes.string.isRequired,
     }),
   ),
   textButton: PropTypes.string,

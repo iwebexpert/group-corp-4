@@ -1,7 +1,15 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material'
 import React, { useState } from 'react'
 import CreatePageForm from '../create-page-form/create-page-form'
 import Modal from '../modal/modal.jsx'
-import './styles.scss'
 
 const PageTable = ({ page, setPage, handleEditPage }) => {
   const [open, setOpen] = useState(false)
@@ -19,35 +27,42 @@ const PageTable = ({ page, setPage, handleEditPage }) => {
 
   return (
     <>
-      <h1>Список всех страниц</h1>
+      <Typography variant="h2">Список всех страниц</Typography>
 
-      <table className="table">
-        <thead>
-          <tr className="head">
-            <th>#</th>
-            <th>URL</th>
-            <th>Название</th>
-            <th>Контент</th>
-            <th>ID пользователя</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {page.map((obj) => (
-            <tr key={obj.id} className="row">
-              <td>{obj.id}</td>
-              <td>{obj.url}</td>
-              <td>{obj.title}</td>
-              <td>{obj.content}</td>
-              <td>{obj.userId}</td>
-              <td onClick={() => onDeletePage(obj.id)}>Удалить</td>
-              <td onClick={() => onEditPage(obj)}>Редактировать</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>#</TableCell>
+              <TableCell align="right">URL</TableCell>
+              <TableCell align="right">Название</TableCell>
+              <TableCell align="right">Контент</TableCell>
+              <TableCell align="right">ID пользователя</TableCell>
+              <TableCell align="right">&nbsp;</TableCell>
+              <TableCell align="right">&nbsp;</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {page.map((row) => (
+              <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell component="th" scope="row">
+                  {row.id}
+                </TableCell>
+                <TableCell align="right">{row.url}</TableCell>
+                <TableCell align="right">{row.title}</TableCell>
+                <TableCell align="right">{row.content}</TableCell>
+                <TableCell align="right">{row.userId}</TableCell>
+                <TableCell align="right" onClick={() => onDeletePage(row.id)}>
+                  Удалить
+                </TableCell>
+                <TableCell align="right" onClick={() => onEditPage(row)}>
+                  Редактировать
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
       <Modal open={open} setOpen={setOpen}>
         <CreatePageForm

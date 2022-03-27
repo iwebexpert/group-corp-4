@@ -11,6 +11,14 @@
     animation-fill-mode: forwards;
     animation-duration: 2.5s;
     animation-iteration-count: infinite;
+  }
+
+  .light {
+    g {
+      fill: var(--color-main);
+    }
+  }
+  .dark {
     g {
       fill: var(--color-bg);
     }
