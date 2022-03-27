@@ -12,7 +12,7 @@ export default function App() {
   const [pages, setPages] = useState([])
   const [changesPages, setChangePages] = useState({})
   const [loadPages, setLoadPages] = useState(true)
-  const [changePagesVisible, setChangePagesVisible]=useState(true)
+  const [changePagesVisible, setChangePagesVisible] = useState(true)
 
   let NODE_ENV = process.env.NODE_ENV
 
@@ -37,17 +37,15 @@ export default function App() {
       }),
     )
     setChangePages({})
-    setChangePagesVisible(false) 
-    
+    setChangePagesVisible(false)
   }
 
   const getElemForChange = (elem) => {
     setChangePages(elem)
     setChangePagesVisible(true)
-    
   }
 
-  const changeBack=()=>{
+  const changeBack = () => {
     setChangePagesVisible(false)
   }
 
@@ -71,25 +69,28 @@ export default function App() {
   }, [])
   return (
     <div>
-      
-      {loadPages && NODE_ENV === 'development' ? (<LoadedForm />) : 
-      (
+      {loadPages && NODE_ENV === 'development' ? (
+        <LoadedForm />
+      ) : (
         <>
-        <Header></Header>
-          
-          
-          {changesPages.id && changePagesVisible ?<PagesFormChange
-            changesPages={changesPages}
-            changeBack={changeBack}
-            editOnPagesObjectFunc={editOnPagesObjectFunc}
-          /> :(<>
-          <PagesTable
-            pages={pages}
-            onDeletePages={deletePages}
-            getElemForChange={getElemForChange}
-          />          
-          <PagesForm onAddPages={addPages} />
-          </>)}
+          <Header></Header>
+
+          {changesPages.id && changePagesVisible ? (
+            <PagesFormChange
+              changesPages={changesPages}
+              changeBack={changeBack}
+              editOnPagesObjectFunc={editOnPagesObjectFunc}
+            />
+          ) : (
+            <>
+              <PagesTable
+                pages={pages}
+                onDeletePages={deletePages}
+                getElemForChange={getElemForChange}
+              />
+              <PagesForm onAddPages={addPages} />
+            </>
+          )}
         </>
       )}
     </div>

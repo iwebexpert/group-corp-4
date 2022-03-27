@@ -1,4 +1,4 @@
-import {PagesForm,dataSelectContent} from './PagesForm'
+import {PagesForm,dataSelectContent} from './PagesFormMUI'
 
 import './PagesForm.css'
 

@@ -4,6 +4,12 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/css": "^11.7.1",
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.5.1",
+    "@mui/material": "^5.5.2",
     "js-tokens": "^4.0.0",
     "loose-envify": "^1.4.0",
     "object-assign": "^4.1.1",
@@ -17,7 +23,6 @@
     "watch": "webpack --mode development --watch",
     "api-server": "json-server --port 3000 --watch ./api/v1.db.json",
     "dev-server": "webpack-dev-server --mode development --port 9000 --open"
-    
   },
   "author": "",
   "license": "ISC",

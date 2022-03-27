@@ -1,4 +1,4 @@
-import {PagesTable} from './PagesTable'
+import {PagesTable} from './PagesTableMUI'
 
 import './PagesTable.css'
 

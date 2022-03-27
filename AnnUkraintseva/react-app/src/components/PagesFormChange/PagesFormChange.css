@@ -13,9 +13,7 @@
 .fragmentForm-dark, .inputText-dark, .inputButton-dark {
     transition: background-color 0.5s linear, color 0.5s linear;
 }
-div {
-    padding: 10px;    
-}
+
 
 input, textarea{ 
     padding: 0%;
