@@ -1,44 +1,53 @@
 import React, {useContext} from 'react'
+import {Box, Typography, Table, TableBody, TableCell, TableHead, TableRow, TableContainer} from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 import PropTypes from 'prop-types'
 import {Context} from '../../context/Context'
+import styled from '@emotion/styled'
+
+const CustomEditBtn = styled(EditIcon)`color: #1976d2; cursor:pointer;`;
+const CustomDeleteBtn = styled(DeleteIcon)`color: #ff0000de; cursor:pointer;`;
 
 export default function ShowListPages({addPages, deleteOnPagesObject, getOnPagesObject}) {
      //Context data
     const {changeWindowEdit} = useContext(Context);
   return (
-    <div>
-        <h2>Список созданных страниц</h2>
-        <table className="table">
-            <thead>
-                <tr>
-                    <th>№ п/п</th>
-                    <th>Адрес страницы</th>
-                    <th>Название</th>
-                    <th>Содержимое</th>
-                    <th>Id пользователя</th>
-                    <th>Редактировать</th>
-                    <th>Удалить</th>
-                </tr>
-            </thead>
-            <tbody>
+    <Box>
+        <Typography component="h2">Список созданных страниц</Typography>
+        <TableContainer>
+        <Table sx={{ minWidth: 650 }} size="small" aria-label="sticky table">
+            <TableHead>
+                <TableRow>
+                    <TableCell>№ п/п</TableCell>
+                    <TableCell>Адрес страницы</TableCell>
+                    <TableCell>Название</TableCell>
+                    <TableCell>Содержимое</TableCell>
+                    <TableCell>Id пользователя</TableCell>
+                    <TableCell>Редактировать</TableCell>
+                    <TableCell>Удалить</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
                 {addPages.length >= 1 ? addPages.map((obj, index) => (
-                    <tr key={obj.id}>
-                    <td>{index + 1}</td>
-                    <td>{obj.url}</td>
-                    <td>{obj.title}</td>
-                    <td className="td-content-small">{obj.content}</td>
-                    <td>{obj.userId}</td>
-                    <td><button className="button__show" onClick={() => {
+                    <TableRow key={obj.id}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{obj.url}</TableCell>
+                    <TableCell>{obj.title}</TableCell>
+                    <TableCell className="TableCell-content-small">{obj.content}</TableCell>
+                    <TableCell>{obj.userId}</TableCell>
+                    <TableCell><CustomEditBtn onClick={() => {
                         getOnPagesObject(obj);
                         changeWindowEdit()
-                    }}>Редактировать</button></td>
-                    <td><button className="button__show button__show--delete" 
-                    onClick={() => deleteOnPagesObject(obj.id)}>Удалить</button></td>
-                </tr>
-                )) : <tr><td colSpan="7">Страницы не созданы</td></tr>}
-            </tbody>
-        </table>
-    </div>
+                    }}/></TableCell>
+                    <TableCell><CustomDeleteBtn
+                    onClick={() => deleteOnPagesObject(obj.id)}/></TableCell>
+                </TableRow>
+                )) : <TableRow><TableCell colSpan="7">Страницы не созданы</TableCell></TableRow>}
+            </TableBody>
+        </Table>
+        </TableContainer>
+    </Box>
   )
 }
 //Props types

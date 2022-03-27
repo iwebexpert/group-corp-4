@@ -1,30 +1,40 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState} from 'react'
+import {Box, Typography, Button} from '@mui/material'
 import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
+import styled from '@emotion/styled'
+import CreateFormBase from '../CreateFormBase/CreateFormBase'
+
+const CustomBox = styled(Box)`
+display: flex;
+flex-direction: column;
+padding: .7rem;
+`
+const CustomTypography = styled(Typography)`
+font-size: 1.3rem;
+color: #f44336`;
 
 export default function CreatePagesForm({addOnPagesObject}) {
-    const urlFocus = useRef(null);
     const [addUrl, setAddUrl] = useState('');
     const [addTitle, setAddTitle] = useState('');
     const [addContent, setAddContent] = useState('');
     const [addUserId, setAddUserId] = useState(1);
-
-    useEffect(() => {
-        if(urlFocus) urlFocus.current.focus();
-    }, [])
-
-    const handleAddUrlChange = (event) => {
-        setAddUrl(event.target.value)
-    }
-    const handleAddTitleChange = (event) => {
-        setAddTitle(event.target.value)
-    }
-    const handleAddContentChange = (event) => {
-        setAddContent(event.target.value)
-    }
-    const handleAddUserIdChange = (event) => {
-        setAddUserId(event.target.value)
-    }
+    
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        switch(name) {
+          case 'addUrl': setAddUrl(value);
+          break;
+          case 'addTitle': setAddTitle(value);
+          break;
+          case 'addContent': setAddContent(value);
+          break;
+          case 'addUserId': setAddUserId(+value);
+          default: 'Нет данных';
+          break;
+        }
+      }
     const handleOnSubmit = () => {
         //Validate data
         if(!addUrl || !addTitle || !addContent) {
@@ -45,38 +55,22 @@ export default function CreatePagesForm({addOnPagesObject}) {
         setAddTitle('');
         setAddContent('');
         setAddUserId(1);
-
     }
   return (
-    <section className="form__wrapper">
-        <h2>Добавить страницу</h2>
-        <div className="form">
-            <div>
-                <label htmlFor="url">Ссылка на страницу</label>
-                <input ref={urlFocus} id="url" type="text" onChange={handleAddUrlChange} value={addUrl}/>
-            </div>
-            <div>
-                <label htmlFor="title">Название страницы</label>
-                <input id="title" type="text" onChange={handleAddTitleChange} value={addTitle} />
-            </div>
-            <div>
-                <label htmlFor="content">Содержимое страницы</label>
-                <textarea 
-                rows="10"
-                 id="content" 
-                 onChange={handleAddContentChange} 
-                 value={addContent}
-                 disabled={addTitle.length < 1}  />
-            </div>
-            <div>
-                <label htmlFor="userId">Идентификатор пользователя</label>
-                <input id="userId" type="number" onChange={handleAddUserIdChange} value={addUserId} />
-            </div>
-            <div>
-                <input type="button" value="Добавить страницу" onClick={handleOnSubmit}/>
-            </div>
-        </div>
-    </section>
+    <>
+        <CustomTypography>Добавить страницу</CustomTypography>
+        <CreateFormBase arrayField={[
+            {label:"URL страницы", name:"addUrl", onChange:handleChange, value:addUrl},
+            {label:"Название страницы", name:"addTitle", onChange:handleChange, value:addTitle},
+            {label:"Содержимое страницы", multiline:true,name:"addContent",onChange:handleChange,
+            value:addContent,minRows:"6",disabled:addTitle.length < 1},
+            {label:"Идентификатор пользователя",name:"addUserId", type:"number",onChange:handleChange,
+             value:addUserId}
+        ]}/>
+        <CustomBox sx={{'display':'flex','alignItems':'center','width': '100%'}}>
+            <Button sx={{ 'width': '100%'}} variant="contained" onClick={handleOnSubmit}>Добавить страницу</Button>
+        </CustomBox>
+    </>
   )
 }
 //Props types
