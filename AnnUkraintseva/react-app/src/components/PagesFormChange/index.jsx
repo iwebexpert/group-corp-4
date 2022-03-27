@@ -1,4 +1,4 @@
-import {PagesFormChange} from './PagesFormChange'
+import {PagesFormChange} from './PagesFormChangeMUI'
 
 import './PagesFormChange.css'
 

@@ -1,21 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { ThemeContextProvider } from './contexts/ThemeContexts'
+// import { ThemeContextProvider } from './contexts/ThemeContexts'
+import ThemeContextMUI from './contexts/ThemeContextMUI'
 
 import './index.css'
+// import './normalize.css'
 
-import App from 'components/App'
+// import App from 'components/App'
+import Layout from 'components/Layout'
 
 ReactDOM.render(
   <>
-    <ThemeContextProvider>
+    {/* <ThemeContextProvider>
       <App />
-    </ThemeContextProvider>
-
-    {/* <div>Test</div>
-    <div>REACT_APP_BASE_URL:{process.env.REACT_APP_BASE_URL}</div>
-    <div></div>
-    <div>REACT_APP_THEME:{process.env.REACT_APP_THEME}</div> */}
+    </ThemeContextProvider> */}
+    <ThemeContextMUI>
+     <Layout/> 
+    </ThemeContextMUI>
   </>,
   document.querySelector('#root'),
 )
