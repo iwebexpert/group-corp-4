@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
-import './PageForm.scss'
 import { Box, Button, TextField } from '@mui/material'
 
-const PageForm = ({ addRows }) => {
-  const [url, setUrl] = useState('')
-  const [title, setTitle] = useState('')
+export const PageForm = ({ addComment }) => {
+  const [pageId, setPageId] = useState('')
   const [userId, setUserId] = useState('')
   const [content, setContent] = useState('')
 
   const handleOnClick = () => {
-    if (url && title && userId && content) {
+    if (pageId && userId && content) {
       const page = {
         id: uuidv4(),
-        url: url,
-        title: title,
+        pageId: pageId,
         userId: userId,
         content: content,
       }
-      addRows(page)
-      setUrl('')
-      setTitle('')
+      addComment(page)
+      setPageId('')
       setUserId('')
       setContent('')
     }
@@ -37,33 +33,25 @@ const PageForm = ({ addRows }) => {
       }}
     >
       <TextField
-        id="url"
-        label="URL"
+        id="padeId"
+        label="Page Id"
         variant="outlined"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
+        value={pageId}
+        onChange={(e) => setPageId(e.target.value)}
       />
       <TextField
-        id="title"
-        label="Title"
-        variant="outlined"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <TextField
-        id="userid"
-        label="UserId"
+        id="userId"
+        label="User Id"
         variant="outlined"
         value={userId}
         onChange={(e) => setUserId(e.target.value)}
       />
       <TextField
-        id="content-multiline"
+        id="content"
         label="Content"
         multiline
         rows={4}
-        disabled={title ? false : true}
-        placeholder={!title ? 'Заполните поле title' : 'Content'}
+        placeholder={'Заполните поле'}
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
@@ -75,7 +63,6 @@ const PageForm = ({ addRows }) => {
 }
 
 PageForm.propTypes = {
-  addRows: PropTypes.func,
+  addRows: PropTypes.func.isRequired,
 }
 
-export default PageForm

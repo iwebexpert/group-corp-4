@@ -1,23 +1,41 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import { ThemeProvider } from '@mui/material/styles';
+import themes from '../themes'
+import { PropTypes } from 'prop-types'
 
-const { Provider, Consumer } = React.createContext()
+export const ThemeContextProvider = React.createContext()
 
-class ThemeContext extends Component {
-  state = {
-    theme: 'light',
+export const ThemeContext = (props) => {
+  const themeChoicer = () => {
+    const themeStorage = localStorage.getItem('config.theme')
+    if (themeStorage) {
+      return themes[themeStorage]
+    }
+    return themes.light
   }
 
-  changeTheme = () => {
-    this.setState({ theme: this.state.theme === 'light' ? 'dark' : 'light' })
+  const themeToggler = () => {
+    setTheme((theme) => {
+      localStorage.setItem('config.theme', theme.palette.mode === 'dark' ? 'light' : 'dark')
+      if (theme.palette.mode === 'dark') {
+        return themes.light
+      } else {
+        return themes.dark
+      }
+    })
   }
 
-  render() {
-    return (
-      <Provider value={{ theme: this.state.theme, changeTheme: this.changeTheme }}>
-        {this.props.children}
-      </Provider>
-    )
-  }
+  const [theme, setTheme] = useState(themeChoicer)
+
+  return (
+    <ThemeProvider theme={theme}>
+      <ThemeContextProvider.Provider value={{ themeToggler }}>
+        {props.children}
+      </ThemeContextProvider.Provider>
+    </ThemeProvider>
+  )
 }
 
-export { ThemeContext , Consumer };
+ThemeContext.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+}
