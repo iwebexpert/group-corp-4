@@ -1,0 +1,20 @@
+.table {
+  border: 1px solid gray;
+  width: 80%;
+  margin: auto;
+}
+td {
+  border: 1px solid gray;
+  height: 32px;
+  text-align: right;
+}
+.button {
+  padding: 5px 15px;
+  border: 1px solid black;
+  font-size: 14px;
+  margin: 0px 5px;
+}
+.style-dark {
+  background: #666;
+  color: aliceblue;
+}

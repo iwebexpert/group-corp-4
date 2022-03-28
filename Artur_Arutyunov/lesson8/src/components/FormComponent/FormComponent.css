@@ -1,0 +1,11 @@
+.wrapperForm {
+  width: 300px;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 15px;
+}
+.headerForm {
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+}
