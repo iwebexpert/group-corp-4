@@ -59,6 +59,7 @@ module.exports = {
         secure: false,
     },
   },
+  historyApiFallback: true,
   },
 
   plugins: [
