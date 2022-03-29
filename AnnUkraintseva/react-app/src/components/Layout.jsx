@@ -21,6 +21,7 @@ import NightlightRoundIcon from '@mui/icons-material/NightlightRound'
 import Tooltip from '@mui/material/Tooltip'
 import { useTheme } from '@mui/material/styles'
 import { ThemeModeContext } from '../contexts/ThemeContextMUI'
+import { Outlet } from 'react-router-dom'
 
 import PagesTable from './PagesTable'
 import PagesForm from './PagesForm'
@@ -95,64 +96,7 @@ export default function Layout() {
 
   const theme = useTheme()
   const colorMode = React.useContext(ThemeModeContext)
-  //---------------------------------------------------------------------
-
-  // const [pages, setPages] = useState([])
-  // const [changesPages, setChangePages] = useState({})
-  // const [loadPages, setLoadPages] = useState(true)
-  // const [changePagesVisible, setChangePagesVisible] = useState(true)
-
-  // let NODE_ENV = process.env.NODE_ENV
-
-  // const addPages = (data) => {
-  //   setPages(pages.concat([data]))
-  // }
-
-  // const deletePages = (id) => {
-  //   const filteredItems = pages.filter((item) => item.id !== id)
-  //   setPages(filteredItems)
-  // }
-
-  // const editOnPagesObjectFunc = (object) => {
-  //   setChangePages(object)
-  //   setPages(
-  //     pages.map((obj) => {
-  //       if (obj.id === object.id) {
-  //         return object
-  //       } else {
-  //         return obj
-  //       }
-  //     }),
-  //   )
-  //   setChangePages({})
-  //   setChangePagesVisible(false)
-  // }
-
-  // const getElemForChange = (elem) => {
-  //   setChangePages(elem)
-  //   setChangePagesVisible(true)
-  // }
-
-  // const changeBack = () => {
-  //   setChangePagesVisible(false)
-  // }
-
-  // const changeLoadPages = () => {
-  //   setLoadPages(!loadPages)
-  // }
-
-  //   const addPagesFromServer = () => {
-  //     fetch('/api/pages')
-  //       .then((response) => response.json())
-  //       .then((data) => setPages(data))
-  //     changeLoadPages()
-  //   }
-
-  // useEffect(() => {
-  //   fetch('/api/pages')
-  //     .then((response) => response.json())
-  //     .then((data) => setPages(data))
-  // }, [])
+ 
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -163,6 +107,7 @@ export default function Layout() {
             pr: '24px', // keep right padding when drawer closed
           }}
         >
+          
           <IconButton
             edge="start"
             color="inherit"
@@ -185,6 +130,7 @@ export default function Layout() {
               {theme.palette.mode !== 'light' ? <LightModeIcon /> : <NightlightRoundIcon />}
             </IconButton>
           </Tooltip>
+          
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -196,6 +142,7 @@ export default function Layout() {
             px: [1],
           }}
         >
+          
           <IconButton onClick={toggleDrawer}>
             <ChevronLeftIcon />
           </IconButton>
@@ -218,48 +165,8 @@ export default function Layout() {
         }}
       >
         <Toolbar />
-        {/* <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                {changesPages.id && changePagesVisible ? (
-                  <PagesFormChange
-                  changesPages={changesPages}
-                  changeBack={changeBack}
-                  editOnPagesObjectFunc={editOnPagesObjectFunc}
-                />
-                ) : (
-                  <>
-                    <PagesForm onAddPages={addPages} />
-                  </>
-                )}
+        <Outlet/>
 
-              </Paper>
-            </Grid>
-            
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                <PagesTable
-                  pages={pages}
-                  onDeletePages={deletePages}
-                  getElemForChange={getElemForChange}
-                />
-              </Paper>
-            </Grid>
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                <CommentForm/>
-              </Paper>
-            </Grid>
-          </Grid>
-          <Copyright sx={{ pt: 4 }} />
-        </Container> */}
       </Box>
     </Box>
   )

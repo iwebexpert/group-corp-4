@@ -1,43 +1,102 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "name": "Anna",
-        "email": "anna1234@domain.local",
-        "password": "1234",
-        "role": "admin"
-      },
-      {
-        "id": 2,
-        "name": "Ivan",
-        "email": "ivan1234@domain.local",
-        "password": "123456",
-        "role": "user"
-      },
-      {
-        "id": 3,
-        "name": "Olga",
-        "email": "olga2022@domain.local",
-        "password": "12345678",
-        "role": "user"
-      }
-    ],
-    "pages": [
-      { "id": "1", "url": "home", "title": "Home", "content": "Some content...", "userId": 1 },
-      { "id": "2", "url": "about", "title": "About", "content": "Some content...", "userId": 1 },
-      { "id": "3", "url": "page1", "title": "Page1", "content": "Some content...", "userId": 2 },
-      { "id": "4", "url": "page2", "title": "Page2", "content": "Some content...", "userId": 3 },
-      { "id": "5", "url": "contacts", "title": "Contacts", "content": "Some content...", "userId": 3 }
-    ],
-    "comments": [
-      { "id": 1, "pageId": 3, "userId": 2, "content": "My comment #1..." },
-      { "id": 2, "pageId": 3, "userId": 3, "content": "My comment #2..." },
-      { "id": 3, "pageId": 4, "userId": 2, "content": "My comment #3..." }
-    ],
-    "settings": [
-      { "id": 1, "theme": "light", "userId": 1 },
-      { "id": 2, "theme": "dark", "userId": 2 },
-      { "id": 3, "theme": "dark", "userId": 3 }
-    ]
-  }
-  
+  "users": [
+    {
+      "id": 1,
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "password": "1234",
+      "role": "admin",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFubmEiLCJlbWFpbCI6ImFubmExMjM0QGRvbWFpbi5sb2NhbCIsInBhc3N3b3JkIjoiMTIzNCIsInJvbGUiOiJhZG1pbiJ9.Ijf4F1n37n4kztWY2tp-MB6FwBLwT7bIvosSbiCgNDA"
+    },
+    {
+      "id": 2,
+      "name": "Ivan",
+      "email": "ivan1234@domain.local",
+      "password": "123456",
+      "role": "user",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ikl2YW4iLCJlbWFpbCI6Iml2YW4xMjM0QGRvbWFpbi5sb2NhbCIsInBhc3N3b3JkIjoiMTIzNDU2Iiwicm9sZSI6InVzZXIifQ.SGepqnpjJoJNamKAkwWnQoGlIAbKgneCDNLen7kdEEA"
+    },
+    {
+      "id": 3,
+      "name": "Olga",
+      "email": "olga2022@domain.local",
+      "password": "12345678",
+      "role": "user",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6Ik9sZ2EiLCJlbWFpbCI6Im9sZ2EyMDIyQGRvbWFpbi5sb2NhbCIsInBhc3N3b3JkIjoiMTIzNDU2NzgiLCJyb2xlIjoidXNlciJ9.C1UmkPJDqbw-9vHUUPA3RGtvIiY-t7PcRc_l9vBG3Xc"
+    }
+  ],
+  "pages": [
+    {
+      "id": "1",
+      "url": "home",
+      "title": "Home",
+      "content": "Some content...",
+      "userId": 1
+    },
+    {
+      "id": "2",
+      "url": "about",
+      "title": "About",
+      "content": "Some content...",
+      "userId": 1
+    },
+    {
+      "id": "3",
+      "url": "page1",
+      "title": "Page1",
+      "content": "Some content...",
+      "userId": 2
+    },
+    {
+      "id": "4",
+      "url": "page2",
+      "title": "Page2",
+      "content": "Some content...",
+      "userId": 3
+    },
+    {
+      "id": "5",
+      "url": "contacts",
+      "title": "Contacts",
+      "content": "Some content...",
+      "userId": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "pageId": 3,
+      "userId": 2,
+      "content": "My comment #1..."
+    },
+    {
+      "id": 2,
+      "pageId": 3,
+      "userId": 3,
+      "content": "My comment #2..."
+    },
+    {
+      "id": 3,
+      "pageId": 4,
+      "userId": 2,
+      "content": "My comment #3..."
+    }
+  ],
+  "settings": [
+    {
+      "id": 1,
+      "theme": "light",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "theme": "dark",
+      "userId": 2
+    },
+    {
+      "id": 3,
+      "theme": "dark",
+      "userId": 3
+    }
+  ]
+}

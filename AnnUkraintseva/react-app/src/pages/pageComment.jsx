@@ -2,7 +2,7 @@ import React from "react"
 import ContainerWrapper from "./ContainerWrapper"
 import CommentForm from "../components/CommentForm"
 
-export default function pageComment(){
+export default function PageComment(){
     return(
         <ContainerWrapper>
             <CommentForm/>

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import PagesTable from '../components/PagesTable'
 import PagesForm from '../components/PagesForm'
 import PagesFormChange from '../components/PagesFormChange'
-import CommentForm from '../components/CommentForm'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Copyright from '../components/Copyright'
 
-export default function pageFormPages() {
+
+export default function PageFormPages() {
   const [pages, setPages] = useState([])
   const [changesPages, setChangePages] = useState({})
   const [loadPages, setLoadPages] = useState(true)
