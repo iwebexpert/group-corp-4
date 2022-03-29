@@ -97,49 +97,49 @@ export default function Layout() {
   const colorMode = React.useContext(ThemeModeContext)
   //---------------------------------------------------------------------
 
-  const [pages, setPages] = useState([])
-  const [changesPages, setChangePages] = useState({})
-  const [loadPages, setLoadPages] = useState(true)
-  const [changePagesVisible, setChangePagesVisible] = useState(true)
+  // const [pages, setPages] = useState([])
+  // const [changesPages, setChangePages] = useState({})
+  // const [loadPages, setLoadPages] = useState(true)
+  // const [changePagesVisible, setChangePagesVisible] = useState(true)
 
-  let NODE_ENV = process.env.NODE_ENV
+  // let NODE_ENV = process.env.NODE_ENV
 
-  const addPages = (data) => {
-    setPages(pages.concat([data]))
-  }
+  // const addPages = (data) => {
+  //   setPages(pages.concat([data]))
+  // }
 
-  const deletePages = (id) => {
-    const filteredItems = pages.filter((item) => item.id !== id)
-    setPages(filteredItems)
-  }
+  // const deletePages = (id) => {
+  //   const filteredItems = pages.filter((item) => item.id !== id)
+  //   setPages(filteredItems)
+  // }
 
-  const editOnPagesObjectFunc = (object) => {
-    setChangePages(object)
-    setPages(
-      pages.map((obj) => {
-        if (obj.id === object.id) {
-          return object
-        } else {
-          return obj
-        }
-      }),
-    )
-    setChangePages({})
-    setChangePagesVisible(false)
-  }
+  // const editOnPagesObjectFunc = (object) => {
+  //   setChangePages(object)
+  //   setPages(
+  //     pages.map((obj) => {
+  //       if (obj.id === object.id) {
+  //         return object
+  //       } else {
+  //         return obj
+  //       }
+  //     }),
+  //   )
+  //   setChangePages({})
+  //   setChangePagesVisible(false)
+  // }
 
-  const getElemForChange = (elem) => {
-    setChangePages(elem)
-    setChangePagesVisible(true)
-  }
+  // const getElemForChange = (elem) => {
+  //   setChangePages(elem)
+  //   setChangePagesVisible(true)
+  // }
 
-  const changeBack = () => {
-    setChangePagesVisible(false)
-  }
+  // const changeBack = () => {
+  //   setChangePagesVisible(false)
+  // }
 
-  const changeLoadPages = () => {
-    setLoadPages(!loadPages)
-  }
+  // const changeLoadPages = () => {
+  //   setLoadPages(!loadPages)
+  // }
 
   //   const addPagesFromServer = () => {
   //     fetch('/api/pages')
@@ -148,11 +148,11 @@ export default function Layout() {
   //     changeLoadPages()
   //   }
 
-  useEffect(() => {
-    fetch('/api/pages')
-      .then((response) => response.json())
-      .then((data) => setPages(data))
-  }, [])
+  // useEffect(() => {
+  //   fetch('/api/pages')
+  //     .then((response) => response.json())
+  //     .then((data) => setPages(data))
+  // }, [])
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -218,9 +218,8 @@ export default function Layout() {
         }}
       >
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        {/* <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
-            {/* Chart */}
             <Grid item xs={12}>
               <Paper
                 sx={{
@@ -229,7 +228,6 @@ export default function Layout() {
                   flexDirection: 'column',
                 }}
               >
-                {/* ------------------------------------------- */}
                 {changesPages.id && changePagesVisible ? (
                   <PagesFormChange
                   changesPages={changesPages}
@@ -245,10 +243,8 @@ export default function Layout() {
               </Paper>
             </Grid>
             
-            {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                {/* <Orders /> */}
                 <PagesTable
                   pages={pages}
                   onDeletePages={deletePages}
@@ -258,13 +254,12 @@ export default function Layout() {
             </Grid>
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                {/* <Orders /> */}
                 <CommentForm/>
               </Paper>
             </Grid>
           </Grid>
           <Copyright sx={{ pt: 4 }} />
-        </Container>
+        </Container> */}
       </Box>
     </Box>
   )
