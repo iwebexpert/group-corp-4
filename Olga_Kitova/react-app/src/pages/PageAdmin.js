@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import {Grid, Paper} from '@mui/material'
 import CreatePagesForm from 'components/CreatePagesForm'
 import ShowListPages from 'components/ShowListPages'
@@ -6,7 +7,7 @@ import EditPagesForm from 'components/EditPagesForm'
 import Loading from 'components/Loading'
 import CreateCommentsForm from 'components/CreateCommentsForm'
 
-export default function AdminPanelScreen() {
+export default function PageAdmin({role}) {
   const [addPages, setAddPages] = useState([]);
   const [editPagesObject, setEditPagesObject] = useState({});
   const [load, setLoad] = useState(true);
@@ -38,10 +39,11 @@ export default function AdminPanelScreen() {
     // Changing the object in state
     setAddPages(addPages.map(obj => {
       if (obj.id == object.id) {
-         return object;
-      } else {
-         return obj;
-      }}));
+        return object;
+     } else {
+        return obj;
+     }
+  }))
       // Clear an intermediate variable
     setEditPagesObject({});
   }
@@ -53,7 +55,10 @@ it to an intermediate variable to send to the editing component ) */
 
   useEffect(() => {
      if(NODE_ENV === 'development') {
-       setTimeout(getDataPagesToJSON, 1000)
+       let timerId = setTimeout(getDataPagesToJSON, 1000);
+       return () => {
+         clearTimeout(timerId)
+       }
      } else {
       getDataPagesToJSON()
      }
@@ -63,14 +68,16 @@ it to an intermediate variable to send to the editing component ) */
      (<>
      <EditPagesForm editPagesObject={editPagesObject} editOnPagesObjectFunc={editOnPagesObjectFunc}/>
      <Grid container spacing={3}>
-              <Grid item xs={12} md={6} lg={7}>
+              {role != "user" ? (
+                <Grid item xs={12} md={6} lg={7}>
                 <Paper
                   sx={{
                     p: 2, display: 'flex', flexDirection: 'column', height: 600,
                   }}>
-                        <CreatePagesForm addOnPagesObject={addOnPagesObject} />
+                        <CreatePagesForm addOnPagesObject={addOnPagesObject} role={role} />
                     </Paper>
               </Grid>
+              ) : null}
               <Grid item xs={12} md={6} lg={5}>
                 <Paper
                   sx={{
@@ -82,8 +89,16 @@ it to an intermediate variable to send to the editing component ) */
               </Grid>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                    <ShowListPages addPages={addPages} deleteOnPagesObject={deleteOnPagesObject} getOnPagesObject={getOnPagesObject} />
+                    <ShowListPages role={role} addPages={addPages} deleteOnPagesObject={deleteOnPagesObject} getOnPagesObject={getOnPagesObject} />
                 </Paper>
               </Grid>
             </Grid></>)
+}
+
+//Props types
+PageAdmin.defaultProps = {
+  role: ""
+}
+ShowListPages.propTypes = {
+role: PropTypes.string.isRequired
 }

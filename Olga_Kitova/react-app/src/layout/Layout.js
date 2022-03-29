@@ -21,7 +21,7 @@ import { Context } from '../context/Context'
 // Components
 import mainListItems from 'components/MenuItems'
 import CopyrightMUI from 'components/Footer/CopyrightMUI'
-import AdminPanelScreen from '../screens/admin/AdminPanelScreen'
+import { Outlet } from 'react-router'
 
 const drawerWidth = 240;
 
@@ -163,8 +163,8 @@ export default function Layout() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <AdminPanelScreen />
-            <CopyrightMUI sx={{ pt: 4 }} />
+          <Outlet />
+          <CopyrightMUI />
           </Container>
         </Box>
       </Box>

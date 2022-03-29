@@ -58,20 +58,21 @@ export default function CreatePagesForm({addOnPagesObject}) {
     }
   return (
     <>
-        <CustomTypography>Добавить страницу</CustomTypography>
-        <CreateFormBase arrayField={[
-            {label:"URL страницы", name:"addUrl", onChange:handleChange, value:addUrl},
-            {label:"Название страницы", name:"addTitle", onChange:handleChange, value:addTitle},
-            {label:"Содержимое страницы", multiline:true,name:"addContent",onChange:handleChange,
-            value:addContent,minRows:"6",disabled:addTitle.length < 1},
-            {label:"Идентификатор пользователя",name:"addUserId", type:"number",onChange:handleChange,
-             value:addUserId}
-        ]}/>
-        <CustomBox sx={{'display':'flex','alignItems':'center','width': '100%'}}>
-            <Button sx={{ 'width': '100%'}} variant="contained" onClick={handleOnSubmit}>Добавить страницу</Button>
-        </CustomBox>
-    </>
+  <CustomTypography>Добавить страницу</CustomTypography>
+  <CreateFormBase arrayField={[
+      {label:"URL страницы", name:"addUrl", onChange:handleChange, value:addUrl},
+      {label:"Название страницы", name:"addTitle", onChange:handleChange, value:addTitle},
+      {label:"Содержимое страницы", multiline:true,name:"addContent",onChange:handleChange,
+      value:addContent,minRows:"6",disabled:addTitle.length < 1},
+      {label:"Идентификатор пользователя",name:"addUserId", type:"number",onChange:handleChange,
+       value:addUserId}
+  ]}/>
+  <CustomBox sx={{'display':'flex','alignItems':'center','width': '100%'}}>
+      <Button sx={{ 'width': '100%'}} variant="contained" onClick={handleOnSubmit}>Добавить страницу</Button>
+  </CustomBox>
+</>
   )
+  
 }
 //Props types
 CreatePagesForm.defaultProps = {

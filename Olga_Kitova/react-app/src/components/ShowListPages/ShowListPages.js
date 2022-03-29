@@ -9,7 +9,7 @@ import styled from '@emotion/styled'
 const CustomEditBtn = styled(EditIcon)`color: #1976d2; cursor:pointer;`;
 const CustomDeleteBtn = styled(DeleteIcon)`color: #ff0000de; cursor:pointer;`;
 
-export default function ShowListPages({addPages, deleteOnPagesObject, getOnPagesObject}) {
+export default function ShowListPages({addPages, deleteOnPagesObject, getOnPagesObject, role}) {
      //Context data
     const {changeWindowEdit} = useContext(Context);
   return (
@@ -24,8 +24,10 @@ export default function ShowListPages({addPages, deleteOnPagesObject, getOnPages
                     <TableCell>Название</TableCell>
                     <TableCell>Содержимое</TableCell>
                     <TableCell>Id пользователя</TableCell>
+                    {role != "user" && <>
                     <TableCell>Редактировать</TableCell>
                     <TableCell>Удалить</TableCell>
+                    </>}
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -36,12 +38,14 @@ export default function ShowListPages({addPages, deleteOnPagesObject, getOnPages
                     <TableCell>{obj.title}</TableCell>
                     <TableCell className="TableCell-content-small">{obj.content}</TableCell>
                     <TableCell>{obj.userId}</TableCell>
-                    <TableCell><CustomEditBtn onClick={() => {
+                    { role != "user" && <><TableCell>
+                      <CustomEditBtn onClick={() => {
                         getOnPagesObject(obj);
                         changeWindowEdit()
                     }}/></TableCell>
                     <TableCell><CustomDeleteBtn
                     onClick={() => deleteOnPagesObject(obj.id)}/></TableCell>
+                    </>}
                 </TableRow>
                 )) : <TableRow><TableCell colSpan="7">Страницы не созданы</TableCell></TableRow>}
             </TableBody>
@@ -52,11 +56,13 @@ export default function ShowListPages({addPages, deleteOnPagesObject, getOnPages
 }
 //Props types
 ShowListPages.defaultProps = {
+    role: "",
     addPages: [],
     deleteOnPagesObject: () => {},
     getOnPagesObject: () => {}
   }
 ShowListPages.propTypes = {
+  role: PropTypes.string.isRequired,
   addPages: PropTypes.arrayOf(PropTypes.shape({
     url:PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
