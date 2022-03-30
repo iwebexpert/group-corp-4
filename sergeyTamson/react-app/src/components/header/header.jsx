@@ -1,8 +1,18 @@
-import { useTheme } from '@mui/material'
-import React from 'react'
+import { AlignHorizontalCenter } from '@mui/icons-material'
+import { Box, Button, useTheme } from '@mui/material'
+import { alignProperty } from '@mui/material/styles/cssUtils'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useRoutes } from 'react-router'
+import { Link } from 'react-router-dom'
+import LoginForm from '../forms/login-form/login-form'
+import Modal from '../modal/modal'
+import { authService } from '../services/auth/authService'
 import './styles.scss'
 
 const Header = ({ toggleThemeMode }) => {
+  const [open, setOpen] = useState(false)
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+
   const theme = useTheme()
 
   const handleClick = () => {
@@ -11,6 +21,16 @@ const Header = ({ toggleThemeMode }) => {
       return prev === 'light' ? 'dark' : 'light'
     })
   }
+
+  const logoutUser = () => {
+    authService.logout()
+    setUser()
+  }
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('user')))
+  }, [localStorage.getItem('user')])
+
   return (
     <div className={'header header__' + theme.palette.mode}>
       <button className="thema" onClick={handleClick}>
@@ -40,6 +60,36 @@ const Header = ({ toggleThemeMode }) => {
           </svg>
         )}
       </button>
+
+      {!user && (
+        <Button color="secondary" type="button" onClick={() => setOpen(true)}>
+          Вход
+        </Button>
+      )}
+
+      {user && (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            color: theme.palette.mode === 'light' ? '#3a3f58' : '#f9ac67',
+          }}
+        >
+          <Link to="/profile">
+            <Box mr={4} sx={{ fontSize: '24px', fontWeight: '700' }}>
+              {user.name}
+            </Box>
+          </Link>
+
+          <Button color="secondary" type="button" onClick={logoutUser}>
+            Выход
+          </Button>
+        </Box>
+      )}
+
+      <Modal open={open} onClose={setOpen}>
+        <LoginForm onClose={setOpen} />
+      </Modal>
     </div>
   )
 }
