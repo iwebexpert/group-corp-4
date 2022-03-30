@@ -13,7 +13,7 @@ import Edit from '@mui/icons-material/Edit'
 import SaveAltIcon from '@mui/icons-material/SaveAlt'
 import { TextField } from '@mui/material'
 
-const PageTable = ({ tableRows, delitePage }) => {
+const PageTable = ({ tableRows, delitePage, role }) => {
   const newTableRow2 = () => {
     return tableRows.map((item) => {
       return { ...item, isEdit: true }
@@ -60,7 +60,7 @@ const PageTable = ({ tableRows, delitePage }) => {
             <TableCell align="right">Title</TableCell>
             <TableCell align="right">Content</TableCell>
             <TableCell align="right">UserId</TableCell>
-            <TableCell align="right">&nbsp;</TableCell>
+            {role === 'admin' ? <TableCell align="right">&nbsp;</TableCell> : null}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -117,23 +117,25 @@ const PageTable = ({ tableRows, delitePage }) => {
                   />
                 )}
               </TableCell>
-              <TableCell align="center">
-                <Delete
-                  sx={{ cursor: 'pointer', color: 'red', ml: 2 }}
-                  onClick={() => delitePage(page.id)}
-                ></Delete>
-                {page.isEdit ? (
-                  <Edit
-                    sx={{ cursor: 'pointer', color: 'blue', ml: 4 }}
-                    onClick={() => editRow(page.id, 'edit')}
-                  ></Edit>
-                ) : (
-                  <SaveAltIcon
-                    sx={{ cursor: 'pointer', color: 'green', ml: 4 }}
-                    onClick={() => editRow(page.id, 'save')}
-                  ></SaveAltIcon>
-                )}
-              </TableCell>
+              {role === 'admin' ? (
+                <TableCell align="center">
+                  <Delete
+                    sx={{ cursor: 'pointer', color: 'red', ml: 2 }}
+                    onClick={() => delitePage(page.id)}
+                  ></Delete>
+                  {page.isEdit ? (
+                    <Edit
+                      sx={{ cursor: 'pointer', color: 'blue', ml: 4 }}
+                      onClick={() => editRow(page.id, 'edit')}
+                    ></Edit>
+                  ) : (
+                    <SaveAltIcon
+                      sx={{ cursor: 'pointer', color: 'green', ml: 4 }}
+                      onClick={() => editRow(page.id, 'save')}
+                    ></SaveAltIcon>
+                  )}
+                </TableCell>
+              ) : null}
             </TableRow>
           ))}
         </TableBody>
@@ -153,6 +155,7 @@ PageTable.propTypes = {
     }),
   ).isRequired,
   delitePage: PropTypes.func.isRequired,
+  role: PropTypes.string,
 }
 
 export default PageTable

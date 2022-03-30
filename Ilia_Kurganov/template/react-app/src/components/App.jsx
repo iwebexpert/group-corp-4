@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { styled } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import MuiDrawer from '@mui/material/Drawer'
@@ -9,20 +9,14 @@ import List from '@mui/material/List'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
-import Container from '@mui/material/Container'
-import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import { mainListItems, secondaryListItems } from './ListItem.jsx/ListItem'
-import PageTable from './PageTable/PageTable'
-import { CopyRight } from './CopyRight/CopyRight'
-import { Loader } from './Loader/Loader'
-import PageForm from './PageForm/PageForm'
 import { ThemeSwitcher } from './ThemeSwitcher'
 import { Tooltip } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { ThemeContextProvider } from '../context/ThemeContext'
+import { Outlet } from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -86,39 +80,8 @@ export function App() {
     localStorage.setItem('config.bar', JSON.stringify({ isOpen: !open }))
   }
 
-  const [tableRows, setTableRows] = useState([])
-  const [fetching, setFetching] = useState(false)
   const theme = useTheme()
   const { themeToggler } = useContext(ThemeContextProvider)
-
-  useEffect(() => {
-    const mode = process.env.NODE_ENV
-    const timer = mode === 'development' ? 0 : 1000
-
-    let waitFetch = setTimeout(() => {
-      timer && setFetching((state) => !state)
-      fetch('/api/pages')
-        .then((respone) => respone.json())
-        .then((data) => setTableRows(data))
-    }, timer)
-
-    timer && setFetching((state) => !state)
-
-    return () => {
-      clearTimeout(waitFetch)
-    }
-  }, [])
-
-  const addRows = (row) => {
-    setTableRows((rows) => {
-      return [...rows, row]
-    })
-  }
-
-  const delitePage = (key) => {
-    const filterPage = tableRows.filter((page) => page.id !== key)
-    setTableRows(filterPage)
-  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -182,43 +145,7 @@ export function App() {
         }}
       >
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: 440,
-                }}
-              >
-                <PageForm addRows={addRows} />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  background:
-                    theme.palette.mode === 'light'
-                      ? theme.palette.grey[300]
-                      : theme.palette.grey[700],
-                }}
-              >
-                {fetching ? (
-                  <Loader />
-                ) : (
-                  <PageTable tableRows={tableRows} delitePage={delitePage} />
-                )}
-              </Paper>
-            </Grid>
-          </Grid>
-          <CopyRight sx={{ pt: 4 }} />
-        </Container>
+        <Outlet />
       </Box>
     </Box>
   )

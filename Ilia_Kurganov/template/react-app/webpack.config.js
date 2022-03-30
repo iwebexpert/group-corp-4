@@ -48,7 +48,8 @@ module.exports = {
         pathRewrite: {'^/api' : ''},
         secure: false,
       }
-    }
+    },
+    historyApiFallback: true,
   },
 
   plugins: [
