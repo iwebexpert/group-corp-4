@@ -1,57 +1,50 @@
 import { ThemeProvider } from '@mui/material'
 import React from 'react'
 import { useState, useEffect } from 'react'
-import CreatePageForm from '../create-page-form/create-page-form.jsx'
-import Header from '../header/header.jsx'
-import Loading from '../loading/loading.jsx'
-import PageTable from '../page-table/page-table.jsx'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import MainPage from '../../pages/Main.jsx'
+import Layout from '../layout/layout.jsx'
 import { darkTheme, lightTheme } from './styles.js'
 import './styles.scss'
+import AuthRequire from '../services/auth/AuthRequire'
+import AuthRequireRoleBased from '../services/auth/AuthRequireRoleBased'
+import ErrorPage from '../../pages/Error.jsx'
+import LogoutPage from '../../pages/Logout.jsx'
+import ProfilePage from '../../pages/Profile.jsx'
+import AboutPage from '../../pages/About.jsx'
+import { authService } from '../services/auth/authService.jsx'
 
-const App = () => {
+const App = ({ user }) => {
   const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('theme') || 'light')
-  const [page, setPage] = useState([])
 
-  const onAddPage = (data) => {
-    setPage(page.concat([data]))
-  }
-
-  const handleEditPage = (data) => {
-    setPage((prev) => [...prev.filter((item) => item.id !== data?.id), data])
-  }
-
-  useEffect(() => {
-    window.setTimeout(
-      () => {
-        fetch('/api/pages')
-          .then((res) => res.json())
-          .then((data) => {
-            setPage(data)
-          })
-      },
-      process.env.NODE_ENV === 'development' ? 10000 : 0,
-    )
-  }, [])
+  console.log('USER', user)
 
   return (
     <ThemeProvider theme={isDarkMode === 'dark' ? darkTheme : lightTheme}>
-      <div>
-        <Header toggleThemeMode={setIsDarkMode} />
+      <Routes>
+        <Route path="/" element={<Layout setIsDarkMode={setIsDarkMode} />}>
+          <Route index element={<MainPage />} />
 
-        {!page.length && <Loading />}
-
-        {page.length !== 0 && (
-          <div className="content">
-            <div className="content__item content__form">
-              <CreatePageForm onAddPage={onAddPage} />
-            </div>
-
-            <div className="content__item">
-              <PageTable page={page} setPage={setPage} handleEditPage={handleEditPage} />
-            </div>
-          </div>
-        )}
-      </div>
+          <Route
+            path="about"
+            element={
+              <AboutPage />
+              // <AuthRequire redirectTo="/">
+              // </AuthRequire>
+            }
+          />
+          <Route path="logout" element={<LogoutPage />} />
+          <Route
+            path="profile"
+            element={
+              <AuthRequireRoleBased redirectTo="/">
+                <ProfilePage />
+              </AuthRequireRoleBased>
+            }
+          />
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+      </Routes>
     </ThemeProvider>
   )
 }

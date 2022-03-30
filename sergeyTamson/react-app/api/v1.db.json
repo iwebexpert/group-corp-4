@@ -3,30 +3,34 @@
     {
       "id": 1,
       "name": "Anna",
-      "email": "anna1234@domain.local",
-      "password": "1234",
-      "role": "admin"
+      "email": "anna@domain.local",
+      "password": "1111",
+      "role": "admin",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFubmEiLCJlbWFpbCI6ImFubmFAZG9tYWluLmxvY2FsIiwicGFzc3dvcmQiOiIxMTExIiwicm9sZSI6ImFkbWluIn0.FrS-Si4JTx0HtJuIGyGe6t3s3FbZ8kAcOFP2vWxnFYw"
     },
     {
       "id": 2,
       "name": "Ivan",
-      "email": "ivan1234@domain.local",
-      "password": "123456",
-      "role": "admin"
-    },
-    {
-      "name": "Sergey",
-      "email": "Q@Q.com",
-      "password": "787878",
+      "email": "ivan@domain.local",
+      "password": "2222",
       "role": "user",
-      "id": 4
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ikl2YW4iLCJlbWFpbCI6Iml2YW5AZG9tYWluLmxvY2FsIiwicGFzc3dvcmQiOiIyMjIyIiwicm9sZSI6InVzZXIifQ.Vdh7dpy07PBDtU40JS9hYYTW2S90FBKCPLjMGJtaH2Q"
     },
     {
+      "id": 3,
+      "name": "Sergey",
+      "email": "sergey@domain.local",
+      "password": "3333",
+      "role": "user",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IlNlcmdleSIsImVtYWlsIjoic2VyZ2V5QGRvbWFpbi5sb2NhbCIsInBhc3N3b3JkIjoiMzMzMyIsInJvbGUiOiJ1c2VyIn0.AoTM8TMnV5t4efX1Y3OVnf2i73xCuxtEDgCvTN76pNg"
+    },
+    {
+      "id": 4,
       "name": "Roman",
-      "email": "rr@rr.com",
-      "password": "123123",
-      "role": "admin",
-      "id": 5
+      "email": "roman@domain.local",
+      "password": "4444",
+      "role": "user",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6IlJvbWFuIiwiZW1haWwiOiJyb21hbkBkb21haW4ubG9jYWwiLCJwYXNzd29yZCI6IjQ0NDQiLCJyb2xlIjoidXNlciJ9.YDe8bzPNZFAqownvwMM1E1b8yoVkRZ3VzR23B_xL6R0"
     }
   ],
   "pages": [

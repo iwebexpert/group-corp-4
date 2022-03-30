@@ -7,13 +7,15 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import React, { useState } from 'react'
-import CreatePageForm from '../create-page-form/create-page-form'
+import React, { useEffect, useState } from 'react'
+import CreatePageForm from '../forms/create-page-form/create-page-form.jsx'
 import Modal from '../modal/modal.jsx'
+import { authService } from '../services/auth/authService.jsx'
 
 const PageTable = ({ page, setPage, handleEditPage }) => {
   const [open, setOpen] = useState(false)
   const [dataObj, setDataObj] = useState({})
+  const [user, setUser] = useState(null)
 
   const onDeletePage = (id) => {
     const filteredItems = page.filter((item) => item.id !== id)
@@ -24,6 +26,12 @@ const PageTable = ({ page, setPage, handleEditPage }) => {
     setDataObj(obj)
     setOpen(true)
   }
+
+  //TODO
+  useEffect(() => {
+    const currentUser = authService.currentUserValue
+    setUser(currentUser)
+  }, [])
 
   return (
     <>
@@ -38,8 +46,8 @@ const PageTable = ({ page, setPage, handleEditPage }) => {
               <TableCell align="right">Название</TableCell>
               <TableCell align="right">Контент</TableCell>
               <TableCell align="right">ID пользователя</TableCell>
-              <TableCell align="right">&nbsp;</TableCell>
-              <TableCell align="right">&nbsp;</TableCell>
+              {user?.role === 'admin' && <TableCell align="right">&nbsp;</TableCell>}
+              {user?.role === 'admin' && <TableCell align="right">&nbsp;</TableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -52,24 +60,28 @@ const PageTable = ({ page, setPage, handleEditPage }) => {
                 <TableCell align="right">{row.title}</TableCell>
                 <TableCell align="right">{row.content}</TableCell>
                 <TableCell align="right">{row.userId}</TableCell>
-                <TableCell align="right" onClick={() => onDeletePage(row.id)}>
-                  Удалить
-                </TableCell>
-                <TableCell align="right" onClick={() => onEditPage(row)}>
-                  Редактировать
-                </TableCell>
+                {user?.role === 'admin' && (
+                  <TableCell align="right" onClick={() => onDeletePage(row.id)}>
+                    Удалить
+                  </TableCell>
+                )}
+                {user?.role === 'admin' && (
+                  <TableCell align="right" onClick={() => onEditPage(row)}>
+                    Редактировать
+                  </TableCell>
+                )}
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
 
-      <Modal open={open} setOpen={setOpen}>
+      <Modal open={open} onClose={setOpen}>
         <CreatePageForm
           item={dataObj}
           onAddPage={handleEditPage}
           textButton="изменить данные страницы"
-          onOpen={setOpen}
+          onClose={setOpen}
         />
       </Modal>
     </>

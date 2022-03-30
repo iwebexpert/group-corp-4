@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import './styles.scss'
 import { Button, TextField, useTheme } from '@mui/material'
 
-const CreatePageForm = ({ onAddPage, item, textButton, onOpen }) => {
+const CreatePageForm = ({ onAddPage, item, textButton, onClose }) => {
   const [pageUrl, setPageUrl] = useState(item?.url)
   const [pageTitle, setPageTitle] = useState(item?.title)
   const [pageContent, setPageContent] = useState(item?.content)
@@ -29,8 +29,8 @@ const CreatePageForm = ({ onAddPage, item, textButton, onOpen }) => {
   }
 
   const handleSubmit = () => {
-    if (onOpen) {
-      onOpen(false)
+    if (onClose) {
+      onClose(false)
     }
     const data = {
       id: item?.id || uuidv4(),
@@ -44,7 +44,7 @@ const CreatePageForm = ({ onAddPage, item, textButton, onOpen }) => {
   }
 
   const handleClose = () => {
-    onOpen(false)
+    onClose(false)
   }
 
   return (
@@ -113,7 +113,7 @@ CreatePageForm.defaultProps = {
   onAddPage: () => {},
   item: {},
   textButton: 'создать страницу',
-  onOpen: () => {},
+  onClose: () => {},
 }
 
 CreatePageForm.propTypes = {
@@ -128,7 +128,7 @@ CreatePageForm.propTypes = {
     }),
   ),
   textButton: PropTypes.string,
-  onOpen: PropTypes.func,
+  onClose: PropTypes.func,
 }
 
 export default CreatePageForm

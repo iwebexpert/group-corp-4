@@ -3,11 +3,11 @@ import { createPortal } from 'react-dom'
 import PropTypes from 'prop-types'
 import './styles.scss'
 
-const Modal = ({ children, open, setOpen }) => {
+const Modal = ({ children, open, onClose }) => {
   const onOverlayClick = (e) => {
-    if (e.target.className === 'root') {
-      setOpen(false)
-    }
+    // if (e.target.className === 'container') {
+    //   onClose(false)
+    // }
   }
 
   return (
@@ -25,7 +25,7 @@ const Modal = ({ children, open, setOpen }) => {
 
 Modal.propTypes = {
   open: PropTypes.bool,
-  setOpen: PropTypes.func,
+  onClose: PropTypes.func,
 }
 
 export default Modal
