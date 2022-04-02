@@ -1,4 +1,6 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import {deletePagesFetch, getPagesFetch, writeCurrentIdByEditPages} from 'actions/actionsPages'
 import {Box, Typography, Table, TableBody, TableCell, TableHead, TableRow, TableContainer} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
@@ -6,12 +8,29 @@ import PropTypes from 'prop-types'
 import {Context} from '../../context/Context'
 import styled from '@emotion/styled'
 
-const CustomEditBtn = styled(EditIcon)`color: #1976d2; cursor:pointer;`;
-const CustomDeleteBtn = styled(DeleteIcon)`color: #ff0000de; cursor:pointer;`;
+const CustomEditBtnAdmin = styled(EditIcon)`color: #1976d2; cursor:pointer;`
+const CustomEditBtnUser = styled(EditIcon)`color: rgb(128 128 128); cursor:pointer;`
+const CustomDeleteBtn = styled(DeleteIcon)`color: #ff0000de; cursor:pointer;`
 
-export default function ShowListPages({addPages, deleteOnPagesObject, getOnPagesObject, role}) {
+export default function ShowListPages({ role }) {
+  const dispatch = useDispatch();
+  const pages = useSelector((state) => state.pages.data)
+
+  useEffect(() => {
+    dispatch(getPagesFetch())
+  },[])
+
      //Context data
-    const {changeWindowEdit} = useContext(Context);
+    const {changeWindowEdit} = useContext(Context)
+
+    const getOnPagesObjectId = (id) => {
+      dispatch(writeCurrentIdByEditPages(id))
+    }
+
+    const deletePages = (id) => {
+      dispatch(deletePagesFetch(id))
+    }
+    
   return (
     <Box>
         <Typography component="h2">Список созданных страниц</Typography>
@@ -24,28 +43,32 @@ export default function ShowListPages({addPages, deleteOnPagesObject, getOnPages
                     <TableCell>Название</TableCell>
                     <TableCell>Содержимое</TableCell>
                     <TableCell>Id пользователя</TableCell>
-                    {role != "user" && <>
                     <TableCell>Редактировать</TableCell>
-                    <TableCell>Удалить</TableCell>
-                    </>}
+                    {role === 'admin' && <TableCell>Удалить</TableCell>}
                 </TableRow>
             </TableHead>
             <TableBody>
-                {addPages.length >= 1 ? addPages.map((obj, index) => (
+                {pages ? pages.map((obj, index) => (
                     <TableRow key={obj.id}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>{obj.url}</TableCell>
                     <TableCell>{obj.title}</TableCell>
                     <TableCell className="TableCell-content-small">{obj.content}</TableCell>
                     <TableCell>{obj.userId}</TableCell>
-                    { role != "user" && <><TableCell>
-                      <CustomEditBtn onClick={() => {
-                        getOnPagesObject(obj);
+                    <TableCell>
+                      {role==='user'? <CustomEditBtnUser onClick={() => {
+                        getOnPagesObjectId(obj.id);
                         changeWindowEdit()
-                    }}/></TableCell>
-                    <TableCell><CustomDeleteBtn
-                    onClick={() => deleteOnPagesObject(obj.id)}/></TableCell>
-                    </>}
+                    }}/> :
+                    <CustomEditBtnAdmin onClick={() => {
+                      getOnPagesObjectId(obj.id);
+                      changeWindowEdit()
+                  }}/>}
+                    </TableCell>
+                    <TableCell>
+                      {role === 'admin' &&  <CustomDeleteBtn
+                    onClick={() => deletePages(obj.id)} /> }
+                    </TableCell>
                 </TableRow>
                 )) : <TableRow><TableCell colSpan="7">Страницы не созданы</TableCell></TableRow>}
             </TableBody>
@@ -56,19 +79,8 @@ export default function ShowListPages({addPages, deleteOnPagesObject, getOnPages
 }
 //Props types
 ShowListPages.defaultProps = {
-    role: "",
-    addPages: [],
-    deleteOnPagesObject: () => {},
-    getOnPagesObject: () => {}
-  }
+  role: ""
+}
 ShowListPages.propTypes = {
-  role: PropTypes.string.isRequired,
-  addPages: PropTypes.arrayOf(PropTypes.shape({
-    url:PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    userId: PropTypes.number.isRequired
-  })),
-  deleteOnPagesObject: PropTypes.func.isRequired,
-  getOnPagesObject: PropTypes.func.isRequired,
+role: PropTypes.string.isRequired
 }

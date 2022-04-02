@@ -7,6 +7,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import NoteAltIcon from '@mui/icons-material/NoteAlt'
 import PostAddIcon from '@mui/icons-material/PostAdd'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
+import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
 const mainListItems = (
     <React.Fragment>
@@ -27,6 +28,12 @@ const mainListItems = (
           <NoteAltIcon/>
         </ListItemIcon>
         <ListItemText primary="Профиль" />
+      </ListItemButton>
+      <ListItemButton component={Link} to="/stats">
+        <ListItemIcon>
+          <QueryStatsIcon/>
+        </ListItemIcon>
+        <ListItemText primary="Статистика" />
       </ListItemButton>
       <ListItemButton component={Link} to="/logout">
         <ListItemIcon>

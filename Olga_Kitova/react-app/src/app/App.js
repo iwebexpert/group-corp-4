@@ -8,18 +8,20 @@ import PageProfile from '../pages/PageProfile'
 import PageLogout from '../pages/PageLogout'
 import PageError from '../pages/PageError'
 import LoginForm from 'components/LoginForm/LoginForm'
+import PageStats from '../pages/PageStats'
+import AuthRequireRole from '../services/auth/AuthRequireRole'
 
 export default function App({user}) {
-  const {role} = user;
   return (
     <>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<PageAboutProject />}/>
-            <Route path="/show_pages" element={<PageAdmin role={role} />} />
+            <Route path="/show_pages" element={<PageAdmin user={user} />} />
             <Route path="/profile" element={ <PageProfile user={user} />}/>
             <Route path="/login" element={< LoginForm />}/>
             <Route path="/logout" element={<PageLogout />} />
+            <Route path="/stats" element={<AuthRequireRole><PageStats/></AuthRequireRole>}/>
             <Route path="*" element={<PageError />} />
           </Route>
         </Routes>

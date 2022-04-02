@@ -24,9 +24,9 @@ export default function LoginForm({handleSuccessAuth}) {
     }
     authService.login(email, password, handleSuccessAuth)
     .then(res => {
-      if( res.message ) {
-        alert(res.message);
-      }
+      if(res.message) {
+        alert(res.message)
+      } 
     })
   };
   return (

@@ -9,6 +9,9 @@ export const authService = {
     logout,
     get currentUserValue() {
       return getCurrentUser()
+    },
+    get token() {
+      return getCurrentToken()
     }
   }
 
@@ -19,6 +22,11 @@ export const authService = {
     }
     return user
   }
+
+  function getCurrentToken() {
+    const user = getCurrentUser()
+    return (user && user.token) ? user.token : null
+   }
   
   function login(email, password, callback = (user) => {}) {
     const options = {
@@ -29,6 +37,7 @@ export const authService = {
       .then(handleResponse)
       .then((user) => {
         let decoded = jwt_decode(user.token)
+        decoded["token"] = user.token
         localStorage.setItem(localStorageKey, JSON.stringify(decoded))
         callback(decoded)
         return decoded

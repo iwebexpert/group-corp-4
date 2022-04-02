@@ -3,30 +3,37 @@ import PropTypes from 'prop-types'
 import {Context} from '../../context/Context'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
 import CreateFormBase from '../CreateFormBase/CreateFormBase';
+import { useDispatch, useSelector } from 'react-redux';
+import {clearCurrentIdByEditPages, editPagesFetch} from 'actions/actionsPages'
 
-export default function EditPagesForm({editPagesObject, editOnPagesObjectFunc }) {
-    const [editId, setEditId] = useState('');
-    const [editUrl, setEditUrl] = useState('');
-    const [editTitle, setEditTitle] = useState('');
-    const [editContent, setEditContent] = useState('');
-    const [editUserId, setEditUserId] = useState('');
+export default function EditPagesForm({ userId}) {
+    const dispatch = useDispatch();
+    const data = useSelector((state) => state.pages.data)
+    const currentId = useSelector((state) => state.pages.currentId)
+    const [editId, setEditId] = useState('')
+    const [editUrl, setEditUrl] = useState('')
+    const [editTitle, setEditTitle] = useState('')
+    const [editContent, setEditContent] = useState('')
+
      //Context data
-   const {openEdit, changeWindowEdit} = useContext(Context);
+   const {openEdit, changeWindowEdit} = useContext(Context)
+
     // Function that keeps track of state, accepts an object, or clears fields
     const changeFormData = (obj) => {
         setEditId(obj?.id || '')
-        setEditUrl(obj?.url || '');
-        setEditTitle(obj?.title || '');
-        setEditContent(obj?.content || '');
-        setEditUserId(obj?.userId || '');
+        setEditUrl(obj?.url || '')
+        setEditTitle(obj?.title || '')
+        setEditContent(obj?.content || '')
     }
+
     useEffect(() => {
-        changeFormData(editPagesObject)
-    }, [editPagesObject])
+        let pageByEdit = data ? data.find(item => item.id === currentId) : null
+        changeFormData(pageByEdit)
+    }, [currentId])
 
     const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
+        const name = event.target.name
+        const value = event.target.value
         switch(name) {
           case 'editUrl': setEditUrl(value);
           break;
@@ -34,30 +41,33 @@ export default function EditPagesForm({editPagesObject, editOnPagesObjectFunc })
           break;
           case 'editContent': setEditContent(value);
           break;
-          case 'editUserId': setEditUserId(+value);
           default: 'Нет данных';
           break;
         }
       }
+
     const handleOnSubmit = () => {
         const data = {
             id: editId,
             url: editUrl,
             title: editTitle,
             content: editContent,
-            userId: editUserId,
+            userId: userId,
         }
-        // Send the object to the App component to write to the state
-        editOnPagesObjectFunc(data);
+        // Edit pages
+        dispatch(editPagesFetch(data))
         //Clear form
         changeFormData()
         //Close open edit window
         changeWindowEdit()
     }
+
     const handleOnClose = () => {
+        // Reset current ID
+        dispatch(clearCurrentIdByEditPages())
         changeWindowEdit()
     }
-  return (
+    return (
         <Dialog open={openEdit}>
         <DialogTitle>Редактировать страницу</DialogTitle>
         <DialogContent>
@@ -66,9 +76,7 @@ export default function EditPagesForm({editPagesObject, editOnPagesObjectFunc })
                 {label:"Ссылка на страницу", name:"editUrl", onChange:handleChange, value:editUrl},
                 {label:"Название страницы", name:"editTitle", onChange:handleChange, value:editTitle},
                 {label:"Содержимое страницы",multiline:true,minRows:'6',name:"editContent",
-                onChange:handleChange,value:editContent,disabled:editTitle?.length < 1},
-                {label:"Идентификатор пользователя", name:"editUserId", type:"number",
-                 onChange:handleChange, value:editUserId}
+                onChange:handleChange,value:editContent,disabled:editTitle?.length < 1}
             ]}/>
         </DialogContent>
             <DialogActions>
@@ -80,16 +88,8 @@ export default function EditPagesForm({editPagesObject, editOnPagesObjectFunc })
 }
 //Props types
 EditPagesForm.defaultProps = {
-    editPagesObject: {},
-    editOnPagesObjectFun: () => {},
+    userId: PropTypes.number
   }
-
-EditPagesForm.propTypes = {
-    editPagesObject: PropTypes.shape({
-        url:PropTypes.string,
-        title: PropTypes.string,
-        content: PropTypes.string,
-        userId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    }),
-    editOnPagesObjectFunc: PropTypes.func.isRequired
-}
+  EditPagesForm.propTypes = {
+  userId: PropTypes.number.isRequired
+  }
