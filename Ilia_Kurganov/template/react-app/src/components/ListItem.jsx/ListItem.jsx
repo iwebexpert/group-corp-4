@@ -4,12 +4,12 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ListSubheader from '@mui/material/ListSubheader'
-import InfoIcon from '@mui/icons-material/Info';
-import HandymanIcon from '@mui/icons-material/Handyman';
-import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
-import FaceIcon from '@mui/icons-material/Face';
-import LogoutIcon from '@mui/icons-material/Logout';
-
+import InfoIcon from '@mui/icons-material/Info'
+import HandymanIcon from '@mui/icons-material/Handyman'
+import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork'
+import FaceIcon from '@mui/icons-material/Face'
+import LogoutIcon from '@mui/icons-material/Logout'
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 export const mainListItems = (
   <React.Fragment>
@@ -30,6 +30,12 @@ export const mainListItems = (
         <MapsHomeWorkIcon />
       </ListItemIcon>
       <ListItemText primary="Филиалы" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/stats">
+      <ListItemIcon>
+        <QueryStatsIcon />
+      </ListItemIcon>
+      <ListItemText primary="Статистика" />
     </ListItemButton>
   </React.Fragment>
 )

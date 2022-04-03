@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
 import { Box, Button, TextField } from '@mui/material'
 
-export const PageForm = ({ addComment }) => {
+export const CommentForm = ({ addComment }) => {
   const [pageId, setPageId] = useState('')
   const [userId, setUserId] = useState('')
   const [content, setContent] = useState('')
