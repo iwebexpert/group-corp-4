@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Divider, ListItemText, Typography } from '@mui/material'
 import WrapperPages from './WrapperPages'
 
-let roleName = {
+export let roleName = {
   admin: "Администратор",
   user: "Пользователь"
 }

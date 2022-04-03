@@ -15,8 +15,13 @@ module.exports = {
     alias: {
       app: path.join(__dirname, "src", "app"),
       components: path.join(__dirname, "src", "components"),
+      pages: path.join(__dirname, "src", "pages"),
+      services: path.join(__dirname, "src", "services"),
       store: path.join(__dirname, "src", "store"),
+      actions: path.join(__dirname, "src", "actions"),
       reducers: path.join(__dirname, "src", "reducers"),
+      constants: path.join(__dirname, "src", "constants"),
+      middlewares: path.join(__dirname, "src", "middlewares"),
       styles: path.join(__dirname, "src", "styles"),
       assets: path.join(__dirname, "src", "assets"),
       img: path.join(__dirname, "src", "assets", "img"),
