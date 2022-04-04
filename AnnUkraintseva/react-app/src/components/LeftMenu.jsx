@@ -8,6 +8,7 @@ import PagesIcon from '@mui/icons-material/Pages';
 import CommentIcon from '@mui/icons-material/Comment';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 import { Link } from 'react-router-dom'
 
@@ -30,6 +31,12 @@ export const mainListItems = (
         <CommentIcon />
       </ListItemIcon>
       <ListItemText primary="Комментарии" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/stats">
+      <ListItemIcon>
+        <QueryStatsIcon />
+      </ListItemIcon>
+      <ListItemText primary="Действия пользователей" />
     </ListItemButton>
   </React.Fragment>
 )

@@ -1,18 +1,16 @@
-import React, {useEffect} from "react"
-import { authServices } from "../services/auth/authServices"
-import ContainerWrapper from "./ContainerWrapper"
+import React, { useEffect } from 'react'
+import { authServices } from '../services/auth/authServices'
+import LoadedForm from '../components/LoadedForm'
 
-export default function PageLogout(){
+export default function PageLogout() {
+  useEffect(() => {
+    authServices.logout()
+    window.location.href = '/'
+  })
+
+  return (
     
-
-    useEffect(()=>{
-        authServices.logout()
-        window.location.href = '/'
-    })
-
-    return(
-        <ContainerWrapper>
-            
-        </ContainerWrapper>
-    )
+        <LoadedForm></LoadedForm>
+    
+  )
 }

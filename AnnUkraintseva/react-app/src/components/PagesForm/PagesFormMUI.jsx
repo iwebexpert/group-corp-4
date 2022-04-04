@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
@@ -9,17 +9,44 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Input from '@mui/material/Input'
 
+import styled from "@emotion/styled"
 
-
+const ButtonCustom = styled(FormControl)`
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+`
 
 
 export const dataSelectContent = ''
 
-export function PagesForm({ onAddPages }) {
+export function PagesForm({ dataInitial, onSave, onReset, onAdd }) {
+  console.log('datainit', dataInitial)
+
+  const [pageId, setPageId] = useState(null)
   const [pagesUrl, setPagesUrl] = useState('')
   const [pagesTitle, setPagesTitle] = useState('')
   const [pagesContent, setPagesContent] = useState('')
   const [pagesUserId, setPagesUserId] = useState(1)
+
+  useEffect(() => {
+    console.log('dataInitial', dataInitial)
+    if (dataInitial) {
+      setPageId(dataInitial.id)
+      setPagesUrl(dataInitial.url)
+      setPagesTitle(dataInitial.title)
+      setPagesContent(dataInitial.content)
+      setPagesUserId(dataInitial.userId)
+    } else {
+      setPageId(null)
+      setPagesUrl('')
+      setPagesTitle('')
+      setPagesContent('')
+      setPagesUserId(1)
+    }
+  }, [dataInitial])
 
   const handlePagesUrlChange = (event) => {
     setPagesUrl(event.target.value)
@@ -47,26 +74,38 @@ export function PagesForm({ onAddPages }) {
 
   const handleSubmit = () => {
     const data = {
-      id: uuidv4(),
+      id: pageId ?? uuidv4(),
       url: pagesUrl,
       title: pagesTitle,
       content: pagesContent,
       userId: pagesUserId,
     }
-    onAddPages(data)
-    setPagesUrl('')
-    setPagesTitle('')
-    setPagesContent('')
-    setPagesUserId(1)
+
+    if (pageId) {
+      onSave(data)
+    } else {
+      onAdd(data)
+      setPagesUrl('')
+      setPagesTitle('')
+      setPagesContent('')
+      setPagesUserId(1)
+    }
   }
 
   return (
     <>
       <Box sx={{ minWidth: 120 }}>
-        <Typography color="primary" component="h2">
-          Добавление страниц
-        </Typography>
-        <FormControl fullWidth sx ={{m:1}}>
+        {pageId ? (
+          <Typography color="primary" component="h2">
+            Редактирование страниц
+          </Typography>
+        ) : (
+          <Typography color="primary" component="h2">
+            Добавление страниц
+          </Typography>
+        )}
+
+        <FormControl fullWidth sx={{ m: 1 }}>
           <InputLabel id="pages-url"></InputLabel>
           <TextField
             placeholder="Введите url"
@@ -76,47 +115,56 @@ export function PagesForm({ onAddPages }) {
             onChange={handlePagesUrlChange}
           ></TextField>
         </FormControl>
-        <FormControl fullWidth sx ={{m:1}}>
-            <InputLabel id="pages-title"></InputLabel>
-            <TextField
-              placeholder="Введите заголовок"
-              label = "Заголовок"
-              id="pages-title"
-              value={pagesTitle}
-              onChange={handlePagesTitleChange}
-            ></TextField>
-          </FormControl>
-          <FormControl fullWidth sx ={{m:1}}>
-            <InputLabel id="pages-content"></InputLabel>
-            <TextField
-              placeholder="Введите контент"
-              label="Контент"
-              disabled={!getPagesContent()}
-              id="pages-content"
-              value={pagesContent}
-              onChange={handlePagesContentChange}
-            ></TextField>
-          </FormControl>
-          <FormControl fullWidth sx ={{m:1, fontSize: 14}}>
-            <InputLabel htmlFor="pagesUserId"></InputLabel>
-            <Input
-              label ="Пользователь"
-              type="number"
-              min="1"
-              id="pagesUserId"
-              value={pagesUserId}
-              onChange={handlePagesUserIdChange}
-            />
-          </FormControl>
-          
-          <FormControl fullWidth sx ={{m:1}}>
-            <Button
-              onClick={handleSubmit}
-              value="Создать новую страницу"
-            >Создать новую страницу</Button>
-          </FormControl>
+        <FormControl fullWidth sx={{ m: 1 }}>
+          <InputLabel id="pages-title"></InputLabel>
+          <TextField
+            placeholder="Введите заголовок"
+            label="Заголовок"
+            id="pages-title"
+            value={pagesTitle}
+            onChange={handlePagesTitleChange}
+          ></TextField>
+        </FormControl>
+        <FormControl fullWidth sx={{ m: 1 }}>
+          <InputLabel id="pages-content"></InputLabel>
+          <TextField
+            placeholder="Введите контент"
+            label="Контент"
+            disabled={!getPagesContent()}
+            id="pages-content"
+            value={pagesContent}
+            onChange={handlePagesContentChange}
+          ></TextField>
+        </FormControl>
+        <FormControl fullWidth sx={{ m: 1, fontSize: 14 }}>
+          <InputLabel htmlFor="pagesUserId"></InputLabel>
+          <Input
+            label="Пользователь"
+            type="number"
+            min="1"
+            id="pagesUserId"
+            value={pagesUserId}
+            onChange={handlePagesUserIdChange}
+          />
+        </FormControl>
+
+        <FormControl fullWidth sx={{ m: 1 }}>
+          {pageId ? (
+            <ButtonCustom>
+              <Button onClick={handleSubmit} value="Редактировать">
+                Редактировать
+              </Button>
+              <Button onClick={onReset} value="Отмена">
+                Отмена
+              </Button>
+            </ButtonCustom>
+          ) : (
+            <Button onClick={handleSubmit} value="Создать новую страницу">
+              Создать новую страницу
+            </Button>
+          )}
+        </FormControl>
       </Box>
-      
     </>
   )
 }

@@ -1,6 +1,5 @@
 import jwt_decode from "jwt-decode"
 
-const LOGIN_URL = 'api/users'
 const localStorageKey = 'user'
 
 const erroeMas = [400,401,403,404,500]
@@ -11,9 +10,12 @@ export const authServices={
     get currentUserValue(){
         return getCurrentUser()
     },
+    get token(){
+        return getCurrentToken()
+    },
 
 }
- function getCurrentUser(){
+export function getCurrentUser(){
     let user = localStorage.getItem(localStorageKey)
     if(user != null)
     {
@@ -21,8 +23,28 @@ export const authServices={
     }
 
     return user
-
 }
+
+export function getCurrentName(){
+    const user = getCurrentUser()
+    return (user && user.name) ? user.name: null
+}
+
+export function getCurrentEmail(){
+    const user = getCurrentUser()
+    return (user && user.email) ? user.email: null
+}
+
+export function getCurrentUserRole(){
+    const user = getCurrentUser()
+    return (user && user.role) ? user.role : null
+}
+
+function getCurrentToken(){
+    const user = getCurrentUser()
+    return (user && user.token)? user.token: null
+} 
+
 
 function login(email, password, callback =(user)=>{}){
     const options = {
@@ -31,6 +53,12 @@ function login(email, password, callback =(user)=>{}){
     }
     return fetch(`http://localhost:9000/api/users?email_like=${email}&password_like=${password}&_embed=tokens`, options).then(handleResponse).then((user)=>{
             let decoded = jwt_decode(user[0].token)
+            if (typeof decoded ==='object')
+            {
+                decoded['email']= email
+                decoded['token']= user[0].token
+            }
+            console.log('decoded', typeof decoded)
             localStorage.setItem(localStorageKey, JSON.stringify(decoded))
             callback(decoded)
             return decoded
