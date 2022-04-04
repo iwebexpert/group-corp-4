@@ -27,32 +27,51 @@
   ],
   "pages": [
     {
-      "id": 2,
+      "id": "dsdsadas",
       "url": "about",
       "title": "About",
       "content": "Some content...",
       "userId": 1
     },
     {
-      "id": 3,
+      "id": "dasdsadweqwe",
       "url": "page1",
       "title": "Page1",
       "content": "Some content...",
       "userId": 2
     },
     {
-      "id": 4,
+      "id": "dasewq2132",
       "url": "page2",
       "title": "Page2",
       "content": "Some content...",
       "userId": 3
     },
     {
-      "id": 5,
+      "id": "sdssds",
       "url": "contacts",
       "title": "Contacts",
       "content": "Some content...",
       "userId": 3
+    },
+    {
+      "id": "rxzLQZO",
+      "url": "page2",
+      "title": "Page2",
+      "content": "Some content...",
+      "userId": 3
+    }
+  ],
+  "log": [
+    {
+      "id": "2312",
+      "action": "PAGE_PENDING",
+      "user": "admin"
+    },
+    {
+      "action": "PAGE_ADD",
+      "user": "admin",
+      "id": "B_j054o"
     }
   ],
   "comments": [

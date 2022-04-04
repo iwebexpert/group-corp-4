@@ -5,9 +5,7 @@ import { authService } from './authService'
 function AuthRequireRole({children, redirect}) {
     
     const isAuth = authService.currentUserValue !== null
-    const role = authService.currentUserValue.role
     const allData = authService.currentUserValue
-    console.log(allData)
 
   return isAuth ? React.cloneElement(children, {...allData}) : <Navigate ro={redirect}/>
 }

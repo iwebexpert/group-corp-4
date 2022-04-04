@@ -6,10 +6,9 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-     
     const currentUser = authService.currentUserValue
-    if(currentUser){
-        setUser(currentUser)
+    if (currentUser) {
+      setUser(currentUser)
     }
   }, [])
 

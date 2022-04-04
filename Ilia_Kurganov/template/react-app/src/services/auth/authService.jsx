@@ -6,6 +6,9 @@ export const authService = {
   get currentUserValue() {
     return getCurrentUser()
   },
+  get token() {
+    return getCurrentToker()
+  },
 }
 
 const localStorageKey = 'user'
@@ -19,24 +22,28 @@ const getCurrentUser = () => {
 }
 
 function login(email, callback = (user) => {}) {
-  return (
-    fetch(`/api/users?email_like=${email}`)
-      .then((res) => {
-        return res.json()
-      })
-      .then((user) => {  
-        if (user.length === 0) {  
-            return Promise.reject('No')
-        }
-        const decode = jwt_decode(user[0].token)
-        localStorage.setItem(localStorageKey, JSON.stringify(decode))
-        callback(decode)
-        return decode
-      })
-  )
+  return fetch(`/api/users?email_like=${email}`)
+    .then((res) => {
+      return res.json()
+    })
+    .then((user) => {
+      if (user.length === 0) {
+        return Promise.reject('No')
+      }
+      let decode = jwt_decode(user[0].token)
+      decode['token'] = user[0].token
+      localStorage.setItem(localStorageKey, JSON.stringify(decode))
+      callback(decode)
+      return decode
+    })
 }
 
-function logout (){
+function getCurrentToker () {
+  const user = getCurrentUser();
+  return user.token
+}
+
+function logout() {
   localStorage.removeItem(localStorageKey)
 }
 

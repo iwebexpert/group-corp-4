@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
 import './PageForm.scss'
@@ -55,7 +55,7 @@ const PageForm = ({ addRows }) => {
         label="UserId"
         variant="outlined"
         value={userId}
-        onChange={(e) => setUserId(e.target.value)}
+        onChange={(e) => setUserId(+(e.target.value))}
       />
       <TextField
         id="content-multiline"

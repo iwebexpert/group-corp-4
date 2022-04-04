@@ -147,7 +147,7 @@ const PageTable = ({ tableRows, delitePage, role }) => {
 PageTable.propTypes = {
   tableRows: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
