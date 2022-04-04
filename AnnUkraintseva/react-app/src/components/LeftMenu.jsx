@@ -1,72 +1,62 @@
-import React from 'react';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import LayersIcon from '@mui/icons-material/Layers';
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import React from 'react'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import ListSubheader from '@mui/material/ListSubheader'
+import InfoIcon from '@mui/icons-material/Info';
+import PagesIcon from '@mui/icons-material/Pages';
+import CommentIcon from '@mui/icons-material/Comment';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
+
+import { Link } from 'react-router-dom'
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/">
       <ListItemIcon>
-        <DashboardIcon />
+        <InfoIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="О приложении" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/pagesLink">
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <PagesIcon />
       </ListItemIcon>
-      <ListItemText primary="Orders" />
+      <ListItemText primary="Страницы" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/commentLink">
       <ListItemIcon>
-        <PeopleIcon />
+        <CommentIcon />
       </ListItemIcon>
-      <ListItemText primary="Customers" />
+      <ListItemText primary="Комментарии" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/stats">
       <ListItemIcon>
-        <BarChartIcon />
+        <QueryStatsIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
+      <ListItemText primary="Действия пользователей" />
     </ListItemButton>
   </React.Fragment>
-);
+)
 
 export const secondaryListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
-      Saved reports
+      О пользователе
     </ListSubheader>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/profile">
       <ListItemIcon>
-        <AssignmentIcon />
+        <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary="Current month" />
+      <ListItemText primary="Профиль" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/logout">
       <ListItemIcon>
-        <AssignmentIcon />
+        <LogoutIcon />
       </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
+      <ListItemText primary="Выход" />
     </ListItemButton>
   </React.Fragment>
-);
+)

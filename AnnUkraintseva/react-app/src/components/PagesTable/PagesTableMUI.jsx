@@ -51,7 +51,7 @@ export function PagesTable({
               <TableCell>{obj.userId}</TableCell>
               <TableCell onClick={()=>onDeletePages(obj.id)}><DeleteIconCusrom color ="primary"/>
               </TableCell>
-              <TableCell onClick={()=>getElemForChange(obj)}><EditIconCustom color="primary"/></TableCell>
+              <TableCell onClick={()=>getElemForChange(obj.id)}><EditIconCustom color="primary"/></TableCell>
             </TableRow>
           ))}
         </TableBody>

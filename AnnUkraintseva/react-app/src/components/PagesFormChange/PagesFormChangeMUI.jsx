@@ -20,7 +20,7 @@ const ButtonCustom = styled(FormControl)`
 
 export const dataSelectContent = ''
 
-export function PagesFormChange({ changesPages, editOnPagesObjectFunc, changeBack }) {
+export function PagesFormChange({ dataInitial, onSave, onReset, onAdd }) {
   const [pagesID, setPagesId] = useState('')
   const [pagesUrl, setPagesUrl] = useState('')
   const [pagesTitle, setPagesTitle] = useState('')

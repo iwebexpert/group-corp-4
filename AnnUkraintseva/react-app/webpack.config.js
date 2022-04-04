@@ -14,7 +14,14 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       components: path.join(__dirname, 'src', 'components'),
-      redux: path.join(__dirname, 'src', 'redux')
+      actions: path.join(__dirname, 'src', 'actions'),
+      containers: path.join(__dirname, 'src', 'containers'),
+      context: path.join(__dirname, 'src', 'context'),
+      pages: path.join(__dirname, 'src', 'pages'),
+      reducers: path.join(__dirname, 'src', 'reducers'),
+      services: path.join(__dirname, 'src', 'services'),
+      middleware: path.join(__dirname, 'src', 'middleware'),
+
     },
   },
 
@@ -48,6 +55,7 @@ module.exports = {
         secure: false,
       },
     },
+    historyApiFallback: true,
   },
 
   plugins: [
