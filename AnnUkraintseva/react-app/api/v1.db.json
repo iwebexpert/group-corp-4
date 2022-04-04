@@ -1398,6 +1398,86 @@
       "role": "admin",
       "action": "Работа со страницами",
       "access": true
+    },
+    {
+      "id": "299f38d8-694a-4944-96c8-8d8fd59dcf96",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
+    },
+    {
+      "id": "e0847e33-a871-46cb-9bd8-1c1cb5e8d2ee",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
+    },
+    {
+      "id": "e8e5cde0-df2c-4d6b-92ce-ec5309553267",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Добавление страницы",
+      "access": true
+    },
+    {
+      "id": "828c9698-c40e-4bbc-8e17-ded239cace38",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Редактирование страниц",
+      "access": true
+    },
+    {
+      "id": "ddb2c9c5-f259-4047-9f2a-93df3a74d5e7",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Редактирование страниц",
+      "access": true
+    },
+    {
+      "id": "f2c28ffd-a969-46ba-b039-c115230fd244",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
+    },
+    {
+      "id": "a0a0df10-5a90-4f17-abfc-c907ca15aeeb",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
+    },
+    {
+      "id": "503c6684-3c77-4e11-86cb-df9b5906495b",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Удаление страницы",
+      "access": true
+    },
+    {
+      "id": "7a81b047-cd0c-4562-9906-561f248efdca",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
+    },
+    {
+      "id": "59d525b9-a1d9-4551-acd2-23c86337b719",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
     }
   ]
 }

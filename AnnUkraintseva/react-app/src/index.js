@@ -5,18 +5,18 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import './index.css'
 import Layout from './components/Layout'
-import PageFormPages from './pages/PagesFormPages'
-import PageComment from './pages/PagesComment'
-import { PageProfile } from './pages/PagesProgile'
-import PageLogout from './pages/PagesLogout'
-import PageError from './pages/PagesError'
+import PageFormPages from './pages/PageFormPages'
+import PageComment from './pages/PageComment'
+import { PageProfile } from './pages/PageProgile'
+import PageLogout from './pages/PageLogout'
+import PageError from './pages/PageError'
 import AuthProvider from './services/auth/AuthProvider'
 import AuthRequir from './services/auth/AuthRequir'
-import PagesAbout from './pages/PageAbout'
+import PagesAbout from './pages/PagesAbout'
 
 import { Provider } from 'react-redux'
 import { store } from './store'
-import { PageLoggerUser } from './pages/PagesLoggerUser'
+import { PageLoggerUser } from './pages/PageLoggerUser'
 
 ReactDOM.render(
   <Provider store={store}>
