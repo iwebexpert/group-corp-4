@@ -1358,6 +1358,46 @@
       "role": "admin",
       "action": "Работа со страницами",
       "access": true
+    },
+    {
+      "id": "c7ca7ea6-0a37-44b7-a689-e8bf0979f3a8",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
+    },
+    {
+      "id": "1eed378d-98c8-4833-bd1b-75a5139e36f2",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
+    },
+    {
+      "id": "aa8f64ce-f332-4707-a0d3-0aed0b719259",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Редактирование страниц",
+      "access": true
+    },
+    {
+      "id": "0eb36746-95ea-4360-bcc8-045e8b4d76c7",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
+    },
+    {
+      "id": "7179bf56-4cd6-472c-aa97-56c3e2d7d90c",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
     }
   ]
 }
