@@ -8,6 +8,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'webpack.bundle.js',
+    publicPath: '/',
   },
 
   resolve: {
@@ -45,6 +46,7 @@ module.exports = {
         secure: false,
       },
     },
+    historyApiFallback: true,
   },
 
   plugins: [

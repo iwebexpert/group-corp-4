@@ -1,12 +1,15 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
-
-import App from 'components/App/App.jsx'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import ThemeContext from './contexts/ThemeContext'
+import Routers from './Routers'
+
 ReactDOM.render(
   <ThemeContext>
-    <App />
+    <Router>
+      <Routers />
+    </Router>
   </ThemeContext>,
   document.getElementById('root'),
 )

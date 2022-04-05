@@ -9,6 +9,7 @@ function ThemeContext(props) {
     localStorage.getItem('mode') ? localStorage.getItem('mode') : 'light',
   )
   localStorage.setItem('mode', mode)
+
   const colorMode = useMemo(
     () => ({
       toogleColorMode: () => {
