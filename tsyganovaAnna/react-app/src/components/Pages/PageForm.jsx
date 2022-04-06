@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
-import Modal from '@mui/material/Modal'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Input from '../Fields/Input.jsx'
+import { Modal, Box, Button } from '@mui/material'
+
+import Input from '../Fields/Input'
+import { authService } from '../../services/auth/authService'
 
 export default function PageForm({ isOpen, close, page, onChangeData }) {
   const [url, setPageUrl] = useState(page ? page.url : '')
@@ -15,12 +15,13 @@ export default function PageForm({ isOpen, close, page, onChangeData }) {
   const handlePageTitleChange = (event) => setPageTitle(event.target.value)
   const handlePageContentChange = (event) => setPaageContent(event.target.value)
 
+  const currentUser = authService.currentUser
   const pageData = {
     id: page.id ? page.id : uuidv4(),
     url: url,
     title: title,
     content: content,
-    userId: page.userId ? page.userId : uuidv4(),
+    userId: page.userId ? page.userId : currentUser.id,
   }
 
   const handleSubmit = () => {

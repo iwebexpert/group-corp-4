@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
-import Modal from '@mui/material/Modal'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import { Modal, Box, Button } from '@mui/material'
+
 import Input from '../Fields/Input.jsx'
+import { authService } from '../../services/auth/authService'
 
 export default function CommentForm({ isOpen, close, comment, onChangeData }) {
   const [content, setPaageContent] = useState(comment ? comment.content : '')
   const handleCommentContentChange = (event) => setPaageConcommenttent(event.target.value)
 
+  const currentUser = authService.currentUser
   const commentData = {
     id: comment.id ? comment.id : uuidv4(),
     content: content,
-    userId: comment.userId ? comment.userId : uuidv4(),
+    userId: comment.userId ? comment.userId : currentUser.id,
   }
 
   const handleSubmit = () => {
