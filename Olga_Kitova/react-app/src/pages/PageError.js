@@ -1,10 +1,19 @@
-import { Typography } from '@mui/material'
 import React from 'react'
+import {Helmet} from "react-helmet"
 import WrapperPages from './WrapperPages'
+import { Stack, Typography } from '@mui/material'
+import iconPageNotFound from 'assets/img/pageNotFound.png'
 
 export default function PageError() {
-  return (
+  return (<>
+      <Helmet>
+        <title>Page Not Found</title>
+    </Helmet>
     <WrapperPages>
-      <Typography variant="body2">Страница не найдена</Typography>
+      <Stack direction="column" spacing={4} sx={{display: 'flex', alignItems: 'center'}}>
+          <div><img src={iconPageNotFound}/></div>
+      <Typography variant="body2">Page Not Found</Typography>
+      </Stack>
+
     </WrapperPages>
-  )}
+  </>)}

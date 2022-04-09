@@ -6,7 +6,7 @@ const Context = React.createContext()
 
 function ContextProvider({children}) {
     const saveTheme = () => {
-      let config = 'light'
+      let config = 'dark'
       const localStorageSaveTheme = localStorage.getItem('theme')
       if (localStorageSaveTheme) {
         config = JSON.parse(localStorageSaveTheme)
@@ -37,7 +37,7 @@ function ContextProvider({children}) {
             secondary: {
               main: '#4615b2'
             }
-        }
+        },
       }),[mode])
   
     const changeWindowEdit = () => {

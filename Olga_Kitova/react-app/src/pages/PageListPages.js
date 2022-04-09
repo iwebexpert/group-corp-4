@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import {Helmet} from "react-helmet"
 import PropTypes from 'prop-types'
 import {Grid, Paper} from '@mui/material'
-import CreatePagesForm from 'components/CreatePagesForm'
 import ShowListPages from 'components/ShowListPages'
 import EditPagesForm from 'components/EditPagesForm'
 import Loading from 'components/Loading'
-import CreateCommentsForm from 'components/CreateCommentsForm'
 
-export default function PageAdmin({user}) {
-  const {role, id} = user
+export default function PageListPages({user}) {
+  const role = user?.role || null
+  const id = user?.id || null
   const [load, setLoad] = useState(true)
   let NODE_ENV = process.env.NODE_ENV
 
@@ -26,25 +26,11 @@ export default function PageAdmin({user}) {
   
    return load && NODE_ENV === 'development' ? <Loading/> : (
     <>
+      <Helmet>
+      <title>List Pages</title>
+      </Helmet>
     <EditPagesForm userId={id}  />
-    <Grid container spacing={3}>
-               <Grid item xs={12} md={6} lg={7}>
-               <Paper
-                 sx={{
-                   p: 2, display: 'flex', flexDirection: 'column', height: 600,
-                 }}>
-                       {role === 'admin' ? <CreatePagesForm userId={id} role={role} /> : null }
-                   </Paper>
-             </Grid>
-             <Grid item xs={12} md={6} lg={5}>
-               <Paper
-                 sx={{
-                   p: 2, display: 'flex', flexDirection: 'column', height: 600,
-                 }}
-               >
-                   <CreateCommentsForm userId={id}/>
-               </Paper>
-             </Grid>
+    <Grid container>
              <Grid item xs={12}>
                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                    <ShowListPages role={role}  />
@@ -56,10 +42,10 @@ export default function PageAdmin({user}) {
 }
 
 //Props types
-PageAdmin.defaultProps = {
+PageListPages.defaultProps = {
   user: {}
 }
-PageAdmin.propTypes = {
+PageListPages.propTypes = {
 user: PropTypes.shape({
   id: PropTypes.number,
   name: PropTypes.string,

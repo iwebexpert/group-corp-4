@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import LoginForm from 'components/LoginForm'
 import { authService } from './authService'
 
 export default function AuthProvider({ children }) {
@@ -15,11 +14,7 @@ export default function AuthProvider({ children }) {
     setUser(user)
   }
 
-  return user === null 
-  ? 
-  <LoginForm handleSuccessAuth={handleSuccessAuth} /> 
-  : 
-  React.cloneElement(children, {user}) 
+return React.cloneElement(children, {user, handleSuccessAuth})
 }
 
 AuthProvider.propTypes = {

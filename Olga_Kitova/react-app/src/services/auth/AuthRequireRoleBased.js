@@ -1,10 +1,10 @@
 import React from 'react'
-import PageError from 'pages/PageError';
+import LoginForm from 'components/LoginForm'
 import { authService } from './authService'
 
-export default function AuthRequireRole({children}) {
+export default function AuthRequireRoleBased({children}) {
     const user = authService?.currentUserValue;
     const role = user?.role || null
    
-    return role === 'admin' ? children : <PageError />
+    return role ? children : <LoginForm />
 }

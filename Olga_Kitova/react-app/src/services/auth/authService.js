@@ -1,6 +1,6 @@
 import jwt_decode from 'jwt-decode' 
+import {BASE_URL_USERS, getOptions} from 'config/requestConfig'
 
-const LOGIN_URL = 'api/users';
 const localStorageKey = 'user';
 const arrayError = [400, 401, 403, 404, 500, 504];
 
@@ -29,11 +29,8 @@ export const authService = {
    }
   
   function login(email, password, callback = (user) => {}) {
-    const options = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    }
-    return fetch(`${LOGIN_URL}?email_like=${email}&password_like=${password}&_embed=tokens`, options)
+    return fetch(`${BASE_URL_USERS}?email_like=${email}&password_like=${password}&_embed=tokens`, 
+    getOptions('GET', null, false))
       .then(handleResponse)
       .then((user) => {
         let decoded = jwt_decode(user.token)
