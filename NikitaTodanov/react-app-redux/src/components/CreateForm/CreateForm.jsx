@@ -7,8 +7,14 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-export function CreateForm({ dataInitial, onAdd, onSave, onReset, roles }) {
-  console.log(roles[0] === "user");
+export function CreateForm({
+  dataInitial,
+  onAdd,
+  onSave,
+  onReset,
+  privileges,
+}) {
+  console.log(privileges);
   const [iD, setId] = useState(null);
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
@@ -45,7 +51,7 @@ export function CreateForm({ dataInitial, onAdd, onSave, onReset, roles }) {
   };
 
   const handleSubmit = () => {
-    if (roles[0] === "user") {
+    if (privileges.isRoot) {
       return;
     }
     const data = {
@@ -55,7 +61,6 @@ export function CreateForm({ dataInitial, onAdd, onSave, onReset, roles }) {
       content,
       userId,
     };
-    console.log(data);
 
     if (iD) {
       onSave(data);
