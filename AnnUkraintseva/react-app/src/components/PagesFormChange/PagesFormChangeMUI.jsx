@@ -28,12 +28,12 @@ export function PagesFormChange({ dataInitial, onSave, onReset, onAdd }) {
   const [pagesUserId, setPagesUserId] = useState(1)
 
   useEffect(() => {
-    setPagesId(changesPages.id)
-    setPagesUrl(changesPages.url)
-    setPagesTitle(changesPages.title)
-    setPagesContent(changesPages.content)
-    setPagesUserId(changesPages.userId)
-  }, [changesPages])
+    setPagesId(dataInitial.id)
+    setPagesUrl(dataInitial.url)
+    setPagesTitle(dataInitial.title)
+    setPagesContent(dataInitial.content)
+    setPagesUserId(dataInitial.userId)
+  }, [dataInitial])
 
   const handlePagesUrlChange = (event) => {
     setPagesUrl(event.target.value)

@@ -6,7 +6,9 @@ import PagesForm from '../components/PagesForm'
 export default function PagesFormContainers(){
     const dispatch = useDispatch()
     const page = useSelector((state) => state.page.data)
+    console.log('pageForm',page)
     const currentEditId = useSelector((state)=>state.page.currentID)
+
 
 
     const addPages = (data) => {
@@ -20,7 +22,6 @@ export default function PagesFormContainers(){
       return data.length === 1 ? data[0] : null
     }
 
-    console.log('EditInit', getInitialData())
 
     useEffect(() => {
         setTimeout(()=>{

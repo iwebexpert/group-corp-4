@@ -8,6 +8,9 @@ export default function PagesFormEditContainers(){
     const page = useSelector((state) => state.page.data)
     const currentEditId = useSelector((state)=>state.page.currentID)
 
+    console.log('pageEdit', page)
+    console.log('currentID', currentEditId)
+
     const addPages = (data) => {
       dispatch(pageAdd(data))
     }

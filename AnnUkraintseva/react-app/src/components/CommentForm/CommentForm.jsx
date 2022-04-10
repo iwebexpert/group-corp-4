@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import { useSelector, useDispatch } from "react-redux"
+
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -8,38 +10,54 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Input from '@mui/material/Input'
 import { v4 as uuidv4 } from 'uuid'
+import { authServices } from '../../services/auth/authServices'
+import { commentAddFetch } from '../../actions/comments'
 
 
 
+export default function CommentForm({onePage}) {
 
-export default function CommentForm() {
+  const dispatch = useDispatch()
 
-  const [commentPagesId, setCommentPagesId]=useState('1')
-  const [commentUserId, setCommentUserId]=useState('1')
+
+  const currentId = authServices.getCurrentId
+
+  const [userId, setUserId]=useState('')
+
+ 
   const [commentContent, setCommentContent]=useState('')
 
-  const handleCommentPagesIdChange = (event) => {
-    setCommentPagesId(event.target.value)
-  }
 
-  const handleCommentUserIdChange = (event) => {
-    setCommentUserId(event.target.value)
-  }
+  console.log('onePage on Form Comment', onePage)
+  useEffect(()=>{
+    setUserId(currentId)
+  }, [currentId])
+
+
+ 
+
+  console.log('userId on comment', userId)
 
   const handleCommentContentChange = (event) => {
     setCommentContent(event.target.value)
   }
 
-  const handleSubmit = () => {
+  let pageId
+
+  {onePage && (pageId = onePage.id)}
+
+
+  console.log ('pageId on Form Comment',pageId)
+
+
+  const handleSubmitAddComment = () => {
     const data = {
       id: uuidv4(),
-      pagesId: commentPagesId,
-      userId: commentUserId,
+      pageId: pageId,
+      userId: userId,
       content: commentContent,
     }
-    onAddComment(data)
-    setCommentPagesId('')
-    setCommentUserId('')
+     dispatch(commentAddFetch(data))
     setCommentContent('')
   }
 
@@ -49,43 +67,21 @@ export default function CommentForm() {
         <Typography color='primary' component="h2">
           Добавление комментариев
         </Typography>
-        <FormControl fullWidth sx ={{m:1}}>
-          <InputLabel id="pages-id">Страница</InputLabel>
-          <Input
-              label ="Страница"
-              type="number"
-              min="1"
-              id="pages-id"
-              // value={commentPagesId}
-              // onChange={handleCommentPagesIdChange}
-            />
-        </FormControl>
-        <FormControl fullWidth sx ={{m:1}}>
-          <InputLabel id="user-id">Пользователь</InputLabel>
-          <Input
-              label ="Пользователь"
-              type="number"
-              min="1"
-              id="user-id"
-              // value={commentUserId}
-              // onChange={handleCommentUserIdChange}
-            />
-        </FormControl>
         <FormControl fullWidth sx={{m:1}}>
           <InputLabel id="content"></InputLabel>
           <TextField
           placeholder="Оставьте свой комментарий"
           label="Коментарий"
           id="content"
-          // value={pagesUrl}
-          // onChange={handlePagesUrlChange}
+          value={commentContent}
+          onChange={handleCommentContentChange}
           >
           </TextField>
         </FormControl>
         <FormControl fullWidth sx={{m:1}}>
           <InputLabel id="button-comments"></InputLabel>
           <Button
-              // onClick={handleSubmit}
+               onClick={handleSubmitAddComment}
               value="Добавить комментарий"
             >Добавить комментарий</Button>
         </FormControl>

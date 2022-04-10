@@ -17,6 +17,8 @@ import PagesAbout from './pages/PagesAbout'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import { PageLoggerUser } from './pages/PageLoggerUser'
+import { Typography } from '@mui/material'
+import LayoutPage from './PageAndComment/LayoutPage'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -24,30 +26,28 @@ ReactDOM.render(
       <AuthProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="/pagesLink/*" element={<LayoutPage/>}/>
+            <Route path="/" element={<Layout />} >
               <Route index element={<PagesAbout />} />
-              <Route
-                path="/pagesLink"
-                element={
-                  <AuthRequir redirectTo="/profile">
-                    <PageFormPages />
-                  </AuthRequir>
-                }
-              />
+              <Route path="/pagesLink" element={<PageFormPages />} />
+              <Route path="/home" element={<PageComment />} />
               <Route path="/commentLink" element={<PageComment />} />
               <Route path="/profile" element={<PageProfile />} />
               <Route path="/logout" element={<PageLogout />} />
-              <Route path="/stats" element={
-              <AuthRequir redirectTo="/profile">
+              <Route
+                path="/stats"
+                element={
+                  <AuthRequir redirectTo="/profile">
                     <PageLoggerUser />
-                  </AuthRequir>} />
-
+                  </AuthRequir>
+                }
+              />
               <Route path="*" element={<PageError />} />
             </Route>
           </Routes>
         </Router>
       </AuthProvider>
     </ThemeContextMUI>
-   </Provider>,
+  </Provider>,
   document.querySelector('#root'),
 )
