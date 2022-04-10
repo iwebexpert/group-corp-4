@@ -6,9 +6,10 @@ import {
   pageDelete,
   pageFormEditStart,
 } from "../actions/createpeges";
+
 import CreatePageTable from "../components/PageTable";
 
-export default function PageTableContainer({ roles }) {
+export default function PageTableContainer({ privileges }) {
   const dispatch = useDispatch();
   const pages = useSelector((state) => state.pages.data);
 
@@ -18,25 +19,27 @@ export default function PageTableContainer({ roles }) {
     }, 1500);
   }, []);
 
+  //pages
   const deletePage = (id) => {
-    if (roles[0] === "user") {
+    if (privileges.isRoot) {
       return;
     }
-    console.log("Delete item", id);
     dispatch(pageDelete(id));
   };
 
   const editPageMode = (id) => {
-    if (roles[0] === "user") {
+    if (privileges.isRoot) {
       return;
     }
-    console.log("Delete item", id);
+
     dispatch(pageFormEditStart(id));
   };
 
+  //comments
+
   return (
     <CreatePageTable
-      roles={roles}
+      privileges={privileges}
       pages={pages}
       onEditPageMode={editPageMode}
       onDeletePage={deletePage}

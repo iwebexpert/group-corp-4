@@ -8,7 +8,7 @@ import {
 } from "../actions/createpeges";
 import CreateForm from "../components/CreateForm";
 
-export default function PageFormContainer({ roles }) {
+export default function PageFormContainer({ privileges }) {
   const dispatch = useDispatch();
   const pages = useSelector((state) => state.pages.data);
   const currentEditId = useSelector((state) => state.pages.currentId);
@@ -36,7 +36,7 @@ export default function PageFormContainer({ roles }) {
 
   return (
     <CreateForm
-      roles={roles}
+      privileges={privileges}
       dataInitial={getInitialData()}
       onSave={editPageSave}
       onReset={editPageReset}
