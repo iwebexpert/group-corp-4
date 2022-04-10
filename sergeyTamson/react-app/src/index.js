@@ -5,14 +5,16 @@ import './styles/index.scss'
 import './styles/normalize.css'
 import { BrowserRouter as Router } from 'react-router-dom'
 import AuthProvider from './components/services/auth/AuthProvider.jsx'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 ReactDOM.render(
-  <StrictMode>
+  <Provider store={store}>
     <Router>
       <AuthProvider>
         <App />
       </AuthProvider>
     </Router>
-  </StrictMode>,
+  </Provider>,
   document.querySelector('#root'),
 )

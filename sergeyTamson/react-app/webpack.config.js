@@ -4,9 +4,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
-  entry: path.join(__dirname, 'src', 'index.js'),
+  entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, './dist'),
+    publicPath: '/',
     filename: 'webpack.bundle.js',
   },
 
@@ -38,7 +39,6 @@ module.exports = {
   },
 
   devServer: {
-    historyApiFallback: true,
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
@@ -46,6 +46,7 @@ module.exports = {
         secure: false,
       },
     },
+    historyApiFallback: true,
   },
 
   plugins: [

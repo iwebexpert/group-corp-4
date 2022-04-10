@@ -1,9 +1,9 @@
 import React from 'react'
-import {Navigate} from 'react-router-dom'
-import {authService} from './authService'
+import { Navigate } from 'react-router-dom'
+import { authService } from './authService'
 
-export default function AuthRequire({children, redirectTo}) {
-  // let isAuthenticated = false
+export default function AuthRequire({ children, redirectTo }) {
   let isAuthenticated = authService.currentUserValue !== null
-  return isAuthenticated ? children : <Navigate to={redirectTo} />
+
+  return isAuthenticated ? React.cloneElement(children) : <Navigate to={redirectTo} />
 }

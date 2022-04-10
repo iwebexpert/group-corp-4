@@ -1,14 +1,14 @@
 import { Container, Typography } from '@mui/material'
 import React from 'react'
 
-const ErrorPage = () => {
+const CommentsPage = () => {
   return (
     <Container>
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        ERROR!!
+        Коментарии
       </Typography>
     </Container>
   )
 }
 
-export default ErrorPage
+export default CommentsPage
