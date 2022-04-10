@@ -62,7 +62,7 @@ const PageForm = ({ addRows }) => {
         label="Content"
         multiline
         rows={4}
-        disabled={title ? false : true}
+        disabled={!title}
         placeholder={!title ? 'Заполните поле title' : 'Content'}
         value={content}
         onChange={(e) => setContent(e.target.value)}

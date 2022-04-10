@@ -1,7 +1,7 @@
 import React from 'react'
 import PageForm from '../components/PageForm/PageForm'
 import { useDispatch } from 'react-redux'
-import { pageAdd } from '../actions/actions'
+import { pageAdd } from '../actions/actionsPages'
 
 function PageFormContainer() {
   const dispatch = useDispatch()

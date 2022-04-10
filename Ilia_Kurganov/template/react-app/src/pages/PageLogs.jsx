@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react'
-import { getStats } from '../actions/actionsStats'
+import { getLogs } from '../actions/actionsLogs'
 import PageWrapper from './PageWrapper'
 import { useSelector, useDispatch } from 'react-redux'
 import { Paper, Table, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import { TableBody } from '@mui/material';
+import { TableBody } from '@mui/material'
+import { Helmet } from 'react-helmet'
 
-function PageStats() {
-  const stats = useSelector((state) => state.stats.data)
+function PageLogs() {
+  const logs = useSelector((state) => state.logs.data)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getStats())
+    dispatch(getLogs())
   }, [])
-
-  console.log(stats)
 
   return (
     <PageWrapper>
+      <Helmet>
+        <title>Logs</title>
+      </Helmet>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -28,7 +30,7 @@ function PageStats() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {stats.map((stat, i) => (
+            {logs.map((stat, i) => (
               <TableRow key={stat.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
                   {i + 1}
@@ -44,4 +46,4 @@ function PageStats() {
   )
 }
 
-export default PageStats
+export default PageLogs

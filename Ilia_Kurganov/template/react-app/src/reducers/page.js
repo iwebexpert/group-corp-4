@@ -1,11 +1,11 @@
 import {
-  PAGE_PENDING,
-  PAGE_ERROR,
-  PAGE_SUCCESS,
+  PAGES_PENDING,
+  PAGES_ERROR,
+  PAGES_SUCCESS,
   PAGE_DELETE,
   PAGE_ADD,
-  ADD_ROLE,
-} from '../actions/actions'
+  ONE_PAGE_SUCCESS
+} from '../actions/actionsPages'
 
 const initialState = {
   isLoading: false,
@@ -15,22 +15,28 @@ const initialState = {
 
 export const pageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PAGE_PENDING:
+    case PAGES_PENDING:
       return {
         ...state,
         isLoading: true,
       }
-    case PAGE_SUCCESS:
+    case PAGES_SUCCESS:
       return {
         ...state,
         isLoading: false,
         data: action.payload,
       }
-    case PAGE_ERROR:
+      case PAGES_ERROR:
+        return {
+          ...state,
+          isLoading: false,
+          data: action.payload,
+        }
+    case ONE_PAGE_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        data: action.payload,
+        data: [action.payload],
       }
     case PAGE_ADD:
       return {
@@ -42,11 +48,6 @@ export const pageReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         data: state.data.filter((item) => item.id !== action.payload),
-      }
-    case ADD_ROLE:
-      return {
-        ...state,
-        role: action.payload,
       }
 
     default:

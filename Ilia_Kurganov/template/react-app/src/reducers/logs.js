@@ -1,24 +1,24 @@
-import { STATS_PENDING, STATS_SUCCESS, STATS_ERROR } from '../actions/actionsStats'
+import { LOGS_PENDING, LOGS_SUCCESS, LOGS_ERROR } from '../actions/actionsLogs'
 
 const initialState = {
   isLoading: false,
   data: [],
 }
 
-export const statsReducer = (state = initialState, action) => {
+export const logsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case STATS_PENDING:
+    case LOGS_PENDING:
       return {
         ...state,
         isLoading: true,
       }
-    case STATS_SUCCESS:
+    case LOGS_SUCCESS:
       return {
         ...state,
         isLoading: false,
         data: action.payload,
       }
-    case STATS_ERROR:
+    case LOGS_ERROR:
       return {
         ...state,
         isLoading: false,

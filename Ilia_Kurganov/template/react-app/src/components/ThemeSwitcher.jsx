@@ -1,8 +1,6 @@
 import React from 'react'
-import { styled } from '@mui/material/styles';
-import { Switch } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/lightMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 export function ThemeSwitcher({theme}) {
   return (

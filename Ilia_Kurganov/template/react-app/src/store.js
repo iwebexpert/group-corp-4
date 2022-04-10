@@ -9,7 +9,7 @@ import checkRoleMiddleware from './midlewares/checkRoleMiddleware'
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(checkUser, logger, thunk, checkRoleMiddleware )),
+  composeWithDevTools(applyMiddleware(logger, checkUser, thunk, checkRoleMiddleware )),
 )
 
 export default store

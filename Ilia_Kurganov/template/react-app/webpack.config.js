@@ -60,6 +60,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
       title: 'React App',
+      favicon: path.join(__dirname, 'src', 'favicon.png')
     }),
 
     new MiniCssExtractPlugin({

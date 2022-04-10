@@ -5,22 +5,28 @@ import { Loader } from '../components/Loader/Loader'
 import { CopyRight } from '../components/CopyRight/CopyRight'
 import PageFormContainer from '../containers/PageFormContainer'
 import PageTableContainer from '../containers/PageTableContainer'
-import { pageFetch } from '../actions/actions'
+import { Helmet } from 'react-helmet'
+import { pagesFetch } from '../actions/actionsPages'
+import { authService } from './../services/auth/authService';
 
 export const PageWithPages = (props) => {
-  const theme = useTheme()
   const dispatch = useDispatch()
+  const theme = useTheme()
   const isLoading = useSelector((state) => state.page.isLoading)
+  const role = authService.currentUserValue.role
 
   useEffect(() => {
-    dispatch(pageFetch())
+    dispatch(pagesFetch())
   }, [])
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Helmet>
+        <title>Main</title>
+      </Helmet>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          {props.role === 'admin' ? (
+          {role === 'admin' ? (
             <Paper
               sx={{
                 p: 2,
