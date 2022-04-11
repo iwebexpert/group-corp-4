@@ -5,14 +5,17 @@ import {Box, Typography, Table, TableBody, TableCell, TableHead, TableRow, Table
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import PropTypes from 'prop-types'
-import {Context} from '../../context/Context'
+import {Context} from 'context/Context'
 import styled from '@emotion/styled'
 
 const CustomEditBtnAdmin = styled(EditIcon)`color: #1976d2; cursor:pointer;`
-const CustomEditBtnUser = styled(EditIcon)`color: rgb(128 128 128); cursor:pointer;`
 const CustomDeleteBtn = styled(DeleteIcon)`color: #ff0000de; cursor:pointer;`
+const CustomTypography = styled(Typography)`
+font-size: 1.3rem;
+color: #f44336`;
 
-export default function ShowListPages({ role }) {
+export default function ShowListPages(props) {
+  const role = props?.role || null
   const dispatch = useDispatch();
   const pages = useSelector((state) => state.pages.data)
 
@@ -33,18 +36,20 @@ export default function ShowListPages({ role }) {
     
   return (
     <Box>
-        <Typography component="h2">Список созданных страниц</Typography>
+        <CustomTypography component="h2">List of created pages</CustomTypography>
         <TableContainer>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="sticky table">
             <TableHead>
                 <TableRow>
-                    <TableCell>№ п/п</TableCell>
-                    <TableCell>Адрес страницы</TableCell>
-                    <TableCell>Название</TableCell>
-                    <TableCell>Содержимое</TableCell>
-                    <TableCell>Id пользователя</TableCell>
-                    <TableCell>Редактировать</TableCell>
-                    {role === 'admin' && <TableCell>Удалить</TableCell>}
+                    <TableCell>Sequence number</TableCell>
+                    <TableCell>Page address</TableCell>
+                    <TableCell>page title</TableCell>
+                    <TableCell>Content</TableCell>
+                    <TableCell>User ID</TableCell>
+                    {role === 'admin' && (<>
+                    <TableCell>Edit</TableCell>
+                    <TableCell>Delete</TableCell>
+                    </>)}
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -55,22 +60,20 @@ export default function ShowListPages({ role }) {
                     <TableCell>{obj.title}</TableCell>
                     <TableCell className="TableCell-content-small">{obj.content}</TableCell>
                     <TableCell>{obj.userId}</TableCell>
-                    <TableCell>
-                      {role==='user'? <CustomEditBtnUser onClick={() => {
-                        getOnPagesObjectId(obj.id);
-                        changeWindowEdit()
-                    }}/> :
+                    {role === 'admin' && (<>
+                      <TableCell>
                     <CustomEditBtnAdmin onClick={() => {
                       getOnPagesObjectId(obj.id);
                       changeWindowEdit()
-                  }}/>}
+                  }}/>
                     </TableCell>
                     <TableCell>
                       {role === 'admin' &&  <CustomDeleteBtn
                     onClick={() => deletePages(obj.id)} /> }
                     </TableCell>
+                    </>)}
                 </TableRow>
-                )) : <TableRow><TableCell colSpan="7">Страницы не созданы</TableCell></TableRow>}
+                )) : <TableRow><TableCell colSpan="7">Pages not created</TableCell></TableRow>}
             </TableBody>
         </Table>
         </TableContainer>

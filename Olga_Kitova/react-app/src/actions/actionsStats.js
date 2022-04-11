@@ -1,15 +1,6 @@
-import {authService} from 'services/auth/authService'
 import {STATS_GET_PENDING, STATS_GET_SUCCESS, STATS_GET_ERROR} from 'constants/constantsStats'
+import {BASE_URL_USERS_LOGS, getOptions} from 'config/requestConfig'
 
-const BASE_URL = 'api/users?_embed=logs'
-
-const options = {
-    method: 'GET',
-    headers: { 
-        'Content-Type': 'application/json',
-        'Authentication': `Bearer ${authService.token}`
-    }   
-}
 
 // Get users with logs
 export const getStatsPending = () => ({
@@ -28,7 +19,7 @@ export const getStatsError = (error) => ({
 export const getUsersWithLogsFetch = () => {
 return (dispatch) => {
     dispatch(getStatsPending())
-    fetch(BASE_URL, options)
+    fetch(BASE_URL_USERS_LOGS, getOptions('GET'))
     .then(res => res.json())
     .then(data => {
         if(data.error) throw data.error

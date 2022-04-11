@@ -14,16 +14,16 @@ NODE_ENV === 'development' ? store = createStore(
                 composeWithDevTools(
                   applyMiddleware(
                      thunk,
-                     logger, 
-                     checkRoleUserMiddleware, 
-                     loggerActionUserMiddleware
+                     logger,
+                    checkRoleUserMiddleware,
+                    loggerActionUserMiddleware
                 )
               )
               ) : store = createStore(
                   rootReducer, 
                   applyMiddleware(
-                    thunk, 
-                    checkRoleUserMiddleware, 
+                    thunk,
+                    checkRoleUserMiddleware,
                     loggerActionUserMiddleware
                 )
               )

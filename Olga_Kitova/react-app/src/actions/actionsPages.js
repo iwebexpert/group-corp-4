@@ -1,32 +1,12 @@
-import {authService} from 'services/auth/authService'
 import { PAGES_GET_PENDING, PAGES_GET_SUCCESS, PAGES_GET_ERROR,
          PAGES_ADD_SUCCESS, PAGES_ADD_ERROR, PAGES_EDIT_ID_RESET,
         PAGES_EDIT_ID_SUCCESS, PAGES_EDIT_SUCCESS, PAGES_EDIT_ERROR,
-        PAGES_DELETE_SUCCESS, PAGES_DELETE_ERROR } from 'constants/constantsPages'
+        PAGES_DELETE_SUCCESS, PAGES_DELETE_ERROR, PAGE_GET_PENDING,
+        PAGE_GET_ERROR, PAGE_GET_SUCCESS } from 'constants/constantsPages'
+import {BASE_URL_PAGES, getOptions} from 'config/requestConfig'
 
-const BASE_URL = 'api/pages'
 
-const getOptions = (method, body = null) => {
-    if(body) {
-        return ({
-            method,
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authentication': `Bearer ${authService.token}`},
-                body: JSON.stringify(body)
-            })
-    } else {
-        return ({
-                method,
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authentication': `Bearer ${authService.token}`
-                }   
-        })
-}
-}
-
-// Get pages
+// Get all pages
 export const getPagesPending = () => ({
     type: PAGES_GET_PENDING
 })
@@ -42,13 +22,39 @@ export const getPagesError = (error) => ({
 export const getPagesFetch = () => {
 return (dispatch) => {
     dispatch(getPagesPending())
-    fetch(BASE_URL, getOptions('GET'))
+    fetch(BASE_URL_PAGES, getOptions('GET'))
     .then(res => res.json())
     .then(data => {
         if(data.error) throw data.error
         else dispatch(getPagesSuccess(data))
     })
     .catch(error => dispatch(getPagesError(error)))
+}
+}
+
+// Get one page
+export const getPagePending = () => ({
+    type: PAGE_GET_PENDING
+})
+export const getPageSuccess = (data) => ({
+    type: PAGE_GET_SUCCESS,
+    payload: data
+})
+export const getPageError = (error) => ({
+    type: PAGE_GET_ERROR,
+    payload: error
+})
+// Get one page fetch
+export const getOnePageFetch = (url) => {
+return (dispatch) => {
+    dispatch(getPagePending())
+    fetch(`${BASE_URL_PAGES}?url=${url}&_expand=user`, getOptions('GET'))
+    .then(res => res.json())
+    .then(data => {
+        if(data.error) throw data.error
+        else dispatch(getPageSuccess(data))
+    })
+    .catch(error => dispatch(getPageError(error)))
 }
 }
 
@@ -65,7 +71,7 @@ export const addPagesError = (error) => ({
 // Add pages fetch
 export const addPagesFetch = (data) => {
 return (dispatch) => {
-    fetch(BASE_URL, getOptions('POST', data))
+    fetch(BASE_URL_PAGES, getOptions('POST', data))
     .then(res => res.json())
     .then(res => {
         if(res.error) throw res.error
@@ -86,7 +92,7 @@ export const deletePagesError = (error) => ({
 //Delete pages fetch
 export const deletePagesFetch = (id) => {
 return (dispatch) => {
-    fetch(`${BASE_URL}/${id}`, getOptions('DELETE'))
+    fetch(`${BASE_URL_PAGES}/${id}`, getOptions('DELETE'))
     .then(res => res.json())
     .then(res => {
         console.log(res)
@@ -128,7 +134,7 @@ export const editPagesError = (error) => ({
 // Edit pages fetch
 export const editPagesFetch = (data) => {
 return (dispatch) => {
-    fetch(`${BASE_URL}/${data.id}`, getOptions('PATCH', data))
+    fetch(`${BASE_URL_PAGES}/${data.id}`, getOptions('PATCH', data))
     .then(res => res.json())
     .then(res => {
         if(res.error) throw res.error
@@ -139,4 +145,3 @@ return (dispatch) => {
     .catch(error => dispatch(editPagesError(error)))
 }
 }
-

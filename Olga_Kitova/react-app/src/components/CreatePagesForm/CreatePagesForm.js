@@ -15,13 +15,8 @@ const CustomTypography = styled(Typography)`
 font-size: 1.3rem;
 color: #f44336`;
 
-const CustomButton = styled(Button)`
-background-color: rgb(128 128 128);
-&:hover {
-  background-color: rgb(128 128 128);
-}`;
 
-export default function CreatePagesForm({ userId, role }) {
+export default function CreatePagesForm({ userId }) {
     const dispatch = useDispatch()
     const [addUrl, setAddUrl] = useState('')
     const [addTitle, setAddTitle] = useState('')
@@ -64,24 +59,17 @@ export default function CreatePagesForm({ userId, role }) {
 
     return (
       <>
-    <CustomTypography>Добавить страницу</CustomTypography>
+    <CustomTypography>Add page</CustomTypography>
     <CreateFormBase arrayField={[
-        {label:"URL страницы", name:"addUrl", onChange:handleChange, value:addUrl},
-        {label:"Название страницы", name:"addTitle", onChange:handleChange, value:addTitle},
-        {label:"Содержимое страницы", multiline:true,name:"addContent",onChange:handleChange,
+        {label:"Page URL", name:"addUrl", onChange:handleChange, value:addUrl},
+        {label:"Зage title", name:"addTitle", onChange:handleChange, value:addTitle},
+        {label:"Page content", multiline:true,name:"addContent",onChange:handleChange,
         value:addContent,minRows:"6",disabled:addTitle.length < 1}
     ]}/>
     <CustomBox sx={{'display':'flex','alignItems':'center','width': '100%'}}>
-      {role === "user" ?
-      <CustomButton
-      sx={{ 'width': '100%' }}
-      variant="contained" 
-      onClick={handleOnSubmit}>Добавить страницу</CustomButton>
-      :
       <Button sx={{ 'width': '100%' }}
       variant="contained" 
-      onClick={handleOnSubmit}>Добавить страницу</Button>
-      }
+      onClick={handleOnSubmit}>Add page</Button>
     </CustomBox>
   </>
     )
@@ -89,7 +77,7 @@ export default function CreatePagesForm({ userId, role }) {
 }
 //Props types
 CreatePagesForm.defaultProps = {
-  userId: PropTypes.number,
+  userId: 0,
   role: ""
 }
 CreatePagesForm.propTypes = {

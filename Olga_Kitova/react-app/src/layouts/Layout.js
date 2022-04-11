@@ -116,11 +116,11 @@ export default function Layout() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Панель управления
+              Dashboard
             </Typography>
             <Tooltip
             title={
-              theme.palette.mode !== 'light' ? 'Выбрать светлую тему оформления' : 'Выбрать темную тему оформления'
+              theme.palette.mode !== 'light' ? 'Choose a light theme' : 'Choose a dark theme'
             }
           >
             <IconButton color="inherit" onClick={() => {

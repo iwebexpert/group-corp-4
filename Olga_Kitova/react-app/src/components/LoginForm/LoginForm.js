@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container';
-import { authService } from '../../services/auth/authService'
+import { authService } from 'services/auth/authService'
 
 
 export default function LoginForm({handleSuccessAuth}) {
@@ -27,7 +27,10 @@ export default function LoginForm({handleSuccessAuth}) {
       if(res.message) {
         alert(res.message)
       } 
+    }).then((data) => {
+      window.location.href = '/'
     })
+    .catch(err => console.log(err))
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -44,7 +47,7 @@ export default function LoginForm({handleSuccessAuth}) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Форма авторизации
+        Authorization form
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -62,7 +65,7 @@ export default function LoginForm({handleSuccessAuth}) {
             required
             fullWidth
             name="password"
-            label="Пароль"
+            label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -73,7 +76,7 @@ export default function LoginForm({handleSuccessAuth}) {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Войти
+            Log In
           </Button>
         </Box>
       </Box>

@@ -7,6 +7,7 @@ module.exports = {
   entry: path.join(__dirname, "src", "index.js"),
   output: {
     path: path.join(__dirname, "dist"),
+    publicPath: '/',
     filename: "webpack.bundle.js",
     assetModuleFilename: 'img/[name][ext][query]'
   },
@@ -14,6 +15,7 @@ module.exports = {
   resolve: {
     alias: {
       app: path.join(__dirname, "src", "app"),
+      context: path.join(__dirname, "src", "context"),
       components: path.join(__dirname, "src", "components"),
       pages: path.join(__dirname, "src", "pages"),
       services: path.join(__dirname, "src", "services"),
@@ -22,6 +24,9 @@ module.exports = {
       reducers: path.join(__dirname, "src", "reducers"),
       constants: path.join(__dirname, "src", "constants"),
       middlewares: path.join(__dirname, "src", "middlewares"),
+      layouts: path.join(__dirname, "src", "layouts"),
+      config: path.join(__dirname, "src", "config"),
+      helpers: path.join(__dirname, "src", "helpers"),
       styles: path.join(__dirname, "src", "styles"),
       assets: path.join(__dirname, "src", "assets"),
       img: path.join(__dirname, "src", "assets", "img"),
