@@ -17,6 +17,11 @@ import AuthProvider from "./services/auth/AuthProvider";
 import AuthRequire from "./services/auth/AuthRequire";
 import AuthRequireRoleBased from "./services/auth/AuthRequireRoleBased";
 import Stats from "./pages/Stats";
+import Comments from "./pages/Comments";
+import PageUsers from "./pages/PageUsers";
+import Pages from "./pages/Pages";
+
+import ComponetnPage from "./components/ComponentPage/ComponetnPage";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -24,7 +29,16 @@ ReactDOM.render(
       <AuthProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route
+              path="/"
+              element={
+                <AuthRequire redirectTo="/login">
+                  <AuthRequireRoleBased>
+                    <Layout />
+                  </AuthRequireRoleBased>
+                </AuthRequire>
+              }
+            >
               <Route
                 index
                 element={
@@ -43,20 +57,51 @@ ReactDOM.render(
                   </AuthRequireRoleBased>
                 }
               />
-                  <Route
+              <Route
                 path="/stats"
                 element={
                   <AuthRequire redirectTo="/login">
-                  <AuthRequireRoleBased>
-                    <Stats />
-                  </AuthRequireRoleBased>
-                </AuthRequire>
+                    <AuthRequireRoleBased>
+                      <Stats />
+                    </AuthRequireRoleBased>
+                  </AuthRequire>
+                }
+              />
+              <Route
+                path="/users"
+                element={
+                  <AuthRequire redirectTo="/login">
+                    <AuthRequireRoleBased>
+                      <PageUsers />
+                    </AuthRequireRoleBased>
+                  </AuthRequire>
+                }
+              />
+              <Route
+                path="/comments"
+                element={
+                  <AuthRequire redirectTo="/login">
+                    <AuthRequireRoleBased>
+                      <Comments />
+                    </AuthRequireRoleBased>
+                  </AuthRequire>
+                }
+              />
+                   <Route
+                path="/pages"
+                element={
+                  <AuthRequire redirectTo="/login">
+                    <AuthRequireRoleBased>
+                      <Pages />
+                    </AuthRequireRoleBased>
+                  </AuthRequire>
                 }
               />
               <Route path="/logout" element={<PageLogout />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="*" element={<PageError />} />
             </Route>
+            <Route path="/:slug" element={<ComponetnPage/>}/>
           </Routes>
         </Router>
       </AuthProvider>

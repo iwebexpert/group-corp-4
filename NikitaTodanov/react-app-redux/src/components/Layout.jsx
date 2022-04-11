@@ -14,7 +14,11 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { mainListItems, secondaryListItems } from "./LeftMenu";
+import {
+  mainListItems,
+  secondaryListItems,
+  secondaryListItemsUser,
+} from "./LeftMenu";
 
 import LightModeIcon from "@mui/icons-material/LightMode";
 import NightlightIcon from "@mui/icons-material/Nightlight";
@@ -70,7 +74,7 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-export default function Layout() {
+export default function Layout({ privileges }) {
   const toggleDrawer = () => {
     setOpen(!open);
     localStorage.setItem("config.appbar", JSON.stringify({ isOpen: !open }));
@@ -97,7 +101,7 @@ export default function Layout() {
       <AppBar position="absolute" open={open}>
         <Toolbar
           sx={{
-            pr: "24px", 
+            pr: "24px",
           }}
         >
           <IconButton
@@ -150,11 +154,19 @@ export default function Layout() {
           </IconButton>
         </Toolbar>
         <Divider />
-        <List component="nav">
-          {mainListItems}
-          <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
-        </List>
+        {!privileges.isRoot ? (
+          <List component="nav">
+            {mainListItems}
+            <Divider sx={{ my: 1 }} />
+            {secondaryListItems}
+          </List>
+        ) : (
+          <List component="nav">
+            {mainListItems}
+            <Divider sx={{ my: 1 }} />
+            {secondaryListItemsUser}
+          </List>
+        )}
       </Drawer>
       <Box
         component="main"

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ContainerWrapper from "./ContainerWrapper";
 
-function Stats({ privileges }) {
+function Comments({ privileges }) {
   const [result, setResult] = useState([]);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ function Stats({ privileges }) {
     const options = {
       method: "GET",
     };
-    fetch("/api/log", options)
+    fetch("/api/users", options)
       .then((result) => result.json())
       .then((result) => {
         if (result.error) {
@@ -27,13 +27,11 @@ function Stats({ privileges }) {
         <div>У вас нет достпа для просмотра данной страницы</div>
       ) : (
         <div>
-          {result.map((res, key) => (
-            <div key={res.userId + 1}>
-              <div>Информация о действиях пользователя: {res.userId}</div>
-              <div>{res.userId}</div>
-              <div>{res.type}</div>
-              <div styles={{ color: "red" }}>{res.content}</div>
-              <div>{res.action}</div>
+          {result.map((res, index) => (
+            <div key={index}>
+              <div>Имя Пользователя :{res.name}</div>
+              <div>Email:{res.email}</div>
+              <div>Роль Пользователя:{res.role}</div>
               <div>
                 <br />
               </div>
@@ -45,4 +43,4 @@ function Stats({ privileges }) {
   );
 }
 
-export default Stats;
+export default Comments;
