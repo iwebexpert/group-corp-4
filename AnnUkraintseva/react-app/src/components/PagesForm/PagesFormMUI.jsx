@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, {useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
@@ -8,6 +8,10 @@ import InputLabel from '@mui/material/InputLabel'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Input from '@mui/material/Input'
+import { authServices } from '../../services/auth/authServices'
+
+import { getCurrentUser } from '../../services/auth/authServices'
+
 
 import styled from "@emotion/styled"
 
@@ -23,28 +27,31 @@ const ButtonCustom = styled(FormControl)`
 export const dataSelectContent = ''
 
 export function PagesForm({ dataInitial, onSave, onReset, onAdd }) {
-  console.log('datainit', dataInitial)
+
+  const user = authServices.currentUserValue
 
   const [pageId, setPageId] = useState(null)
   const [pagesUrl, setPagesUrl] = useState('')
   const [pagesTitle, setPagesTitle] = useState('')
   const [pagesContent, setPagesContent] = useState('')
-  const [pagesUserId, setPagesUserId] = useState(1)
+  const [pagesUserName, setPagesUserName]= useState(user.name)
+  const [pagesUserId, setPagesUserId] = useState(user.id)
 
   useEffect(() => {
-    console.log('dataInitial', dataInitial)
     if (dataInitial) {
       setPageId(dataInitial.id)
       setPagesUrl(dataInitial.url)
       setPagesTitle(dataInitial.title)
       setPagesContent(dataInitial.content)
       setPagesUserId(dataInitial.userId)
+      setPagesUserName(dataInitial.userName)
     } else {
       setPageId(null)
       setPagesUrl('')
       setPagesTitle('')
       setPagesContent('')
-      setPagesUserId(1)
+      setPagesUserId(user.id)
+      setPagesUserName(user.name)
     }
   }, [dataInitial])
 
@@ -60,9 +67,6 @@ export function PagesForm({ dataInitial, onSave, onReset, onAdd }) {
     setPagesContent(event.target.value)
   }
 
-  const handlePagesUserIdChange = (event) => {
-    setPagesUserId(event.target.value)
-  }
 
   const getPagesContent = () => {
     if (dataSelectContent != pagesTitle) {
@@ -79,16 +83,20 @@ export function PagesForm({ dataInitial, onSave, onReset, onAdd }) {
       title: pagesTitle,
       content: pagesContent,
       userId: pagesUserId,
+      userName: pagesUserName,
     }
 
     if (pageId) {
       onSave(data)
     } else {
+      setPagesUserId(user.id)
+      setPagesUserName(user.name)
       onAdd(data)
       setPagesUrl('')
       setPagesTitle('')
       setPagesContent('')
-      setPagesUserId(1)
+      setPagesUserName('')
+      setPagesUserId('')
     }
   }
 
@@ -135,17 +143,6 @@ export function PagesForm({ dataInitial, onSave, onReset, onAdd }) {
             value={pagesContent}
             onChange={handlePagesContentChange}
           ></TextField>
-        </FormControl>
-        <FormControl fullWidth sx={{ m: 1, fontSize: 14 }}>
-          <InputLabel htmlFor="pagesUserId"></InputLabel>
-          <Input
-            label="Пользователь"
-            type="number"
-            min="1"
-            id="pagesUserId"
-            value={pagesUserId}
-            onChange={handlePagesUserIdChange}
-          />
         </FormControl>
 
         <FormControl fullWidth sx={{ m: 1 }}>

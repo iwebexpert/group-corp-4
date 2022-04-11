@@ -8,12 +8,9 @@ import Toolbar from '@mui/material/Toolbar'
 import List from '@mui/material/List'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
-import Container from '@mui/material/Container'
-import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import { mainListItems, secondaryListItems } from './LeftMenu'
+import { MainListItems, secondaryListItems } from './LeftMenu'
 import Copyright from './Copyright'
 import Typography from '@mui/material/Typography'
 import LightModeIcon from '@mui/icons-material/LightMode'
@@ -23,10 +20,6 @@ import { useTheme } from '@mui/material/styles'
 import { ThemeModeContext } from '../contexts/ThemeContextMUI'
 import { Outlet } from 'react-router-dom'
 
-import PagesTable from './PagesTable'
-import PagesForm from './PagesForm'
-import PagesFormChange from './PagesFormChange'
-import CommentForm from './CommentForm'
 
 const drawerWidth = 240
 
@@ -149,7 +142,7 @@ export default function Layout() {
         </Toolbar>
         <Divider />
         <List component="nav">
-          {mainListItems}
+          <MainListItems />
           <Divider sx={{ my: 1 }} />
           {secondaryListItems}
         </List>

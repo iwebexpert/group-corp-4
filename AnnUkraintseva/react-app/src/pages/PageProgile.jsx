@@ -1,22 +1,26 @@
 import React from 'react'
 import ContainerWrapper from './ContainerWrapper'
 import Typography from '@mui/material/Typography'
-
-
+import { getCurrentUser } from '../services/auth/authServices'
+import { Paper } from '@mui/material'
 
 export function PageProfile() {
-  const currentUser = JSON.parse(localStorage.getItem('user'))
+  const currentUser = getCurrentUser()
 
   return (
     <ContainerWrapper>
-      {/* К следующему дз сделаю красивее */}
-      <Typography component="h2" sx={{fontSize :20, m:2}}>Мой профиль</Typography>
-      <Typography component='div' sx={{border:2, borderColor:'secondary', m:2, p:3, borderRadius: 2}}>
-      <Typography component="div">Имя пользователя: {currentUser.name}</Typography>
-      <Typography component="div">Email: {currentUser.email}</Typography>
-      <Typography component="div">Роль: {currentUser.role}</Typography>
+      <Typography component="h2" variant="h3" align="center" color="text.primary" gutterBottom>
+        Мой профиль
       </Typography>
-      
+        <Typography variant="h5" align="left" color="text.secondary" paragraph>
+          Имя пользователя: {currentUser.name}
+        </Typography>
+        <Typography variant="h5" align="left" color="text.secondary" paragraph>
+          Email: {currentUser.email}
+        </Typography>
+        <Typography variant="h5" align="left" color="text.secondary" paragraph>
+          Роль: {currentUser.role}
+        </Typography>
     </ContainerWrapper>
   )
 }

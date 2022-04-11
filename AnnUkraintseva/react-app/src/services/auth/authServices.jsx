@@ -1,26 +1,47 @@
 import jwt_decode from "jwt-decode"
 
 const localStorageKey = 'user'
+const localStorageKey2 = 'allUsers'
 
 const erroeMas = [400,401,403,404,500]
 
 export const authServices={
     login,
     logout,
+    setAllUser,
     get currentUserValue(){
         return getCurrentUser()
     },
     get token(){
         return getCurrentToken()
     },
+    get userName(){
+        return getCurrentName()
+    },
+    get userRole(){
+        return getCurrentUserRole()
+    },
+    get userEmail(){
+        return getCurrentEmail()
+    },
+    get getAllUser(){
+        return getAllUser()
+    },
+
+    get getCurrentId(){
+        return getCurrentId()
+    }
 
 }
+
+
+
 export function getCurrentUser(){
     let user = localStorage.getItem(localStorageKey)
     if(user != null)
     {
         user = JSON.parse(user)
-    }
+    } 
 
     return user
 }
@@ -45,6 +66,12 @@ function getCurrentToken(){
     return (user && user.token)? user.token: null
 } 
 
+function getCurrentId(){
+    const user = getCurrentUser()
+    return (user && user.id)? user.id: null
+} 
+
+
 
 function login(email, password, callback =(user)=>{}){
     const options = {
@@ -63,6 +90,32 @@ function login(email, password, callback =(user)=>{}){
             callback(decoded)
             return decoded
     })
+}
+
+function setAllUser(){
+    const options = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+    }
+    return fetch('/api/users', options)
+    .then((response) => response.json())
+    .then((data) => {
+
+        localStorage.setItem(localStorageKey2, JSON.stringify(data))
+        console.log('dataAllUser', data)
+    })
+
+}
+
+function getAllUser(){
+    let users = localStorage.getItem(localStorageKey2)
+    
+        users = JSON.parse(users)
+        console.log('allUsersLocal',users)
+    
+
+    return users
+
 }
 
 function logout(){

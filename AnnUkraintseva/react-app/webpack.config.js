@@ -65,7 +65,7 @@ module.exports = {
     }),
 
     new MiniCssExtractPlugin({
-      filename: 'index.css',
+      filename: 'index.css'
     }),
 
     new Dotenv(),

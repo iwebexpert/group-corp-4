@@ -1,45 +1,57 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ListSubheader from '@mui/material/ListSubheader'
-import InfoIcon from '@mui/icons-material/Info';
-import PagesIcon from '@mui/icons-material/Pages';
-import CommentIcon from '@mui/icons-material/Comment';
-import PersonIcon from '@mui/icons-material/Person';
-import LogoutIcon from '@mui/icons-material/Logout';
-import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import InfoIcon from '@mui/icons-material/Info'
+import PagesIcon from '@mui/icons-material/Pages'
+import CommentIcon from '@mui/icons-material/Comment'
+import PersonIcon from '@mui/icons-material/Person'
+import LogoutIcon from '@mui/icons-material/Logout'
+import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
 import { Link } from 'react-router-dom'
+import { authServices } from '../services/auth/authServices'
 
-export const mainListItems = (
-  <React.Fragment>
-    <ListItemButton component={Link} to="/">
-      <ListItemIcon>
-        <InfoIcon />
-      </ListItemIcon>
-      <ListItemText primary="О приложении" />
-    </ListItemButton>
-    <ListItemButton component={Link} to="/pagesLink">
-      <ListItemIcon>
-        <PagesIcon />
-      </ListItemIcon>
-      <ListItemText primary="Страницы" />
-    </ListItemButton>
-    <ListItemButton component={Link} to="/commentLink">
-      <ListItemIcon>
-        <CommentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Комментарии" />
-    </ListItemButton>
-    <ListItemButton component={Link} to="/stats">
-      <ListItemIcon>
-        <QueryStatsIcon />
-      </ListItemIcon>
-      <ListItemText primary="Действия пользователей" />
-    </ListItemButton>
-  </React.Fragment>
-)
+export const MainListItems = () => {
+  const privileges = authServices.userRole
+  const [isAdmin, setIsAdmin] = useState('')
+  useEffect(() => {
+    setIsAdmin(privileges)
+  }, [privileges])
+
+  return (
+    <React.Fragment>
+      <ListItemButton component={Link} to="/" >
+        <ListItemIcon>
+          <InfoIcon />
+        </ListItemIcon>
+        <ListItemText primary="О приложении" />
+      </ListItemButton>
+      <ListItemButton component={Link} to="/pagesLink">
+        <ListItemIcon>
+          <PagesIcon />
+        </ListItemIcon>
+        <ListItemText primary="Страницы" />
+      </ListItemButton>
+      <ListItemButton component={Link} to="/commentLink">
+        <ListItemIcon>
+          <CommentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Комментарии" />
+      </ListItemButton>
+      {isAdmin === 'admin' &&
+        <ListItemButton component={Link} to="/stats">
+          <ListItemIcon>
+            <QueryStatsIcon />
+          </ListItemIcon>
+          <ListItemText primary="О пользователях" />
+        </ListItemButton>
+      }
+      
+    </React.Fragment>
+  )
+}
 
 export const secondaryListItems = (
   <React.Fragment>
