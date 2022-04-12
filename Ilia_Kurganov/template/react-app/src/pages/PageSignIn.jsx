@@ -9,23 +9,22 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { CopyRight } from '../components/CopyRight/CopyRight'
 import { authService } from '../services/auth/authService'
+import { Helmet } from 'react-helmet'
 
 export default function SignIn({ handleSuccesAuth }) {
   const handleSubmit = (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
     const email = data.get('email')
-    const password = data.get('password')
-    console.log({
-      email,
-      password,
-    })
-
-    authService.login(email, handleSuccesAuth);
+    // const password = data.get('password')
+    authService.login(email, handleSuccesAuth)
   }
 
   return (
     <Container component="main" maxWidth="xs">
+      <Helmet>
+        <title>Authorization</title>
+      </Helmet>
       <CssBaseline />
       <Box
         sx={{

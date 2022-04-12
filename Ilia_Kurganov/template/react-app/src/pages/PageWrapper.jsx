@@ -4,8 +4,11 @@ import { CopyRight } from '../components/CopyRight/CopyRight'
 
 function PageWrapper({ children }) {
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4, display: 'flex', flexDirection: 'column', height: "85%" }}>
-      <Grid container spacing={3} sx={{flex: '1 0 auto'}}>
+    <Container
+      maxWidth="lg"
+      sx={{ mt: 4, mb: 4, display: 'flex', flexDirection: 'column', height: '85%' }}
+    >
+      <Grid container spacing={3} sx={{ flex: '1 0 auto' }}>
         <Grid item xs={12}>
           <Paper
             sx={{

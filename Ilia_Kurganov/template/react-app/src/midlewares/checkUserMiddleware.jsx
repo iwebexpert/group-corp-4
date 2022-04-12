@@ -1,4 +1,5 @@
 import { authService } from '../services/auth/authService'
+import { sendLog } from '../actions/actionsLogs';
 
 export const checkUser = (store) => (next) => (action) => {
   const res = next(action)
@@ -6,18 +7,10 @@ export const checkUser = (store) => (next) => (action) => {
   if (action.type === 'PAGE_ADD' || action.type === 'PAGE_DELETE' || action.type === 'PAGE_EDIT') {
     const bodyPost = {
       action: action.type,
-      user: store.getState().page.role,
+      user: authService.currentUserValue.role,
     }
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authentication: `Bearer ${authService.token}`,
-      },
-      body: JSON.stringify(bodyPost),
-    }
-    fetch('/api/log', options)
-      .then((res) => res.json())
+    store.dispatch(sendLog(bodyPost))
+   dis
   }
   return res
 }

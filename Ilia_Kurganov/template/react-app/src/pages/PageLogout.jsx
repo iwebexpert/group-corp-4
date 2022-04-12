@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react'
 import { Typography } from '@mui/material'
 import PageWrapper from './PageWrapper'
-import { authService } from './../services/auth/authService';
+import { authService } from './../services/auth/authService'
+import { Helmet } from 'react-helmet'
 
 function PageLogout() {
+  useEffect(() => {
+    authService.logout()
+    window.location.href = '/'
+  }, [])
 
-    useEffect(() => {
-      authService.logout()
-      window.location.href='/'
-    }, [])
-    
   return (
     <PageWrapper>
+      <Helmet>
+        <title>Logout</title>
+      </Helmet>
       <Typography component="h3" variant="h6" color="primery" gutterBottom>
         Выход
       </Typography>

@@ -1,4 +1,9 @@
 import jwt_decode from 'jwt-decode'
+import { isDev } from '../../helpers/devProdMode'
+import { removeParams } from '../../helpers/localStorageHelper'
+import { setParams } from '../../helpers/localStorageHelper'
+import { getParams } from '../../helpers/localStorageHelper'
+import { urls } from '../../helpers/urlHelper'
 
 export const authService = {
   login,
@@ -9,20 +14,24 @@ export const authService = {
   get token() {
     return getCurrentToker()
   },
+  get userId() {
+    return getUserId()
+  },
 }
 
 const localStorageKey = 'user'
 
 const getCurrentUser = () => {
-  let user = localStorage.getItem(localStorageKey)
-  if (user !== null) {
-    user = JSON.parse(user)
-  }
+  let user = getParams(localStorageKey, null, 'auth')
+  // if (isDev() && user && user?.roles) {
+  //   // console.log(user)
+  //   user.role.push('ROLE_ROOT')
+  // }
   return user
 }
 
 function login(email, callback = (user) => {}) {
-  return fetch(`/api/users?email_like=${email}`)
+  return fetch(urls.authLogin(email))
     .then((res) => {
       return res.json()
     })
@@ -32,19 +41,23 @@ function login(email, callback = (user) => {}) {
       }
       let decode = jwt_decode(user[0].token)
       decode['token'] = user[0].token
-      localStorage.setItem(localStorageKey, JSON.stringify(decode))
+      setParams(localStorageKey, 'auth', decode)
       callback(decode)
       return decode
     })
 }
 
-function getCurrentToker () {
-  const user = getCurrentUser();
-  return user.token
+function getCurrentToker() {
+  const user = getCurrentUser()
+  return user && user.tokeen ? user.token : null
+}
+function getUserId() {
+  const user = getCurrentUser()
+  return user && user.token ? user.token : null
 }
 
 function logout() {
-  localStorage.removeItem(localStorageKey)
+  removeParams(localStorageKey)
 }
 
 // const handleResponse = (res) => {

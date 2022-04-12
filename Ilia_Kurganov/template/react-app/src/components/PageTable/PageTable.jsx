@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './PageTable.scss'
 import PropTypes from 'prop-types'
 import Table from '@mui/material/Table'
@@ -67,7 +68,7 @@ const PageTable = ({ tableRows, delitePage, role }) => {
           {newTableRow.map((page, i) => (
             <TableRow key={page.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                {i + 1}
+                <Link to={`/pages/${page.id}`}>{i + 1}</Link>
               </TableCell>
               <TableCell align="right">
                 {page.isEdit ? (

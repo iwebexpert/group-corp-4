@@ -1,22 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Typography } from '@mui/material'
 import PageWrapper from './PageWrapper'
+import { authService } from '../services/auth/authService'
 import { Helmet } from 'react-helmet'
 
-function PageApp() {
+function PageComments() {
   return (
     <PageWrapper>
-       <Helmet>
-        <title>About App</title>
+      <Helmet>
+        <title>Comments</title>
       </Helmet>
       <Typography component="h3" variant="h6" color="primery" gutterBottom>
-        О приложении
-      </Typography>
-      <Typography component="p" variant="p" color="primery" gutterBottom>
-        Хорошее приложение
+        Комментарии
       </Typography>
     </PageWrapper>
   )
 }
 
-export default PageApp
+export default PageComments
