@@ -1,4 +1,7 @@
 import jwt_decode from 'jwt-decode'
+import { getItem, setItem, removeItem } from '../../helpers/localStorageHelper'
+import { urls, getOptions } from '../../helpers/requestHelper'
+import { isDev } from '../../helpers/devProdMode'
 
 export const authService = {
   login,
@@ -15,69 +18,59 @@ export const authService = {
   get isAdmin() {
     return checkRole()
   },
+  get token() {
+    return getCurrentToken()
+  },
 }
 const localStorageKey = 'User'
 
 function getCurrentUser() {
-  let user = localStorage.getItem(localStorageKey)
-  if (user !== null) {
-    user = JSON.parse(user)
-  }
-  return user
+  return getItem(localStorageKey)
 }
 
 function getCurrentUserRole() {
-  let user = localStorage.getItem(localStorageKey)
-  if (user !== null) {
-    return JSON.parse(user).role
-  }
+  return getItem(localStorageKey).role
 }
 
 function getCurrentUserExist() {
-  let user = localStorage.getItem(localStorageKey)
-  if (user !== null) {
-    return true
-  }
+  const user = getItem(localStorageKey)
+  if (user !== null) return true
   return false
 }
 
 function checkRole() {
-  let user = localStorage.getItem(localStorageKey)
-  if (user !== null && JSON.parse(user).role === 'admin') {
-    return true
-  }
+  const user = getItem(localStorageKey)
+  if (user !== null && user.role === 'admin') return true
+
   return false
 }
 
-function login(username, password, callback = (user) => {}) {
-  const options = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    // body: JSON.stringify({ login: username, pass: password }),
-  }
+function logout() {
+  removeItem(localStorageKey)
+  removeItem('Token')
+  window.location.href = '/'
+}
 
-  return fetch(`/api/users?email=${username}&password=${password}`, options)
+function getCurrentToken() {
+  return getCurrentUser() ? getItem('Token') : null
+}
+
+function login(username, password, callback = () => {}) {
+  return fetch(urls.login(username, password), getOptions('GET', false))
     .then(handleResponse)
     .then((user) => {
-      const userData = user[0] ? user.pop() : user
+      const userData = isDev() ? user.pop() : user
       let decoded = jwt_decode(userData.token)
       if (typeof decoded === 'object') {
         decoded['username'] = username
       }
-      localStorage.setItem(localStorageKey, JSON.stringify(decoded))
-      localStorage.setItem('Token', userData.token)
+      setItem(localStorageKey, decoded)
+      setItem('Token', userData.token)
+
       callback(decoded)
       location.reload()
       return decoded
     })
-}
-
-function logout() {
-  localStorage.removeItem(localStorageKey)
-  localStorage.removeItem('Token')
-  window.location.href = '/'
 }
 
 function handleResponse(response) {
@@ -88,11 +81,9 @@ function handleResponse(response) {
         authService.logout()
         location.reload()
       }
-
       const error = (data && data.message) || response.statusText
       return Promise.reject(error)
     }
-
     return data
   })
 }

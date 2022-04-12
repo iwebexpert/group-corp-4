@@ -7,11 +7,8 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import IconButton from '@mui/material/IconButton'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
 
-export default function PageTable({ pages, showButton, onEditPage, onDeletePage }) {
+export default function Stats({ pages }) {
   return (
     <TableContainer sx={{ maxHeight: 440 }}>
       <Table stickyHeader aria-label="sticky table" size="small">
@@ -21,12 +18,6 @@ export default function PageTable({ pages, showButton, onEditPage, onDeletePage 
             <TableCell>Url</TableCell>
             <TableCell>Title</TableCell>
             <TableCell>Content</TableCell>
-            {showButton && (
-              <>
-                <TableCell>&nbsp;</TableCell>
-                <TableCell>&nbsp;</TableCell>
-              </>
-            )}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -36,20 +27,6 @@ export default function PageTable({ pages, showButton, onEditPage, onDeletePage 
               <TableCell>{tabelItem.url}</TableCell>
               <TableCell>{tabelItem.title}</TableCell>
               <TableCell>{tabelItem.content}</TableCell>
-              {showButton && (
-                <>
-                  <TableCell>
-                    <IconButton onClick={() => onEditPage(tabelItem.id)} aria-label="edit">
-                      <EditIcon />
-                    </IconButton>
-                  </TableCell>
-                  <TableCell>
-                    <IconButton onClick={() => onDeletePage(tabelItem.id)} aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
-                </>
-              )}
             </TableRow>
           ))}
         </TableBody>
@@ -57,16 +34,17 @@ export default function PageTable({ pages, showButton, onEditPage, onDeletePage 
     </TableContainer>
   )
 }
-PageTable.defaultProps = {
+Stats.defaultProps = {
   pages: [],
   showButton: false,
   onEditPage: () => {},
   onDeletePage: () => {},
 }
 
-PageTable.propTypes = {
+Stats.propTypes = {
   pages: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.number.isRequired || PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string,

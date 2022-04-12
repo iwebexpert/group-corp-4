@@ -22,7 +22,10 @@ export default function LeftMunu({ isOpenLeftMenu, HandleClick }) {
     setState({ ...state, [anchor]: open })
   }
 
-  const navLink = [{ link: '/pages', name: 'Pages' }]
+  const navLink = [
+    { link: '/pages', name: 'Pages' },
+    { link: '/stats', name: 'Stats' },
+  ]
 
   const list = (anchor) => (
     <Box

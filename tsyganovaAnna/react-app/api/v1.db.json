@@ -23,11 +23,6 @@
       "password": "12345678",
       "role": "user",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6Ik9sZ2EiLCJlbWFpbCI6Im9sZ2EyMDIyQGRvbWFpbi5sb2NhbCIsInBhc3N3b3JkIjoiMTIzNDU2NzgiLCJyb2xlIjoidXNlciJ9.C1UmkPJDqbw-9vHUUPA3RGtvIiY-t7PcRc_l9vBG3Xc"
-    },
-    {
-      "login": "anna1234@domain.local",
-      "pass": "1234",
-      "id": 4
     }
   ],
   "pages": [
@@ -65,6 +60,13 @@
       "title": "Contacts",
       "content": "Some content...",
       "userId": 3
+    },
+    {
+      "url": "rtyrty",
+      "title": "rtryrtyry",
+      "content": "rtyrty",
+      "userId": 1,
+      "id": 6
     }
   ],
   "comments": [
@@ -102,6 +104,72 @@
       "id": 3,
       "theme": "dark",
       "userId": 3
+    }
+  ],
+  "logs": [
+    {
+      "userId": 2,
+      "actions": {
+        "date": "02.04.2022, 16:20:06",
+        "action": "Получение страниц"
+      },
+      "id": 1
+    },
+    {
+      "userId": 3,
+      "actions": {
+        "date": "02.04.2022, 16:20:29",
+        "action": "Получение страниц"
+      },
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "actions": {
+        "date": "02.04.2022, 16:20:44",
+        "action": "Получение страниц"
+      },
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "actions": {
+        "date": "02.04.2022, 16:20:53",
+        "action": "Добавление страниц"
+      },
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "actions": {
+        "date": "02.04.2022, 16:21:02",
+        "action": "Редактирование страницы"
+      },
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "actions": {
+        "date": "02.04.2022, 16:21:03",
+        "action": "Получение ID страницы"
+      },
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "actions": {
+        "date": "02.04.2022, 16:22:51",
+        "action": "Получение статистики"
+      },
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "actions": {
+        "date": "02.04.2022, 16:22:51",
+        "action": "Получение статистики"
+      },
+      "id": 8
     }
   ]
 }

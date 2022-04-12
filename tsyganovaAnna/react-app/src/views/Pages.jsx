@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Button from '@mui/material/Button'
 import AddIcon from '@mui/icons-material/Add'
 
@@ -6,33 +7,25 @@ import PageForm from '../components/Pages/PageForm'
 import PageTable from '../components/Pages/PageTable'
 import CommentForm from '../components/Comments/CommentForm'
 import Dashboard from '../components/Dashboard'
+import Loading from '../components/Loading/Loading'
 import { authService } from '../services/auth/authService'
+import { getAllPage, addPage, editPage, deletePage } from '../store/actions/pageActions'
+import { isDev } from '../helpers/devProdMode'
 
 export default function Pages() {
-  let NODE_ENV = process.env.NODE_ENV
-  const [pages, setPages] = useState([])
-  const [editPage, setEditPage] = useState({})
+  const [openEditPage, setEditPage] = useState({})
   const [isVisibleAdd, setIsVisibleAdd] = useState(false)
   const [isVisibleEdit, setIsVisibleEdit] = useState(false)
   const [isVisibleCommentAdd, setIsVisibleCommentAdd] = useState(false)
-  const [isLoading, setLoading] = useState(false)
 
   const isAdmin = authService.isAdmin
-  const getListPages = () => {
-    fetch('/api/pages')
-      .then((response) => response.json())
-      .then((data) => {
-        setPages(data)
-      })
-      .finally(() => setLoading(false))
-  }
+  const dispatch = useDispatch()
+  const pages = useSelector((state) => state.page.data)
+  const loading = useSelector((state) => state.page.loading)
+
   useEffect(() => {
-    if (NODE_ENV === 'development') {
-      setLoading(!isLoading)
-      setTimeout(() => getListPages(), 1000)
-    } else {
-      getListPages()
-    }
+    if (isDev()) setTimeout(() => dispatch(getAllPage()), 1000)
+    else dispatch(getAllPage())
   }, [])
 
   const handlePageToogle = (pageId) => {
@@ -42,26 +35,20 @@ export default function Pages() {
   }
   const onEditPage = (data) => {
     setEditPage(data)
-    setPages(
-      pages.map((item) => {
-        if (item.id === data.id) return data
-        else return item
-      }),
-    )
+    dispatch(editPage(data))
     setIsVisibleEdit(!isVisibleEdit)
   }
-
-  const deletePage = (id) => {
-    const filteredItems = pages.filter((item) => item.id !== id)
-    setPages(filteredItems)
-  }
-
+  const onDeletePage = (id) => dispatch(deletePage(id))
   const onAddPage = (data) => {
-    setPages(pages.concat([data]))
+    dispatch(addPage(data))
     openPageForm()
   }
+
   const openPageForm = () => {
     setIsVisibleAdd(!isVisibleAdd)
+  }
+  const openPageEditForm = () => {
+    setIsVisibleEdit(!isVisibleEdit)
   }
   const openCommentForm = () => {
     setIsVisibleCommentAdd(!isVisibleCommentAdd)
@@ -70,7 +57,7 @@ export default function Pages() {
     <>
       {isAdmin && (
         <div>
-          <Button variant="outlined" startIcon={<AddIcon />} onClick={openPageForm}>
+          <Button variant="outlined" startIcon={<AddIcon />} onClick={openPageForm} sx={{ mr: 2 }}>
             Add new page
           </Button>
           <Button variant="outlined" startIcon={<AddIcon />} onClick={openCommentForm}>
@@ -79,15 +66,24 @@ export default function Pages() {
         </div>
       )}
       <Dashboard>
-        <PageTable
-          pages={pages}
-          showButton={isAdmin}
-          onDeletePage={deletePage}
-          onEditPage={handlePageToogle}
-        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <PageTable
+            pages={pages}
+            showButton={isAdmin}
+            onDeletePage={onDeletePage}
+            onEditPage={handlePageToogle}
+          />
+        )}
       </Dashboard>
       {isVisibleEdit && (
-        <PageForm isOpen={isVisibleEdit} page={editPage} onChangeData={onEditPage} />
+        <PageForm
+          close={openPageEditForm}
+          page={openEditPage}
+          isOpen={isVisibleEdit}
+          onChangeData={onEditPage}
+        />
       )}
       {isVisibleAdd && (
         <PageForm close={openPageForm} isOpen={isVisibleAdd} onChangeData={onAddPage} />

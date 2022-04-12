@@ -45,17 +45,19 @@ export default function Login({ handleSuccessAuth }) {
       </Typography>
       <Input
         label="Login"
+        required
         error={emptyLogin}
-        errorLabel={emptyLogin ? 'Login is empty' : ''}
+        helperText={emptyLogin ? 'Login is empty' : ''}
         value={login}
         onChange={handleLogin}
       />
       <Input
         label="Password"
+        required
         error={emptyPassword}
         value={password}
         type="password"
-        errorLabel={emptyPassword ? 'Password is empty' : ''}
+        helperText={emptyPassword ? 'Password is empty' : ''}
         onChange={handlePassword}
       />
       <Button

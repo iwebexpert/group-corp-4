@@ -6,6 +6,7 @@ import Pages from './views/Pages'
 import Profile from './views/Profile'
 import Login from './views/Login'
 import Error from './views/Error'
+import Stats from './views/Stats'
 import AuthProvider from './services/auth/AuthProvider'
 
 export default function Routers() {
@@ -17,6 +18,7 @@ export default function Routers() {
           <Route path="/pages" element={<Pages />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/stats" element={<Stats />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Route>

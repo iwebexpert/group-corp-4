@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
-import { Modal, Box, Button } from '@mui/material'
+import { Modal, Box, Typography, Button } from '@mui/material'
 
 import Input from '../Fields/Input.jsx'
 import { authService } from '../../services/auth/authService'
@@ -34,6 +34,9 @@ export default function CommentForm({ isOpen, close, comment, onChangeData }) {
   return (
     <Modal open={isOpen} onClose={close}>
       <Box sx={style}>
+        <Typography variant="h6" component="h6" sx={{ color: 'gray' }}>
+          Create comment
+        </Typography>
         <Input
           label="Content"
           value={content}
@@ -41,8 +44,11 @@ export default function CommentForm({ isOpen, close, comment, onChangeData }) {
           multiline
           onChange={handleCommentContentChange}
         />
-        <Button onClick={handleSubmit} variant="outlined">
+        <Button onClick={handleSubmit} variant="outlined" sx={{ mt: 2, mr: 2 }}>
           Save
+        </Button>
+        <Button onClick={close} variant="text" sx={{ mt: 2 }}>
+          Canсel
         </Button>
       </Box>
     </Modal>
