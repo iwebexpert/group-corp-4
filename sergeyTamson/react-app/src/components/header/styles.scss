@@ -11,7 +11,7 @@
   }
 
   &__dark {
-    background: var(--color-bg);
+    background: var(--color-bg-add);
   }
 
   .thema {
@@ -20,4 +20,11 @@
     color: var(--color-btn);
     cursor: pointer;
   }
+}
+
+.scroll {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 9999;
 }

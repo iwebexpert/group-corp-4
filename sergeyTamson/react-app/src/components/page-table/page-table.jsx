@@ -1,4 +1,6 @@
 import {
+  Button,
+  Link,
   Table,
   TableBody,
   TableCell,
@@ -8,18 +10,22 @@ import {
   Typography,
 } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { pageDelete } from '../../actions/page.js'
+import { userFetch } from '../../actions/user.js'
 import CreatePageForm from '../forms/create-page-form/create-page-form.jsx'
 import Modal from '../modal/modal.jsx'
 import { authService } from '../services/auth/authService.jsx'
 
-const PageTable = ({ page, setPage, handleEditPage }) => {
+const PageTable = ({ page }) => {
   const [open, setOpen] = useState(false)
   const [dataObj, setDataObj] = useState({})
-  const [user, setUser] = useState(null)
+
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.data)
 
   const onDeletePage = (id) => {
-    const filteredItems = page.filter((item) => item.id !== id)
-    setPage(filteredItems)
+    dispatch(pageDelete(id))
   }
 
   const onEditPage = (obj) => {
@@ -27,15 +33,11 @@ const PageTable = ({ page, setPage, handleEditPage }) => {
     setOpen(true)
   }
 
-  //TODO
-  useEffect(() => {
-    const currentUser = authService.currentUserValue
-    setUser(currentUser)
-  }, [])
-
   return (
     <>
-      <Typography variant="h2">Список всех страниц</Typography>
+      <Typography variant="h4" mb={2}>
+        Список всех страниц
+      </Typography>
 
       <TableContainer>
         <Table>
@@ -56,18 +58,20 @@ const PageTable = ({ page, setPage, handleEditPage }) => {
                 <TableCell component="th" scope="row">
                   {row.id}
                 </TableCell>
-                <TableCell align="right">{row.url}</TableCell>
+                <TableCell align="right">
+                  <Link href={row.url}>{row.url}</Link>
+                </TableCell>
                 <TableCell align="right">{row.title}</TableCell>
                 <TableCell align="right">{row.content}</TableCell>
                 <TableCell align="right">{row.userId}</TableCell>
                 {user?.role === 'admin' && (
                   <TableCell align="right" onClick={() => onDeletePage(row.id)}>
-                    Удалить
+                    <Button>Удалить</Button>
                   </TableCell>
                 )}
                 {user?.role === 'admin' && (
                   <TableCell align="right" onClick={() => onEditPage(row)}>
-                    Редактировать
+                    <Button>Редактировать</Button>
                   </TableCell>
                 )}
               </TableRow>
@@ -77,12 +81,7 @@ const PageTable = ({ page, setPage, handleEditPage }) => {
       </TableContainer>
 
       <Modal open={open} onClose={setOpen}>
-        <CreatePageForm
-          item={dataObj}
-          onAddPage={handleEditPage}
-          textButton="изменить данные страницы"
-          onClose={setOpen}
-        />
+        <CreatePageForm item={dataObj} textButton="изменить данные страницы" onClose={setOpen} />
       </Modal>
     </>
   )

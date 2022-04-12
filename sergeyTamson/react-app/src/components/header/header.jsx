@@ -1,19 +1,20 @@
-import { AlignHorizontalCenter } from '@mui/icons-material'
-import { Box, Button, useTheme } from '@mui/material'
-import { alignProperty } from '@mui/material/styles/cssUtils'
-import React, { useCallback, useEffect, useState } from 'react'
-import { useRoutes } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Box, Button, useTheme, Link } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import LoginForm from '../forms/login-form/login-form'
 import Modal from '../modal/modal'
 import { authService } from '../services/auth/authService'
 import './styles.scss'
+import { useSelector, useDispatch } from 'react-redux'
+import { userFetch, userLogout } from '../../actions/user'
 
 const Header = ({ toggleThemeMode }) => {
   const [open, setOpen] = useState(false)
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+  const [scroll, setScroll] = useState(false)
 
   const theme = useTheme()
+
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.data)
 
   const handleClick = () => {
     toggleThemeMode((prev) => {
@@ -24,15 +25,30 @@ const Header = ({ toggleThemeMode }) => {
 
   const logoutUser = () => {
     authService.logout()
-    setUser()
+    dispatch(userLogout())
+  }
+
+  const handleScroll = () => {
+    if (window.scrollY < 1) {
+      setScroll(false)
+    } else {
+      setScroll(true)
+    }
   }
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('user')))
-  }, [localStorage.getItem('user')])
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    dispatch(userFetch())
+  }, [])
 
   return (
-    <div className={'header header__' + theme.palette.mode}>
+    <div className={'header header__' + theme.palette.mode + ` ${scroll ? 'scroll' : ''}`}>
+      <Link href="/home">LOGO</Link>
+
       <button className="thema" onClick={handleClick}>
         {theme.palette.mode === 'light' && (
           <svg
@@ -61,24 +77,31 @@ const Header = ({ toggleThemeMode }) => {
         )}
       </button>
 
-      {!user && (
+      <Box>
+        <Link mr={4} href="/home/about" underline="none" color="secondary">
+          О нас
+        </Link>
+
+        <Link href="/admin" underline="none" color="secondary">
+          Админ панель
+        </Link>
+      </Box>
+
+      {!user?.name && (
         <Button color="secondary" type="button" onClick={() => setOpen(true)}>
           Вход
         </Button>
       )}
 
-      {user && (
+      {user?.name && (
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
-            color: theme.palette.mode === 'light' ? '#3a3f58' : '#f9ac67',
           }}
         >
-          <Link to="/profile">
-            <Box mr={4} sx={{ fontSize: '24px', fontWeight: '700' }}>
-              {user.name}
-            </Box>
+          <Link href="admin/profile" color="secondary" underline="none" mr={2} fontSize={32}>
+            {user.name}
           </Link>
 
           <Button color="secondary" type="button" onClick={logoutUser}>

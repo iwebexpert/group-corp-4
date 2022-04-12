@@ -6,7 +6,7 @@ import CreatePageForm from '../components/forms/create-page-form/create-page-for
 import Loading from '../components/loading/loading'
 import PageTable from '../components/page-table/page-table'
 
-const MainPage = () => {
+const PagesPage = () => {
   const page = useSelector((state) => state.page.data)
 
   const user = useSelector((state) => state.user.data)
@@ -36,4 +36,4 @@ const MainPage = () => {
   )
 }
 
-export default MainPage
+export default PagesPage

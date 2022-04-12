@@ -7,10 +7,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { authService } from '../../services/auth/authService'
+import { useDispatch } from 'react-redux'
+import { userFetch } from '../../../actions/user'
 
 const LoginForm = ({ handleSuccessAuth, onClose }) => {
   const [error, setError] = useState({ email: false, password: false })
   const theme = createTheme()
+
+  const dispatch = useDispatch()
 
   const handleSubmit = (event) => {
     setError({ email: false, password: false })
@@ -35,6 +39,7 @@ const LoginForm = ({ handleSuccessAuth, onClose }) => {
             alert(res.message)
           }
         })
+        .then(() => dispatch(userFetch()))
         .then(() => onClose(false))
     }
   }

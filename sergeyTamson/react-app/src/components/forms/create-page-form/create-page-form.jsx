@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import './styles.scss'
 import { Button, TextField, useTheme } from '@mui/material'
 
-const CreatePageForm = ({ onAddPage, item, textButton, onClose }) => {
+const CreatePageForm = ({ item, textButton, onClose }) => {
   const [pageUrl, setPageUrl] = useState(item?.url)
   const [pageTitle, setPageTitle] = useState(item?.title)
   const [pageContent, setPageContent] = useState(item?.content)
@@ -39,8 +39,6 @@ const CreatePageForm = ({ onAddPage, item, textButton, onClose }) => {
       content: pageContent,
       userId: pageUserId,
     }
-
-    onAddPage(data)
   }
 
   const handleClose = () => {
