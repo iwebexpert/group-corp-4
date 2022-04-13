@@ -1,73 +1,51 @@
-import { authService } from '../../services/auth/authService'
+import { urls, request, response } from '../../helpers/requestHelper'
 
-export const PAGE_LOADING = 'PAGE_LOADING'
-export const PAGE_SUCCESS = 'PAGE_SUCCESS'
-export const PAGE_ERROR = 'PAGE_ERROR'
-export const PAGE_ADD = 'PAGE_ADD'
-export const PAGE_ADD_SUCCESS = 'PAGE_SUCCESS'
-export const PAGE_ADD_ERROR = 'PAGE_ERROR'
-export const PAGE_DELETE = 'PAGE_DELETE'
+export const COMMENTS_LOADING = 'COMMENTS_LOADING'
+export const COMMENTS_SUCCESS = 'COMMENTS_SUCCESS'
+export const COMMENTS_ERROR = 'COMMENTS_ERROR'
+export const COMMENTS_ADD_SUCCESS = 'COMMENTS_ADD_SUCCESS'
+export const COMMENTS_ADD_ERROR = 'COMMENTS_ADD_ERROR'
+export const COMMENTS_EDIT_SUCCESS = 'COMMENTS_EDIT_SUCCESS'
+export const COMMENTS_EDIT_ERROR = 'COMMENTS_EDIT_ERROR'
+export const COMMENTS_DELETE_SUCCESS = 'COMMENTS_DELETE_SUCCESS'
+export const COMMENTS_DELETE_ERROR = 'COMMENTS_DELETE_ERROR'
 
-export const PAGE_EDIT = 'PAGE_EDIT'
-
-export const pageLoading = () => ({
-  type: PAGE_LOADING,
+export const commentLoading = () => ({
+  type: COMMENTS_LOADING,
 })
 
-export const getAllPage = () => {
+export const getAllComments = () => {
   return (dispatch) => {
-    dispatch(pageLoading())
-    request('/api/pages', 'GET')
-      .then((data) => dispatch(pageResponse(PAGE_SUCCESS, data)))
-      .catch((error) => dispatch(pageResponse(PAGE_ERROR, error)))
-  }
-}
-
-export const addPage = (data) => {
-  console.log('data: ', data)
-  return (dispatch) => {
-    dispatch(pageLoading())
-    request('/api/pages', 'POST', data)
+    dispatch(commentLoading())
+    request(urls.comments(), 'GET')
       .then((data) => {
         console.log('data: ', data)
-        return dispatch(pageResponse(PAGE_ADD_SUCCESS, data))
+        return dispatch(response(COMMENTS_SUCCESS, data))
       })
-      .catch((error) => dispatch(pageResponse(PAGE_ADD_ERROR, error)))
+      .catch((error) => dispatch(response(COMMENTS_ERROR, error)))
   }
 }
-// export const addPage = (data) => ({
-//   type: PAGE_ADD,
-//   payload: data,
-// })
-export const pageEdit = (data) => ({
-  type: PAGE_EDIT,
-  payload: data,
-  pageId: data.id,
-})
-
-export const pageDelete = (id) => ({
-  type: PAGE_DELETE,
-  payload: id,
-})
-export const pageResponse = (type, response) => ({
-  type: type,
-  payload: response,
-})
-
-const request = (api, method, body = null) =>
-  fetch(api, getOptions(method, body)).then((response) => response.json())
-
-const getOptions = (method, body) => {
-  let headers = {
-    'Content-Type': 'application/json',
-    Authentication: `Bearer ${authService.token}`,
+export const addComment = (data) => {
+  return (dispatch) => {
+    dispatch(commentLoading())
+    request(urls.comments(), 'POST', data)
+      .then((data) => dispatch(response(COMMENTS_ADD_SUCCESS, data)))
+      .catch((error) => dispatch(response(COMMENTS_ADD_ERROR, error)))
   }
-  if (body) {
-    console.log('JSON.stringify(body): ', JSON.stringify(body))
-    headers.body = JSON.stringify(body)
+}
+export const editComment = (data) => {
+  return (dispatch) => {
+    dispatch(commentLoading())
+    request(urls.getComment(data.id), 'PUT', data)
+      .then((data) => dispatch(response(COMMENTS_EDIT_SUCCESS, data)))
+      .catch((error) => dispatch(response(COMMENTS_EDIT_ERROR, error)))
   }
-  return {
-    method: method,
-    headers: headers,
+}
+export const deleteComment = (id) => {
+  return (dispatch) => {
+    dispatch(commentLoading())
+    request(urls.getComment(id), 'DELETE')
+      .then(() => dispatch(response(COMMENTS_DELETE_SUCCESS, id)))
+      .catch((error) => dispatch(response(COMMENTS_DELETE_ERROR, error)))
   }
 }

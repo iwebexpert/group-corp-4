@@ -1,56 +1,41 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Typography, Divider } from '@mui/material'
 
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
+import Loading from '../components/Loading/Loading'
+import Dashboard from '../components/Dashboard'
+import TableBlock from '../components/TableBlock'
+import { authService } from '../services/auth/authService'
+import { getAllStats } from '../store/actions/statsActions'
+import { isDev } from '../helpers/devProdMode'
 
-export default function Stats({ pages }) {
+export default function Stats() {
+  const isAdmin = authService.isAdmin
+  const dispatch = useDispatch()
+
+  const stats = useSelector((state) => state.stats.data)
+  const loading = useSelector((state) => state.stats.loading)
+
+  useEffect(() => {
+    if (isDev()) {
+      setTimeout(() => dispatch(getAllStats()), 1000)
+    } else {
+      dispatch(getAllStats())
+    }
+  }, [])
   return (
-    <TableContainer sx={{ maxHeight: 440 }}>
-      <Table stickyHeader aria-label="sticky table" size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>№</TableCell>
-            <TableCell>Url</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Content</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {pages.map((tabelItem, index) => (
-            <TableRow key={index}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{tabelItem.url}</TableCell>
-              <TableCell>{tabelItem.title}</TableCell>
-              <TableCell>{tabelItem.content}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Dashboard>
+          <Typography component="h3" variant="h5">
+            List of created stats
+          </Typography>
+          <Divider sx={{ mt: 1, mb: 2 }} />
+          <TableBlock titles={['Date', 'Action']} showFields={['date', 'action']} fields={stats} />
+        </Dashboard>
+      )}
+    </>
   )
-}
-Stats.defaultProps = {
-  pages: [],
-  showButton: false,
-  onEditPage: () => {},
-  onDeletePage: () => {},
-}
-
-Stats.propTypes = {
-  pages: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired || PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      content: PropTypes.string,
-    }),
-  ),
-  showButton: PropTypes.bool.isRequired,
-  onEditPage: PropTypes.func.isRequired,
-  onDeletePage: PropTypes.func.isRequired,
 }

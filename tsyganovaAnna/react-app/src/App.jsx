@@ -22,8 +22,12 @@ export default function App() {
         sx={{
           backgroundColor: (theme) =>
             theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
-          height: '100vh',
+          height: 'calc(100vh - 65px)',
           overflow: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Container

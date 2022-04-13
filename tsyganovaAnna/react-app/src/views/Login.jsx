@@ -19,6 +19,7 @@ export default function Login({ handleSuccessAuth }) {
     if (password === '') setEmptyPassword(true)
     if (login !== '' && password !== '') {
       authService.login(login, password, handleSuccessAuth)
+
       setEmptyLogin(false)
       setEmptyPassword(false)
       setLogin('')

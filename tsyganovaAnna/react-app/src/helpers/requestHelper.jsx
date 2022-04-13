@@ -1,22 +1,24 @@
 import { authService } from '../services/auth/authService'
 import { isDev } from './devProdMode'
 
-// const URL_DOMAIN = 'http://127.0.0.1:3001'
 const URL_PREFIX = '/api'
 
 export const urls = {
   login: (username, password) => `${URL_PREFIX}/users?email=${username}&password=${password}`,
   pages: () => `${URL_PREFIX}/pages`,
   getPage: (id) => `${URL_PREFIX}/pages/${id}`,
-  stats: () => `${URL_PREFIX}/stats`,
-  getStats: (id) => `${URL_PREFIX}/pages/${id}`,
+  comments: () => `${URL_PREFIX}/comments`,
+  getComments: (id) => `${URL_PREFIX}/comments/${id}`,
+  stats: () => `${URL_PREFIX}/logs`,
+  getStats: (id) => `${URL_PREFIX}/logs/${id}`,
 }
 
 export const request = (api, method = 'GET', body = null, isAddToken = true) => {
   return fetch(api, getOptions(method, body, isAddToken)).then((response) => {
     if (!response.ok) {
       if (response.status !== 401) {
-        authService.logout()
+        // authService.logout()
+        console.log('response.statusText: ', response.statusText)
       }
       return Promise.reject(response.statusText)
     }
@@ -37,7 +39,16 @@ export const getOptions = (method, body = null, isAddToken = true) => {
   return request
 }
 
-export const pageResponse = (type, response) => ({
+export const response = (type, response) => ({
   type: type,
   payload: response,
 })
+
+export const optionsDate = {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric',
+}

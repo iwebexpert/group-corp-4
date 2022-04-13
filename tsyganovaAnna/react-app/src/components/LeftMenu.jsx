@@ -1,5 +1,13 @@
 import React, { useEffect } from 'react'
-import { Box, SwipeableDrawer, List, ListItem, ListItemText } from '@mui/material'
+import {
+  Box,
+  SwipeableDrawer,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material'
+import { Dashboard, QueryStats, Comment, Group } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 
 export default function LeftMunu({ isOpenLeftMenu, HandleClick }) {
@@ -23,10 +31,11 @@ export default function LeftMunu({ isOpenLeftMenu, HandleClick }) {
   }
 
   const navLink = [
-    { link: '/pages', name: 'Pages' },
-    { link: '/stats', name: 'Stats' },
+    { link: '/pages', name: 'Pages', icon: <Dashboard /> },
+    { link: '/stats', name: 'Stats', icon: <QueryStats /> },
+    { link: '/comments', name: 'Comments', icon: <Comment /> },
+    { link: '/users', name: 'Users', icon: <Group /> },
   ]
-
   const list = (anchor) => (
     <Box
       sx={{ width: 180 }}
@@ -36,11 +45,10 @@ export default function LeftMunu({ isOpenLeftMenu, HandleClick }) {
     >
       <List>
         {navLink.map((text, index) => (
-          <Link to={text.link} key={index}>
-            <ListItem button>
-              <ListItemText>{text.name}</ListItemText>
-            </ListItem>
-          </Link>
+          <ListItemButton component={Link} to={text.link} key={index}>
+            <ListItemIcon>{text.icon}</ListItemIcon>
+            <ListItemText primary={text.name} />
+          </ListItemButton>
         ))}
       </List>
     </Box>

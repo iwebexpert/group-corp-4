@@ -7,8 +7,8 @@ import Input from '../Fields/Input.jsx'
 import { authService } from '../../services/auth/authService'
 
 export default function CommentForm({ isOpen, close, comment, onChangeData }) {
-  const [content, setPaageContent] = useState(comment ? comment.content : '')
-  const handleCommentContentChange = (event) => setPaageConcommenttent(event.target.value)
+  const [content, setComment] = useState(comment ? comment.content : '')
+  const handleCommentChange = (event) => setComment(event.target.value)
 
   const currentUser = authService.currentUser
   const commentData = {
@@ -18,7 +18,7 @@ export default function CommentForm({ isOpen, close, comment, onChangeData }) {
   }
 
   const handleSubmit = () => {
-    setPaageContent('')
+    setComment('')
     onChangeData(commentData)
   }
   const style = {
@@ -37,13 +37,7 @@ export default function CommentForm({ isOpen, close, comment, onChangeData }) {
         <Typography variant="h6" component="h6" sx={{ color: 'gray' }}>
           Create comment
         </Typography>
-        <Input
-          label="Content"
-          value={content}
-          rows={4}
-          multiline
-          onChange={handleCommentContentChange}
-        />
+        <Input label="Content" value={content} rows={4} multiline onChange={handleCommentChange} />
         <Button onClick={handleSubmit} variant="outlined" sx={{ mt: 2, mr: 2 }}>
           Save
         </Button>

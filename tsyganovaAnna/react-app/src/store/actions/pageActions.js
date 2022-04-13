@@ -1,4 +1,4 @@
-import { urls, request, pageResponse } from '../../helpers/requestHelper'
+import { urls, request, response } from '../../helpers/requestHelper'
 
 export const PAGE_LOADING = 'PAGE_LOADING'
 export const PAGE_SUCCESS = 'PAGE_SUCCESS'
@@ -18,31 +18,31 @@ export const getAllPage = () => {
   return (dispatch) => {
     dispatch(pageLoading())
     request(urls.pages(), 'GET')
-      .then((data) => dispatch(pageResponse(PAGE_SUCCESS, data)))
-      .catch((error) => dispatch(pageResponse(PAGE_ERROR, error)))
+      .then((data) => dispatch(response(PAGE_SUCCESS, data)))
+      .catch((error) => dispatch(response(PAGE_ERROR, error)))
   }
 }
 export const addPage = (data) => {
   return (dispatch) => {
     dispatch(pageLoading())
     request(urls.pages(), 'POST', data)
-      .then((data) => dispatch(pageResponse(PAGE_ADD_SUCCESS, data)))
-      .catch((error) => dispatch(pageResponse(PAGE_ADD_ERROR, error)))
+      .then((data) => dispatch(response(PAGE_ADD_SUCCESS, data)))
+      .catch((error) => dispatch(response(PAGE_ADD_ERROR, error)))
   }
 }
 export const editPage = (data) => {
   return (dispatch) => {
     dispatch(pageLoading())
     request(urls.getPage(data.id), 'PUT', data)
-      .then((data) => dispatch(pageResponse(PAGE_EDIT_SUCCESS, data)))
-      .catch((error) => dispatch(pageResponse(PAGE_EDIT_ERROR, error)))
+      .then((data) => dispatch(response(PAGE_EDIT_SUCCESS, data)))
+      .catch((error) => dispatch(response(PAGE_EDIT_ERROR, error)))
   }
 }
 export const deletePage = (id) => {
   return (dispatch) => {
     dispatch(pageLoading())
     request(urls.getPage(id), 'DELETE')
-      .then(() => dispatch(pageResponse(PAGE_DELETE_SUCCESS, id)))
-      .catch((error) => dispatch(pageResponse(PAGE_DELETE_ERROR, error)))
+      .then(() => dispatch(response(PAGE_DELETE_SUCCESS, id)))
+      .catch((error) => dispatch(response(PAGE_DELETE_ERROR, error)))
   }
 }

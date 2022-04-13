@@ -67,6 +67,13 @@
       "content": "rtyrty",
       "userId": 1,
       "id": 6
+    },
+    {
+      "url": "ывываываываываыва",
+      "title": "rtryrtyry",
+      "content": "fdgdfgdfgee5dr6t7gyhujipok",
+      "userId": 1,
+      "id": 7
     }
   ],
   "comments": [
@@ -108,68 +115,76 @@
   ],
   "logs": [
     {
-      "userId": 2,
-      "actions": {
-        "date": "02.04.2022, 16:20:06",
-        "action": "Получение страниц"
-      },
-      "id": 1
-    },
-    {
-      "userId": 3,
-      "actions": {
-        "date": "02.04.2022, 16:20:29",
-        "action": "Получение страниц"
-      },
-      "id": 2
+      "userId": 1,
+      "date": "13.04.2022, 18:18:53",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 15
     },
     {
       "userId": 1,
-      "actions": {
-        "date": "02.04.2022, 16:20:44",
-        "action": "Получение страниц"
-      },
-      "id": 3
+      "date": "13.04.2022, 18:18:53",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 16
     },
     {
       "userId": 1,
-      "actions": {
-        "date": "02.04.2022, 16:20:53",
-        "action": "Добавление страниц"
-      },
-      "id": 4
+      "date": "13.04.2022, 18:18:53",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 17
     },
     {
       "userId": 1,
-      "actions": {
-        "date": "02.04.2022, 16:21:02",
-        "action": "Редактирование страницы"
-      },
-      "id": 5
+      "date": "13.04.2022, 18:18:53",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 18
     },
     {
       "userId": 1,
-      "actions": {
-        "date": "02.04.2022, 16:21:03",
-        "action": "Получение ID страницы"
-      },
-      "id": 6
+      "date": "13.04.2022, 18:18:53",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 19
     },
     {
       "userId": 1,
-      "actions": {
-        "date": "02.04.2022, 16:22:51",
-        "action": "Получение статистики"
-      },
-      "id": 7
+      "date": "13.04.2022, 18:18:53",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 20
     },
     {
       "userId": 1,
-      "actions": {
-        "date": "02.04.2022, 16:22:51",
-        "action": "Получение статистики"
-      },
-      "id": 8
+      "date": "13.04.2022, 18:18:53",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 21
+    },
+    {
+      "userId": 1,
+      "date": "13.04.2022, 18:18:53",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 22
+    },
+    {
+      "userId": 1,
+      "date": "13.04.2022, 18:18:53",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 23
+    },
+    {
+      "userId": 1,
+      "date": "13.04.2022, 18:18:53",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 24
+    },
+    {
+      "userId": 1,
+      "date": "13.04.2022, 18:18:53",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 25
+    },
+    {
+      "userId": 1,
+      "date": "13.04.2022, 18:18:54",
+      "action": "STATS_ADD_SUCCESS",
+      "id": 26
     }
   ]
 }

@@ -15,7 +15,7 @@ export default function Header({ HandleClick }) {
   const { colorMode } = React.useContext(ThemeModeContext)
   const userExist = authService.currentUserExist
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ 'background-color': '#08bd93' }}>
       <Toolbar>
         <Tooltip title="Menu">
           <IconButton
