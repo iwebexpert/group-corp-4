@@ -1,13 +1,14 @@
 import { Grid, Typography } from '@mui/material'
 import React, { Fragment, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { onePageFetch, PagePayload } from '../actions/page'
+import { onePageFetch } from '../actions/page'
 import { Helmet } from 'react-helmet'
 import { AppState } from 'reducers/index'
+import { PagePayload } from '../actions/page'
 
 export default function PagesAboutContainers() {
   const dispatch = useDispatch()
-  const page = useSelector((state:AppState) => state.page.oneData)
+  const page:PagePayload []= useSelector((state:AppState) => state.page.oneData)
 
   useEffect(() => {
     setTimeout(() => {
@@ -21,7 +22,7 @@ export default function PagesAboutContainers() {
         <title>Главная</title>
         <meta name="description" content="Главная" />
       </Helmet>
-      {page.map((obj: PagePayload, index: string) => (
+      {page && page.map((obj: PagePayload, index: number) => (
         <Fragment key={index}>
             <Typography
               component="h1"

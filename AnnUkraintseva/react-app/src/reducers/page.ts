@@ -6,8 +6,8 @@ import {
 
 export type PageReduserState={
   loading: boolean,
-  data: any,
-  oneData:any,
+  data: PagePayload[],
+  oneData:PagePayload[] | [],
   error: Error | null,
   currentID: string | null,
   url: string | null,
@@ -48,7 +48,8 @@ export const pageReducer: Reducer<PageReduserState, PageActions > = (state = ini
     case PageActionTypes.PAGE_DELETE_ERROR:
       return {
         ...state,
-        data: action.payload,
+        loading: false,
+        error: action.payload,
       }
 
     case PageActionTypes.PAGE_ADD_SUCCESS:
@@ -59,6 +60,7 @@ export const pageReducer: Reducer<PageReduserState, PageActions > = (state = ini
     case PageActionTypes.PAGE_ADD_ERROR:
       return {
         ...state,
+        loading: false,
         error: action.payload,
       }
     case PageActionTypes.PAGE_FORM_EDIT_START:

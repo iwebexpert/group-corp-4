@@ -12,11 +12,12 @@ import Input from '@mui/material/Input'
 import { v4 as uuidv4 } from 'uuid'
 import { authServices } from '../services/auth/authServices'
 import { commentAddFetch, CommentPayload } from '../actions/comments'
+import { PagePayload } from 'actions/page'
 
 
 
 type CommentFormProps={
-  onePage: CommentPayload
+  onePage: PagePayload
 }
 export default function CommentForm({onePage}:CommentFormProps) {
 

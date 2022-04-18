@@ -36,7 +36,7 @@ export type PagePendingAction={
 
 export type PageSuccessAction={
   type: PageActionTypes.PAGE_SUCCESS
-  payload: PageType[]
+  payload: PagePayload[]
 }
 export type PageErrorAction={
   type: PageActionTypes.PAGE_ERROR
@@ -51,7 +51,7 @@ export type PageDeleteErrorAction={
 }
 export type PageAddSuccessAction={
   type: PageActionTypes.PAGE_ADD_SUCCESS
-  payload: PageType
+  payload: PagePayload
 }
 export type PageAddErrorAction={
   type: PageActionTypes.PAGE_ADD_ERROR
@@ -63,7 +63,7 @@ export type PageFormEditStartAction={
 }
 export type PageFormEditSaveAction={
   type: PageActionTypes.PAGE_FORM_EDIT_SAVE
-  payload: PageType
+  payload: PagePayload
 }
 export type PageFormEditResetAction={
   type: PageActionTypes.PAGE_FORM_EDIT_RESET
@@ -73,7 +73,7 @@ export type PageOnePagePandingAction={
 }
 export type PageOnePageSuccessAction={
   type: PageActionTypes.ONE_PAGE_SUCCESS
-  payload: PageType
+  payload: PagePayload[]
 }
 export type PageOnePageErrorAction={
   type: PageActionTypes.ONE_PAGE_ERROR

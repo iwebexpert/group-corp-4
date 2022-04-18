@@ -41,7 +41,7 @@ import CommentUser from './CommentUser'
 
 import { authServices } from '../services/auth/authServices'
 import { AppState } from 'reducers/index'
-
+import { PagePayload } from '../actions/page'
 
 const TypographyCustom = styled(Typography)`
   display: flex;
@@ -72,7 +72,7 @@ export default function LayoutPage() {
     dispatch(onePageFetch(url))
   }, [])
 
-  const onePage = page[0]
+  const onePage:PagePayload = page[0]
 
   const theme = useTheme()
 

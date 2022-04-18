@@ -89,6 +89,14 @@
       "content": "sadadsad",
       "userId": "1",
       "userName": "Anna"
+    },
+    {
+      "id": "063fc402-1c92-4003-862f-657c4af80dde",
+      "url": ",cnbfzd",
+      "title": ",xjzjnbjDbdj",
+      "content": "sg",
+      "userId": 1,
+      "userName": "Anna"
     }
   ],
   "comments": [
@@ -5337,6 +5345,110 @@
     },
     {
       "id": "fde20e72-6fe0-4936-8bc9-8660d68b5500",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Просмотр комментариев",
+      "access": true
+    },
+    {
+      "id": "eb68d638-8a9b-4dd9-8b61-5d2ce7639b62",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Просмотр страницы",
+      "access": true
+    },
+    {
+      "id": "66917c11-c84a-4b7a-861c-025d3f0a10f9",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Просмотр страницы",
+      "access": true
+    },
+    {
+      "id": "fe1fc5f4-bd7e-4266-b17f-0ee8aea5e945",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
+    },
+    {
+      "id": "9bfa3e8c-a7ad-4c5a-bcd4-fccd3fbd590c",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Работа со страницами",
+      "access": true
+    },
+    {
+      "id": "70e0f6a2-11b1-4551-b82a-4aeddc7031ad",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Добавление страницы",
+      "access": true
+    },
+    {
+      "id": "7f12d238-ce2b-4d78-b88a-6e205f2afabe",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Редактирование страниц",
+      "access": true
+    },
+    {
+      "id": "2b2a746e-97b1-429f-8beb-5159c59866b9",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Редактирование страниц",
+      "access": true
+    },
+    {
+      "id": "2dea48f7-f7a2-4037-96b4-a5685f20badf",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Просмотр страницы",
+      "access": true
+    },
+    {
+      "id": "1bb2eef0-d05b-4a48-8194-59e30696da13",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Просмотр страницы",
+      "access": true
+    },
+    {
+      "id": "20bb0b34-dd3b-481c-be07-8f6da7f008a6",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Просмотр страницы",
+      "access": true
+    },
+    {
+      "id": "c6a397e2-c091-4216-9a24-2bb6b0c84eae",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Просмотр страницы",
+      "access": true
+    },
+    {
+      "id": "fafbcac1-e32d-43fd-aae9-9a9b2ea13c68",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Просмотр комментариев",
+      "access": true
+    },
+    {
+      "id": "ec490563-eac6-4d8b-ae8a-712b43b9d5e5",
       "name": "Anna",
       "email": "anna1234@domain.local",
       "role": "admin",
