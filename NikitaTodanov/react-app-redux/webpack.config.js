@@ -4,21 +4,24 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Dotenv = require("dotenv-webpack");
 
 module.exports = {
-  entry: path.join(__dirname, "src", "index.js"),
+  entry: path.join(__dirname, "src", "index.tsx"),
   output: {
     path: path.join(__dirname, "dist"),
     filename: "webpack.bundle.js",
   },
   
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
-      components: path.join(__dirname, 'src', 'components'),
-      config: path.join(__dirname, 'src', 'config'),
-      containers: path.join(__dirname, 'src', 'containers'),
       actions: path.join(__dirname, 'src', 'actions'),
+      components: path.join(__dirname, 'src', 'components'),
+      containers: path.join(__dirname, 'src', 'containers'),
+      contexts: path.join(__dirname, 'src', 'contexts'),
       reducers: path.join(__dirname, 'src', 'reducers'),
+      middlewares: path.join(__dirname, 'src', 'middlewares:'),
       services: path.join(__dirname, 'src', 'services'),
+      pages: path.join(__dirname, 'src', 'pages'),
+      helpers: path.join(__dirname, 'src', 'helpers'),
     },
   },
 
@@ -30,10 +33,11 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ["@babel/preset-env", "@babel/preset-react", "@babel/preset-typescript"],
           },
         },
       },
+      { test: /\.tsx?$/, loader: "ts-loader" },
       {
         test: /\.s?css$/i,
         use: [
@@ -71,14 +75,15 @@ module.exports = {
 
     new Dotenv(),
   ],
-
-  externals: {
-    Config: JSON.stringify(
-      process.env.npm_lifecycle_event === "dev"
-        ? require("./src/config/config.development.env.json")
-        : require("./src/config/config.production.env.json")
-    ),
-  },
-};
+}
+//   externals: {
+//     Config: JSON.stringify(
+//       process.env.npm_lifecycle_event === "dev"
+//         ? require("./src/config/config.development.env.json")
+//         : require("./src/config/config.production.env.json")
+//     ),
+//   },
+// };
 
 // console.log(process.env)
+// npm i @types/react-dom@17 @types/react-helmet @types/redux @types/redux-logger @types/react-redux  @types/redux-thunk @types/uuid 
