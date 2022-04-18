@@ -1,5 +1,9 @@
 .loading {
-  padding: 75px 0 0 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &__item {
     display: flex;
     max-width: 250px;
