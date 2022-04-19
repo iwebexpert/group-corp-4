@@ -18,9 +18,11 @@ import AuthRequireRoleAdmin from '../services/auth/AuthRequireRoleAdmin'
 import UsersPage from '../../pages/Users'
 import StatsPage from '../../pages/Stats'
 import LogoutPage from '../../pages/Logout'
-import { pageFetch } from '../../actions/page'
+import { IdPageFetch, pageFetch } from '../../actions/page'
 import { AppState } from '../../reducers'
 import { darkTheme, lightTheme } from './styles'
+import { useLocation } from 'react-router'
+import { isDev } from '../../helpers/modes'
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('theme') || 'light')
@@ -28,14 +30,18 @@ const App = () => {
   const dispatch = useDispatch()
   const user = useSelector((state: AppState) => state.user.data)
 
+  let location = useLocation().pathname.split('/').slice(-1)[0]
+
+  console.log(isDev())
+
   useEffect(() => {
     window.setTimeout(
       () => {
-        dispatch(pageFetch())
+        dispatch(IdPageFetch(location))
       },
-      process.env.NODE_ENV === 'development' ? 1000 : 0,
+      isDev() ? 1000 : 0,
     )
-  }, [])
+  }, [location])
 
   return (
     <ThemeProvider theme={isDarkMode === 'dark' ? darkTheme : lightTheme}>

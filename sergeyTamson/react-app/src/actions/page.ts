@@ -2,6 +2,9 @@ import { authService } from '../components/services/auth/authService'
 import { ActionCreator, Dispatch } from 'redux'
 
 export enum PageActionTypes {
+  PAGE_ALL_PENDING = 'PAGE_ALL_PENDING',
+  PAGE_ALL_SUCCESS = 'PAGE_ALL_SUCCESS',
+  PAGE_ALL_ERROR = 'PAGE_ALL_ERROR',
   PAGE_PENDING = 'PAGE_PENDING',
   PAGE_SUCCESS = 'PAGE_SUCCESS',
   PAGE_ERROR = 'PAGE_ERROR',
@@ -12,6 +15,18 @@ export enum PageActionTypes {
   PAGE_EDIT_SAVE = 'PAGE_EDIT_SAVE',
   PAGE_EDIT_RESET = 'PAGE_EDIT_RESET',
   PAGE_EDIT_ERROR = 'PAGE_EDIT_ERROR',
+}
+
+export type PageAllPendingAction = {
+  type: PageActionTypes.PAGE_ALL_PENDING
+}
+export type PageAllSuccessAction = {
+  type: PageActionTypes.PAGE_ALL_SUCCESS
+  payload: string
+}
+export type PageAllErrorAction = {
+  type: PageActionTypes.PAGE_ALL_ERROR
+  payload: Error
 }
 
 export type PagePendingAction = {
@@ -54,6 +69,9 @@ export type PageEditErrorAction = {
 }
 
 export type PageActions =
+  | PageAllPendingAction
+  | PageAllSuccessAction
+  | PageAllErrorAction
   | PagePendingAction
   | PageSuccessAction
   | PageErrorAction
@@ -75,6 +93,20 @@ export type PagePayload = {
 }
 
 // Actions
+export const pageAllPending: ActionCreator<PageAllPendingAction> = () => ({
+  type: PageActionTypes.PAGE_ALL_PENDING,
+})
+
+export const pageAllSuccess: ActionCreator<PageAllSuccessAction> = (data) => ({
+  type: PageActionTypes.PAGE_ALL_SUCCESS,
+  payload: data,
+})
+
+export const pageAllError: ActionCreator<PageAllErrorAction> = (error) => ({
+  type: PageActionTypes.PAGE_ALL_ERROR,
+  payload: error,
+})
+
 export const pagePending: ActionCreator<PagePendingAction> = () => ({
   type: PageActionTypes.PAGE_PENDING,
 })
@@ -119,7 +151,7 @@ export const editPageError: ActionCreator<PageEditErrorAction> = (error) => ({
 
 export const pageFetch: ActionCreator<any> = () => {
   return (dispatch: Dispatch) => {
-    dispatch(pagePending())
+    dispatch(pageAllPending())
     const options = {
       method: 'GET',
     }
@@ -140,10 +172,10 @@ export const pageFetch: ActionCreator<any> = () => {
         if (res.error) {
           throw res.error
         }
-        return dispatch(pageSuccess(res))
+        return dispatch(pageAllSuccess(res))
       })
       .catch((error) => {
-        dispatch(pageError(error))
+        dispatch(pageAllError(error))
       })
   }
 }
@@ -226,5 +258,24 @@ export const editPageFetch: ActionCreator<any> = (data) => {
         }
       })
       .catch((error) => dispatch(editPageError(error)))
+  }
+}
+
+export const IdPageFetch: ActionCreator<any> = (url) => {
+  return (dispatch: Dispatch) => {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'application/json',
+      },
+    }
+    fetch(`http://localhost:9000/api/pages?url=${url}`, options)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.error) throw res.error
+        else dispatch(pageSuccess(res))
+      })
+      .catch((error) => dispatch(pageError(error)))
   }
 }

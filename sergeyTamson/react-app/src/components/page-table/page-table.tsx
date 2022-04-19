@@ -10,9 +10,9 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { pageDelete } from '../../actions/page'
+import { pageDelete, pageFetch } from '../../actions/page'
 import { AppState } from '../../reducers/index'
 import EditPageForm from '../forms/edit-page-form/edit-page-form'
 
@@ -22,7 +22,9 @@ const PageTable = () => {
 
   const dispatch = useDispatch()
   const user = useSelector((state: AppState) => state.user.data)
-  const pages = useSelector((state: AppState) => state.page.data)
+  const pages = useSelector((state: AppState) => state.page.allPages)
+
+  console.log(pages)
 
   const onDeletePage = (id: any) => {
     dispatch(pageDelete(id))
@@ -32,6 +34,10 @@ const PageTable = () => {
     setDataObj(obj)
     setOpen(true)
   }
+
+  useEffect(() => {
+    dispatch(pageFetch())
+  }, [])
 
   return (
     <>

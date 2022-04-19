@@ -4,6 +4,7 @@ import { PageActionTypes, PageActions, PagePayload } from '../actions/page'
 export type PageReducerState = {
   loading: boolean
   data: any
+  allPages: any
   error: any
   currentId: number | null
 }
@@ -11,6 +12,7 @@ export type PageReducerState = {
 const initialState: PageReducerState = {
   loading: false,
   data: [],
+  allPages: [],
   error: null,
   currentId: null,
 }
@@ -20,6 +22,23 @@ export const pageReducer: Reducer<PageReducerState, PageActions> = (
   action,
 ) => {
   switch (action.type) {
+    case PageActionTypes.PAGE_ALL_PENDING:
+      return {
+        ...state,
+        loading: true,
+      }
+    case PageActionTypes.PAGE_ALL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        allPages: action.payload,
+      }
+    case PageActionTypes.PAGE_ALL_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      }
     case PageActionTypes.PAGE_PENDING:
       return {
         ...state,
