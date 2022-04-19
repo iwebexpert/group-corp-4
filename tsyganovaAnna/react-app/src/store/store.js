@@ -9,7 +9,7 @@ import { isDev } from '../helpers/devProdMode'
 
 let middleware = applyMiddleware(thunk, customLoggerMiddleware, checkRoleMiddleware)
 
-if (isDev()) {
-  middleware = applyMiddleware(thunk, logger, customLoggerMiddleware, checkRoleMiddleware)
-}
+// if (isDev()) {
+//   middleware = applyMiddleware(thunk, logger, customLoggerMiddleware, checkRoleMiddleware)
+// }
 export const store = createStore(rootReducer, middleware)

@@ -182,27 +182,31 @@ export default function PageForm({ isOpen, close, page, onChangeData }) {
   ]
 
   const validateCheck = () => {
-    fieldGroup.forEach((field) => validateField(field.label, field.value))
-    handleSubmit()
+    new Promise(() => {
+      fieldGroup.forEach((field) => validateField(field.label, field.value))
+    }).then(() => {
+      console.log('error: ', error)
+      if (Object.keys(error).length === 0) {
+        handleSubmit()
+      }
+    })
   }
 
   const handleSubmit = () => {
-    // fieldGroup.forEach((field) => validateField(field.label, field.value))
-    if (JSON.stringify(error) === '{}') {
-      const pageData = {
-        url: url,
-        title: title,
-        content: content,
-        userId: page.userId ? page.userId : authService.currentUser.id,
-      }
-      if (page) pageData.id = page.id
-
-      setUrl('')
-      setTitle('')
-      setContent('')
-      onChangeData(pageData)
+    const pageData = {
+      url: url,
+      title: title,
+      content: content,
+      userId: page.userId ? page.userId : authService.currentUser.id,
     }
+    if (page) pageData.id = page.id
+
+    setUrl('')
+    setTitle('')
+    setContent('')
+    onChangeData(pageData)
   }
+  
   return (
     <Modal open={isOpen} onClose={close}>
       <Box sx={style}>

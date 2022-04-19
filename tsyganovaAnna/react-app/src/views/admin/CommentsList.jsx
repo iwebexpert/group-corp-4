@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Typography, Divider } from '@mui/material'
+import { Toolbar, Tooltip, Typography, IconButton, Divider } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 
-import Loading from '../components/Loading/Loading'
-import Dashboard from '../components/Dashboard'
-import TableBlock from '../components/TableBlock'
-import CommentForm from '../components/Comments/CommentForm'
-import { authService } from '../services/auth/authService'
+import Loading from '../../components/Loading/Loading'
+import Dashboard from '../../components/Dashboard'
+import TableBlock from '../../components/TableBlock'
+import CommentForm from '../../components/Comments/CommentForm'
+import { authService } from '../../services/auth/authService'
 import {
   getAllComments,
   addComment,
   editComment,
   deleteComment,
-} from '../store/actions/commentActions'
-import { isDev } from '../helpers/devProdMode'
+} from '../../store/actions/commentActions'
+import { isDev } from '../../helpers/devProdMode'
 
-export default function Comments() {
+export default function CommentsList() {
   const [openEditComment, setEditComment] = useState({})
   const [isShowAdd, setIsShowAdd] = useState(false)
   const [isShowEdit, setIsShowEdit] = useState(false)
@@ -63,22 +63,26 @@ export default function Comments() {
         <Loading />
       ) : (
         <Dashboard>
-          <Typography component="h3" variant="h5" sx={{ mb: 3 }}>
-            List of created comment
-          </Typography>
-          <Divider sx={{ mt: 1, mb: 2 }} />
-          {isAdmin && (
-            <Button variant="outlined" startIcon={<AddIcon />} onClick={openAddForm}>
-              Add new comment
-            </Button>
-          )}
+          <Toolbar sx={{ pl: { sm: 2 }, pr: { xs: 1, sm: 1 } }}>
+            <Typography sx={{ flex: '1 1 100%' }} component="h3" variant="h5">
+              Comments
+            </Typography>
+            {isAdmin && (
+              <Tooltip title="Create a new comment">
+                <IconButton onClick={openAddForm} sx={{ color: '#08bd93' }}>
+                  <AddIcon />
+                </IconButton>
+              </Tooltip>
+            )}
+          </Toolbar>
+          <Divider sx={{ mb: 2 }} />
           <TableBlock
             titles={['Content']}
             showFields={['content']}
             fields={comments}
             showButton={isAdmin}
-            onDeleteComment={onDeleteComment}
-            onEditComment={handleCommentToogle}
+            onDelete={onDeleteComment}
+            onEdit={handleCommentToogle}
           />
         </Dashboard>
       )}

@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { createTheme, ThemeProvider, experimental_sx as sx } from '@mui/material/styles'
+import { lightBlue } from '@mui/material/colors'
 
 export const ThemeModeContext = React.createContext({ toogleColorMode: () => {} })
 
@@ -24,6 +25,9 @@ function ThemeContext(props) {
       createTheme({
         palette: {
           mode,
+        },
+        typography: {
+          fontFamily: ['Chilanka', 'cursive'].join(','),
         },
       }),
     [mode],

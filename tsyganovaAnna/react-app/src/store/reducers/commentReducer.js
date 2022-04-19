@@ -8,6 +8,8 @@ import {
   COMMENTS_EDIT_ERROR,
   COMMENTS_DELETE_SUCCESS,
   COMMENTS_DELETE_ERROR,
+  COMMENTS_GET_SUCCESS,
+  COMMENTS_GET_ERROR,
 } from '../actions/commentActions'
 
 const initialState = {
@@ -15,13 +17,18 @@ const initialState = {
   loading: true,
   error: null,
   currentId: null,
+  commentsOnPage: [],
 }
 
 export const commentReducer = (state = initialState, action) => {
   if (
-    [COMMENTS_ERROR, COMMENTS_ADD_ERROR, COMMENTS_EDIT_ERROR, COMMENTS_DELETE_ERROR].includes(
-      action.type,
-    )
+    [
+      COMMENTS_ERROR,
+      COMMENTS_ADD_ERROR,
+      COMMENTS_EDIT_ERROR,
+      COMMENTS_GET_ERROR,
+      COMMENTS_DELETE_ERROR,
+    ].includes(action.type)
   ) {
     return { ...state, error: action.payload, loading: false }
   } else {
@@ -29,7 +36,6 @@ export const commentReducer = (state = initialState, action) => {
       case COMMENTS_LOADING:
         return { ...state, loading: true }
       case COMMENTS_SUCCESS:
-        console.log('action.payload: ', action.payload)
         return { ...state, data: action.payload, loading: false }
       case COMMENTS_ADD_SUCCESS:
         return { ...state, data: [...state.data, action.payload], loading: false }
@@ -45,6 +51,8 @@ export const commentReducer = (state = initialState, action) => {
           data: state.data.filter((item) => item.id !== action.payload),
           loading: false,
         }
+      case COMMENTS_GET_SUCCESS:
+        return { ...state, loading: false, commentsOnPage: action.payload }
       default:
         return state
     }

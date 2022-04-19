@@ -9,6 +9,7 @@ import {
 } from '@mui/material'
 import { Dashboard, QueryStats, Comment, Group } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
+import { authService } from '../services/auth/authService'
 
 export default function LeftMunu({ isOpenLeftMenu, HandleClick }) {
   const anchor = 'left'
@@ -30,12 +31,16 @@ export default function LeftMunu({ isOpenLeftMenu, HandleClick }) {
     setState({ ...state, [anchor]: open })
   }
 
-  const navLink = [
-    { link: '/pages', name: 'Pages', icon: <Dashboard /> },
-    { link: '/stats', name: 'Stats', icon: <QueryStats /> },
-    { link: '/comments', name: 'Comments', icon: <Comment /> },
-    { link: '/users', name: 'Users', icon: <Group /> },
+  const isAdmin = authService.isAdmin
+  const adminLink = [
+    { link: '/admin/pages', name: 'Pages', icon: <Dashboard /> },
+    { link: '/admin/users', name: 'Users', icon: <Group /> },
+    { link: '/admin/comments', name: 'Comments', icon: <Comment /> },
+    { link: '/admin/stats', name: 'Stats', icon: <QueryStats /> },
   ]
+  const userLink = []
+  const navLink = isAdmin ? [...userLink, ...adminLink] : userLink
+
   const list = (anchor) => (
     <Box
       sx={{ width: 180 }}

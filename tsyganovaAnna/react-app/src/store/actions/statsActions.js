@@ -6,9 +6,9 @@ export const STATS_ERROR = 'STATS_ERROR'
 export const STATS_ADD_SUCCESS = 'STATS_ADD_SUCCESS'
 export const STATS_ADD_ERROR = 'STATS_ADD_ERROR'
 
-export const getAllStats = () => {
+export const getLogsOfUser = () => {
   return (dispatch) => {
-    request(urls.stats(), 'GET')
+    request(urls.getLogsOfUser(), 'GET')
       .then((data) => dispatch(response(STATS_SUCCESS, data)))
       .catch((error) => dispatch(response(STATS_ERROR, error)))
   }

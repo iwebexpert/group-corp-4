@@ -9,6 +9,8 @@ export const COMMENTS_EDIT_SUCCESS = 'COMMENTS_EDIT_SUCCESS'
 export const COMMENTS_EDIT_ERROR = 'COMMENTS_EDIT_ERROR'
 export const COMMENTS_DELETE_SUCCESS = 'COMMENTS_DELETE_SUCCESS'
 export const COMMENTS_DELETE_ERROR = 'COMMENTS_DELETE_ERROR'
+export const COMMENTS_GET_SUCCESS = 'COMMENTS_GET_SUCCESS'
+export const COMMENTS_GET_ERROR = 'COMMENTS_GET_ERROR'
 
 export const commentLoading = () => ({
   type: COMMENTS_LOADING,
@@ -47,5 +49,14 @@ export const deleteComment = (id) => {
     request(urls.getComment(id), 'DELETE')
       .then(() => dispatch(response(COMMENTS_DELETE_SUCCESS, id)))
       .catch((error) => dispatch(response(COMMENTS_DELETE_ERROR, error)))
+  }
+}
+
+export const getCommentsForPage = (id) => {
+  return (dispatch) => {
+    dispatch(commentLoading())
+    request(urls.getCommentsForPage(id), 'GET')
+      .then((data) => dispatch(response(COMMENTS_GET_SUCCESS, data)))
+      .catch((error) => dispatch(response(COMMENTS_GET_ERROR, error)))
   }
 }

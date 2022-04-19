@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Divider, Grid, Typography } from '@mui/material'
 
-import { authService } from '../services/auth/authService'
-import Dashboard from '../components/Dashboard'
+import { authService } from '../../services/auth/authService'
+import Dashboard from '../../components/Dashboard'
 
 export default function Profile() {
   const { name, email, password, role } = authService.currentUser

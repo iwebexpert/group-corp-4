@@ -1,16 +1,8 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import {
-  Box,
-  Avatar,
-  Menu,
-  MenuItem,
-  ListItemIcon,
-  Divider,
-  IconButton,
-  Tooltip,
-} from '@mui/material'
+import { Box, Avatar, MenuItem, ListItemIcon, Divider, IconButton, Tooltip } from '@mui/material'
 import Logout from '@mui/icons-material/Logout'
+import MenuBlock from './MenuBlock'
 
 export default function AccountMenu({ user, logout }) {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -35,7 +27,7 @@ export default function AccountMenu({ user, logout }) {
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
+            sx={{ ml: 1 }}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
@@ -44,55 +36,28 @@ export default function AccountMenu({ user, logout }) {
           </IconButton>
         </Tooltip>
       </Box>
-      <Menu
+      <MenuBlock
         anchorEl={anchorEl}
-        id="account-menu"
         open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
-            '& .MuiAvatar-root': {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            '&:before': {
-              content: '""',
-              display: 'block',
-              position: 'absolute',
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        <Link to="/profile">
-          <MenuItem>
-            <Avatar />
-            Profile
-          </MenuItem>
-        </Link>
-        <Divider />
-        <MenuItem onClick={logout}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
-      </Menu>
+        handleClose={handleClose}
+        children={
+          <Box>
+            <Link to="/profile">
+              <MenuItem>
+                <Avatar />
+                Profile
+              </MenuItem>
+            </Link>
+            <Divider />
+            <MenuItem onClick={logout}>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+          </Box>
+        }
+      />
     </React.Fragment>
   )
 }

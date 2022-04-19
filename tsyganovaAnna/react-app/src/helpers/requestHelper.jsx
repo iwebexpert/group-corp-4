@@ -7,8 +7,15 @@ export const urls = {
   login: (username, password) => `${URL_PREFIX}/users?email=${username}&password=${password}`,
   pages: () => `${URL_PREFIX}/pages`,
   getPage: (id) => `${URL_PREFIX}/pages/${id}`,
+  getPageByUrl: (url) => `${URL_PREFIX}/pages?url=${url}`,
+
+  users: () => `${URL_PREFIX}/users`,
+  getUser: (id) => `${URL_PREFIX}/users/${id}`,
+  getLogsOfUser: () => `${URL_PREFIX}/users?_embed=logs`,
+
   comments: () => `${URL_PREFIX}/comments`,
-  getComments: (id) => `${URL_PREFIX}/comments/${id}`,
+  getCommentsForPage: (pageId) => `${URL_PREFIX}/comments?pageId=${pageId}`,
+
   stats: () => `${URL_PREFIX}/logs`,
   getStats: (id) => `${URL_PREFIX}/logs/${id}`,
 }

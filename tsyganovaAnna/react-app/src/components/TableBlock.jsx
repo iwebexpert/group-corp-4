@@ -8,24 +8,31 @@ import {
   TableHead,
   TableRow,
   IconButton,
+  Link,
 } from '@mui/material'
 import { Edit, Delete } from '@mui/icons-material'
 export default function TableBlock({
   titles,
   showFields,
   fields,
+  linkFields,
   showButton,
-  onEditPage,
-  onDeletePage,
+  onEdit,
+  onDelete,
 }) {
   return (
     <TableContainer>
-      <Table stickyHeader sx={{ maxHeight: 440 }} aria-label="sticky table" size="small">
+      <Table
+        stickyHeader
+        sx={{ maxHeight: 440, mb: 2 }}
+        aria-label="sticky table"
+        size={showButton ? 'small' : 'middle'}
+      >
         <TableHead>
           <TableRow>
             <TableCell>№</TableCell>
             {titles.map((title) => (
-              <TableCell>{title}</TableCell>
+              <TableCell key={title}>{title}</TableCell>
             ))}
             {showButton && (
               <>
@@ -40,17 +47,23 @@ export default function TableBlock({
             <TableRow key={index}>
               <TableCell>{index + 1}</TableCell>
               {showFields.map((title) => (
-                <TableCell>{tabelItem[title]}</TableCell>
+                <TableCell key={title}>
+                  {linkFields.includes(title) ? (
+                    <Link to={`/${tabelItem[title]}`}>{tabelItem[title]}</Link>
+                  ) : (
+                    tabelItem[title]
+                  )}
+                </TableCell>
               ))}
               {showButton && (
                 <>
                   <TableCell>
-                    <IconButton onClick={() => onEditPage(tabelItem.id)} aria-label="edit">
+                    <IconButton onClick={() => onEdit(tabelItem.id)} aria-label="edit">
                       <Edit />
                     </IconButton>
                   </TableCell>
                   <TableCell>
-                    <IconButton onClick={() => onDeletePage(tabelItem.id)} aria-label="delete">
+                    <IconButton onClick={() => onDelete(tabelItem.id)} aria-label="delete">
                       <Delete />
                     </IconButton>
                   </TableCell>
@@ -67,16 +80,18 @@ TableBlock.defaultProps = {
   title: [],
   showFields: [],
   fields: [],
+  linkFields: [],
   showButton: false,
-  onEditPage: () => {},
-  onDeletePage: () => {},
+  onEdit: () => {},
+  onDelete: () => {},
 }
 
 TableBlock.propTypes = {
   title: PropTypes.array,
   showFields: PropTypes.array,
   fields: PropTypes.array,
+  linkFields: PropTypes.array,
   showButton: PropTypes.bool.isRequired,
-  onEditPage: PropTypes.func.isRequired,
-  onDeletePage: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 }

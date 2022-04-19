@@ -21,19 +21,12 @@ export default function App() {
         component="main"
         sx={{
           backgroundColor: (theme) =>
-            theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
+            theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[900],
           height: 'calc(100vh - 65px)',
           overflow: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
         }}
       >
-        <Container
-          maxWidth="lg"
-          sx={{ mt: 4, mb: 4, display: 'flex', flexDirection: 'column', gap: '1rem' }}
-        >
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Outlet />
         </Container>
       </Box>

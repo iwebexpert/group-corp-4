@@ -1,6 +1,5 @@
 import { PAGE_ADD } from '../store/actions/pageActions'
 import { authService } from '../services/auth/authService'
-// import { PAGES_GET_SUCCESS, PAGES_GET_PENDING, PAGES_GET_ERROR } from 'constants/constantsPages'
 const textError =
   'У пользователя недостаточно прав для добавления, редактирования или удаления страниц'
 
