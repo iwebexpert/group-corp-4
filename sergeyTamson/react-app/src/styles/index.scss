@@ -12,3 +12,19 @@ html {
 
   --color-text: #ece6cd;
 }
+
+body {
+  &.hidden {
+    overflow: hidden;
+
+    .header {
+      .inner {
+        padding: 0 42px;
+      }
+    }
+  }
+
+  &.noMac {
+    padding: 0 17px 0 0;
+  }
+}

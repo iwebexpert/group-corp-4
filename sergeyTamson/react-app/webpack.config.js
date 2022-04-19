@@ -4,15 +4,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: path.join(__dirname, './dist'),
     publicPath: '/',
-    filename: 'webpack.bundle.js',
+    filename: '[name].js',
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
       components: path.join(__dirname, 'src', 'components'),
       config: path.join(__dirname, 'src', 'config'),
@@ -35,6 +35,7 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
+      { test: /\.tsx?$/, loader: 'ts-loader' },
     ],
   },
 
