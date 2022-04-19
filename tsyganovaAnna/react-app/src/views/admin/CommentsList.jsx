@@ -7,10 +7,17 @@ import Dashboard from '../../components/Dashboard'
 import TableBlock from '../../components/TableBlock'
 import { getAllCommentsWithPageAndUser, deleteComment } from '../../store/actions/commentActions'
 import { authService } from '../../services/auth/authService'
+import { isValidElement } from 'react'
 
 export default function CommentsList() {
   const dispatch = useDispatch()
-  const comments = useSelector((state) => state.comment.data)
+  const comments = useSelector((state) => state.comment.data).map((item) => ({
+    id: item.id,
+    content: item?.content,
+    pageTitle: item?.page?.title,
+    userName: item?.user?.name,
+    ...item,
+  }))
   const loading = useSelector((state) => state.comment.loading)
   const isAdmin = authService.isAdmin
   useEffect(() => dispatch(getAllCommentsWithPageAndUser()), [])
@@ -29,8 +36,8 @@ export default function CommentsList() {
           </Toolbar>
           <Divider sx={{ mb: 2 }} />
           <TableBlock
-            titles={['Content']}
-            showFields={['content']}
+            titles={['Content', 'Page', 'User']}
+            showFields={['content', 'pageTitle', 'userName']}
             fields={comments}
             showDelete={isAdmin}
             onDelete={onDeleteComment}
