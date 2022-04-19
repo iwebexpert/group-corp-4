@@ -16,7 +16,8 @@ export default function TableBlock({
   showFields,
   fields,
   linkFields,
-  showButton,
+  showEdit,
+  showDelete,
   onEdit,
   onDelete,
 }) {
@@ -26,7 +27,7 @@ export default function TableBlock({
         stickyHeader
         sx={{ maxHeight: 440, mb: 2 }}
         aria-label="sticky table"
-        size={showButton ? 'small' : 'middle'}
+        size={showEdit || showDelete ? 'small' : 'middle'}
       >
         <TableHead>
           <TableRow>
@@ -34,12 +35,8 @@ export default function TableBlock({
             {titles.map((title) => (
               <TableCell key={title}>{title}</TableCell>
             ))}
-            {showButton && (
-              <>
-                <TableCell>&nbsp;</TableCell>
-                <TableCell>&nbsp;</TableCell>
-              </>
-            )}
+            {showEdit && <TableCell>&nbsp;</TableCell>}
+            {showDelete && <TableCell>&nbsp;</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -55,19 +52,19 @@ export default function TableBlock({
                   )}
                 </TableCell>
               ))}
-              {showButton && (
-                <>
-                  <TableCell>
-                    <IconButton onClick={() => onEdit(tabelItem.id)} aria-label="edit">
-                      <Edit />
-                    </IconButton>
-                  </TableCell>
-                  <TableCell>
-                    <IconButton onClick={() => onDelete(tabelItem.id)} aria-label="delete">
-                      <Delete />
-                    </IconButton>
-                  </TableCell>
-                </>
+              {showEdit && (
+                <TableCell>
+                  <IconButton onClick={() => onEdit(tabelItem.id)} aria-label="edit">
+                    <Edit />
+                  </IconButton>
+                </TableCell>
+              )}
+              {showDelete && (
+                <TableCell>
+                  <IconButton onClick={() => onDelete(tabelItem.id)} aria-label="delete">
+                    <Delete />
+                  </IconButton>
+                </TableCell>
               )}
             </TableRow>
           ))}
@@ -81,7 +78,8 @@ TableBlock.defaultProps = {
   showFields: [],
   fields: [],
   linkFields: [],
-  showButton: false,
+  showEdit: false,
+  showDelete: false,
   onEdit: () => {},
   onDelete: () => {},
 }
@@ -91,7 +89,8 @@ TableBlock.propTypes = {
   showFields: PropTypes.array,
   fields: PropTypes.array,
   linkFields: PropTypes.array,
-  showButton: PropTypes.bool.isRequired,
+  showEdit: PropTypes.bool,
+  showDelete: PropTypes.bool,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 }

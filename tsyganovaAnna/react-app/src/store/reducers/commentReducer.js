@@ -38,7 +38,11 @@ export const commentReducer = (state = initialState, action) => {
       case COMMENTS_SUCCESS:
         return { ...state, data: action.payload, loading: false }
       case COMMENTS_ADD_SUCCESS:
-        return { ...state, data: [...state.data, action.payload], loading: false }
+        return {
+          ...state,
+          commentsOnPage: [...state.commentsOnPage, action.payload],
+          loading: false,
+        }
       case COMMENTS_EDIT_SUCCESS:
         return {
           ...state,

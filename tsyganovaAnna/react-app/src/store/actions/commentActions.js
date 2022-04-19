@@ -16,10 +16,10 @@ export const commentLoading = () => ({
   type: COMMENTS_LOADING,
 })
 
-export const getAllComments = () => {
+export const getAllCommentsWithPageAndUser = () => {
   return (dispatch) => {
     dispatch(commentLoading())
-    request(urls.comments(), 'GET')
+    request(urls.commentsWithPageAndUser(), 'GET')
       .then((data) => {
         console.log('data: ', data)
         return dispatch(response(COMMENTS_SUCCESS, data))

@@ -14,6 +14,8 @@ export const urls = {
   getLogsOfUser: () => `${URL_PREFIX}/users?_embed=logs`,
 
   comments: () => `${URL_PREFIX}/comments`,
+  commentsWithPageAndUser: () => `${URL_PREFIX}/comments?_expand=user&_expand=page`,
+  getComment: (id) => `${URL_PREFIX}/comments/${id}`,
   getCommentsForPage: (pageId) => `${URL_PREFIX}/comments?pageId=${pageId}&_expand=user`,
 
   stats: () => `${URL_PREFIX}/logs`,

@@ -79,7 +79,8 @@ export default function PagesList() {
             showFields={['url', 'title', 'content']}
             linkFields={['url']}
             fields={pages}
-            showButton={isAdmin}
+            showEdit={isAdmin}
+            showDeleten={isAdmin}
             onDelete={onDeletePage}
             onEdit={handlePageToogle}
           />

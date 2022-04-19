@@ -15,12 +15,12 @@ import {
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
 import Loading from '../components/Loading/Loading'
-import AvatarIcon from '../components/AvatarIcon'
+import CommentForm from '../components/Comments/CommentForm'
 import CommentBlock from '../components/Comments/CommentBlock'
 
 import forest from '../assets/forest.jpg'
 import { getPageByUrl } from '../store/actions/pageActions'
-import { getCommentsForPage } from '../store/actions/commentActions'
+import { getCommentsForPage, addComment } from '../store/actions/commentActions'
 
 export default function Page(props) {
   const url = props?.url || null
@@ -29,10 +29,15 @@ export default function Page(props) {
   const loading = useSelector((state) => state.page.loading)
   const params = useParams()
   const dispatch = useDispatch()
-  const mainPages = ['home', 'about', 'contacts']
   const [expanded, setExpanded] = useState(false)
+  const mainPages = ['home', 'about', 'contacts']
+
   const handleExpandClick = () => {
     setExpanded(!expanded)
+  }
+
+  const onAddComment = (data) => {
+    dispatch(addComment(data))
   }
 
   useEffect(() => {
@@ -84,6 +89,7 @@ export default function Page(props) {
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                   <CardContent sx={{ maxHeight: '300px', overflow: 'auto' }}>
                     <Typography variant="h5">Comments</Typography>
+                    <CommentForm onChangeData={onAddComment} pageId={currentPage?.id} />
                     {comments?.length > 0 ? (
                       <>
                         <Divider sx={{ mb: 1 }} />
@@ -97,11 +103,6 @@ export default function Page(props) {
                       </Box>
                     )}
                   </CardContent>
-                  {/* {user && (
-                  // <Paper sx={{ padding: '1rem' }} elevation={2}>
-                    <CommentsForm pageId={currentPage?.id} userId={user?.id} />
-                  // </Paper>
-                )} */}
                 </Collapse>
               </>
             )}

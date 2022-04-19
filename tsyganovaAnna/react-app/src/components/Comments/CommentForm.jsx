@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
-import { Modal, Box, Typography, Button } from '@mui/material'
+import { Box, Button } from '@mui/material'
 
 import Input from '../Fields/Input.jsx'
 import { authService } from '../../services/auth/authService'
 
-export default function CommentForm({ isOpen, close, comment, onChangeData }) {
+export default function CommentForm({ comment, onChangeData, pageId }) {
   const [content, setComment] = useState(comment ? comment.content : '')
   const handleCommentChange = (event) => setComment(event.target.value)
 
@@ -15,52 +15,34 @@ export default function CommentForm({ isOpen, close, comment, onChangeData }) {
     id: comment.id ? comment.id : uuidv4(),
     content: content,
     userId: comment.userId ? comment.userId : currentUser.id,
+    pageId: pageId,
   }
 
   const handleSubmit = () => {
     setComment('')
     onChangeData(commentData)
   }
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 500,
-    bgcolor: 'background.paper',
-    p: 2,
-  }
 
   return (
-    <Modal open={isOpen} onClose={close}>
-      <Box sx={style}>
-        <Typography variant="h6" component="h6" sx={{ color: 'gray' }}>
-          Create comment
-        </Typography>
-        <Input label="Content" value={content} rows={4} multiline onChange={handleCommentChange} />
-        <Button onClick={handleSubmit} variant="outlined" sx={{ mt: 2, mr: 2 }}>
-          Save
-        </Button>
-        <Button onClick={close} variant="text" sx={{ mt: 2 }}>
-          Canсel
-        </Button>
-      </Box>
-    </Modal>
+    <Box sx={{ mt: 1, mb: 1 }}>
+      <Input label="Content" value={content} multiline onChange={handleCommentChange} />
+      <Button onClick={handleSubmit} variant="outlined" sx={{ mt: 1, mr: 1, pt: 1 }}>
+        Save
+      </Button>
+    </Box>
   )
 }
 CommentForm.defaultProps = {
-  isOpen: false,
-  close: () => {},
   comment: {},
   onChangeData: () => {},
+  pageId: null,
 }
 
 CommentForm.propTypes = {
-  isOpen: PropTypes.bool,
-  close: PropTypes.func.isRequired,
   comment: PropTypes.shape({
     id: PropTypes.number || PropTypes.string,
     content: PropTypes.string,
   }),
   onChangeData: PropTypes.func.isRequired,
+  pageId: PropTypes.number,
 }
