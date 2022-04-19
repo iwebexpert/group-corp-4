@@ -49,14 +49,16 @@ export default function Header({ HandleClick }) {
   const showList = (list, style) =>
     list.map((text, index) => (
       <Link
+        key={index}
         component={RouterLink}
         to={`/page/${text?.link}`}
-        key={index}
+        aria-label={text.name}
         sx={{
           ...style,
           textDecoration: 'none',
           fontFamily: ['Chilanka', 'cursive'].join(','),
         }}
+        tabIndex="0"
       >
         {text.name}
       </Link>
@@ -98,6 +100,8 @@ export default function Header({ HandleClick }) {
           <Typography
             onClick={handleClickMenu}
             variant="h7"
+            aria-label="Pages"
+            tabIndex="0"
             sx={{ cursor: 'pointer', mr: 2, fontFamily: ['Chilanka', 'cursive'].join(',') }}
           >
             Pages

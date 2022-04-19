@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Box, Avatar, MenuItem, ListItemIcon, Divider, IconButton, Tooltip } from '@mui/material'
 import Logout from '@mui/icons-material/Logout'
 import MenuBlock from './MenuBlock'
+import AvatarIcon from './AvatarIcon'
 
 export default function AccountMenu({ user, logout }) {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -13,15 +14,9 @@ export default function AccountMenu({ user, logout }) {
   const handleClose = () => {
     setAnchorEl(null)
   }
-  const getName = () => {
-    if (user.name) {
-      return user.name.charAt(0)
-    }
-    return 'U'
-  }
 
   return (
-    <React.Fragment>
+    <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Account settings">
           <IconButton
@@ -32,7 +27,7 @@ export default function AccountMenu({ user, logout }) {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>{getName()}</Avatar>
+            <AvatarIcon name={user?.name} />
           </IconButton>
         </Tooltip>
       </Box>
@@ -58,6 +53,6 @@ export default function AccountMenu({ user, logout }) {
           </Box>
         }
       />
-    </React.Fragment>
+    </>
   )
 }

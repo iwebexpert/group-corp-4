@@ -1,28 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { Box, Typography, Paper, Divider, Avatar, Chip } from '@mui/material'
-import Card from '@mui/material/Card'
-import CardHeader from '@mui/material/CardHeader'
-import CardMedia from '@mui/material/CardMedia'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import Collapse from '@mui/material/Collapse'
+import {
+  Box,
+  Typography,
+  Divider,
+  Chip,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Collapse,
+} from '@mui/material'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
 import Loading from '../components/Loading/Loading'
+import AvatarIcon from '../components/AvatarIcon'
+import CommentBlock from '../components/Comments/CommentBlock'
+
 import forest from '../assets/forest.jpg'
 import { getPageByUrl } from '../store/actions/pageActions'
 import { getCommentsForPage } from '../store/actions/commentActions'
 
-import { Opacity } from '@mui/icons-material'
-
 export default function Page(props) {
-  console.log('props: ', props)
   const url = props?.url || null
   const currentPage = useSelector((state) => state.page.currentPage)
   const comments = useSelector((state) => state.comment.commentsOnPage)
-  console.log('comments: ', comments)
   const loading = useSelector((state) => state.page.loading)
   const params = useParams()
   const dispatch = useDispatch()
@@ -55,10 +58,10 @@ export default function Page(props) {
         <Loading />
       ) : (
         <>
-          <Card sx={{ width: '75%' }}>
+          <Card sx={{ width: '80%' }}>
             <CardMedia component="img" height="230" image={forest} alt="forest" />
             <CardContent>
-              <Typography variant="h4">{currentPage?.title}</Typography>
+              <Typography variant="h3">{currentPage?.title}</Typography>
               <Typography variant="body2" color="text.secondary">
                 {currentPage?.content}
               </Typography>
@@ -66,35 +69,30 @@ export default function Page(props) {
             {!url && !mainPages.includes(currentPage?.url) && (
               <>
                 <CardActions
-                  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}
-                  // disableSpacing
+                  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
                 >
                   <Chip
                     onClick={handleExpandClick}
-                    expand={expanded}
                     aria-expanded={expanded}
-                    aria-label="show more"
+                    aria-label="comments"
                     title="comments"
                     icon={<ChatBubbleOutlineIcon />}
-                    sx={{ p: 1.3, pr: 0 }}
+                    sx={{ p: 1.3 }}
+                    label={comments?.length}
                   />
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                   <CardContent sx={{ maxHeight: '300px', overflow: 'auto' }}>
-                    <Typography paragraph>Comments</Typography>
+                    <Typography variant="h5">Comments</Typography>
                     {comments?.length > 0 ? (
-                      comments?.map((comment, index) => (
-                        <Box key={index}>
-                          <Avatar aria-label="recipe"></Avatar>
-                          <Typography>{comment?.content}</Typography>
-                          <Typography style={{ alignSelf: 'flex-end' }}>
-                            {comment?.user?.name}
-                          </Typography>
-                          <Divider sx={{ mb: 1 }} />
-                        </Box>
-                      ))
+                      <>
+                        <Divider sx={{ mb: 1 }} />
+                        {comments?.map((comment, index) => (
+                          <CommentBlock key={index} comment={comment} />
+                        ))}
+                      </>
                     ) : (
-                      <Box sx={{ padding: '1rem' }} elevation={24}>
+                      <Box sx={{ padding: '1rem' }}>
                         <Typography>Not comments</Typography>
                       </Box>
                     )}
