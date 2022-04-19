@@ -80,7 +80,7 @@ export default function PagesList() {
             linkFields={['url']}
             fields={pages}
             showEdit={isAdmin}
-            showDeleten={isAdmin}
+            showDelete={isAdmin}
             onDelete={onDeletePage}
             onEdit={handlePageToogle}
           />
