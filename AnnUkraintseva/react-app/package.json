@@ -42,7 +42,7 @@
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch",
-    "api-server": "json-server --port 3000 --watch ./api/v1.db.json --watch",
+    "api-server": "json-server --port 3000 --watch ./api/v1.db.json ",
     "dev-server": "webpack-dev-server --mode development --port 9000 --open",
     "test": "jest",
     "test-update": "jest -u",
