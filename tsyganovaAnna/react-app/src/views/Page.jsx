@@ -76,14 +76,15 @@ export default function Page(props) {
                     aria-label="show more"
                     title="comments"
                     icon={<ChatBubbleOutlineIcon />}
+                    sx={{ p: 1.3, pr: 0 }}
                   />
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
-                  <CardContent sx={{ height: '300px', overflow: 'auto' }}>
+                  <CardContent sx={{ maxHeight: '300px', overflow: 'auto' }}>
                     <Typography paragraph>Comments</Typography>
                     {comments?.length > 0 ? (
-                      comments?.map((comment) => (
-                        <Box key={comment?.id}>
+                      comments?.map((comment, index) => (
+                        <Box key={index}>
                           <Avatar aria-label="recipe"></Avatar>
                           <Typography>{comment?.content}</Typography>
                           <Typography style={{ alignSelf: 'flex-end' }}>
