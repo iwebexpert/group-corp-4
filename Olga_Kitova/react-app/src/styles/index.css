@@ -1,15 +1,15 @@
 .app {
-    height: 100vh;
-    padding: 2rem 1rem;
-    margin: 0 auto;
-    font-size: 1.2rem;
-    overflow-Y: auto;
+  height: 100vh;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  overflow-y: auto;
 }
 .app--light {
-    color: #000;
-    background: rgb(160 160 160 / 20%);
+  color: #000;
+  background: rgb(160 160 160 / 20%);
 }
 .app--dark {
-    background: rgba(0, 0, 0, 90%);
-    color: #fff;
+  background: rgba(0, 0, 0, 90%);
+  color: #fff;
 }
