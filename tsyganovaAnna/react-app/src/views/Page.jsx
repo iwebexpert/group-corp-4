@@ -93,9 +93,9 @@ export default function Page(props) {
                     {comments?.length > 0 ? (
                       <>
                         <Divider sx={{ mb: 1 }} />
-                        {comments?.map((comment, index) => {
-                          return <CommentBlock key={index} comment={comment} />
-                        })}
+                        {comments?.map((comment, index) => (
+                          <CommentBlock key={index} comment={comment} />
+                        ))}
                       </>
                     ) : (
                       <Box sx={{ padding: '1rem' }}>

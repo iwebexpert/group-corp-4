@@ -7,7 +7,7 @@ import Input from '../Fields/Input.jsx'
 import { authService } from '../../services/auth/authService'
 
 export default function CommentForm({ comment, onChangeData, pageId }) {
-  const [content, setComment] = useState(comment ? comment.content : '')
+  const [content, setComment] = useState(comment?.content)
   const [emptyComment, setEmptyComment] = useState(false)
   const handleCommentChange = (event) => setComment(event.target.value)
 
@@ -24,7 +24,6 @@ export default function CommentForm({ comment, onChangeData, pageId }) {
     else setEmptyComment(false)
 
     if (!emptyComment) {
-      setEmptyComment(false)
       setComment('')
       onChangeData(commentData)
     }
