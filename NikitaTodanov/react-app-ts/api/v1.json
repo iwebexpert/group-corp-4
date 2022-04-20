@@ -1,0 +1,134 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "password": "1234",
+      "role": "admin",
+      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwibmFtZSI6IkFubmEiLCJlbWFpbCI6ImFubmExMjM0QGRvbWFpbi5sb2NhbCIsInBhc3N3b3JkIjoiMTIzNCIsInJvbGUiOiJhZG1pbiJ9.z20NiRlGEWK9fQuId8fgSEVj-r2lMfMe9Y3tPyG1a24"
+    },
+    {
+      "id": 2,
+      "name": "Ivan",
+      "email": "ivan1234@domain.local",
+      "password": "123456",
+      "role": "user"
+    },
+    {
+      "id": 3,
+      "name": "Olga",
+      "email": "olga2022@domain.local",
+      "password": "12345678",
+      "role": "user"
+    }
+  ],
+  "equipment": [
+    {
+      "id": "16f9f127-2848-4044-90c6-3e46eb1399db",
+      "type": "ground-equipment",
+      "title": "3",
+      "amount": "2",
+      "date": "2022-03-17",
+      "comment": "Test"
+    },
+    {
+      "id": "3dea6b61-5aaf-4a0e-b17c-337fc7667b00",
+      "type": "underground-equipment",
+      "title": "2",
+      "amount": "3",
+      "date": "2022-03-18",
+      "comment": "Test 1234"
+    }
+  ],
+  "pages": [
+    {
+      "id": 1,
+      "url": "home",
+      "title": "Home",
+      "content": "Some content...",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "url": "about",
+      "title": "About",
+      "content": "Some content...",
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "url": "page1",
+      "title": "Page1",
+      "content": "Some content...",
+      "userId": 2
+    },
+    {
+      "id": 4,
+      "url": "page2",
+      "title": "Page2",
+      "content": "Some content...",
+      "userId": 3
+    },
+    {
+      "id": 5,
+      "url": "contacts",
+      "title": "Contacts",
+      "content": "Some content...",
+      "userId": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "pageId": 3,
+      "userId": 2,
+      "content": "My comment #1..."
+    },
+    {
+      "id": 1,
+      "pageId": 3,
+      "userId": 3,
+      "content": "My comment #2..."
+    },
+    {
+      "id": 1,
+      "pageId": 4,
+      "userId": 2,
+      "content": "My comment #3..."
+    }
+  ],
+  "settings": [
+    {
+      "id": 1,
+      "theme": "light",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "theme": "dark",
+      "userId": 2
+    },
+    {
+      "id": 3,
+      "theme": "dark",
+      "userId": 3
+    }
+  ],
+  "log":[
+    {
+      "userId": 1,
+      "type":"ground-equipment",
+      "content": "My comment #2...",
+      "role":"user",
+      "action": "some action...."
+    },
+    {
+      "userId": 2,
+      "type":"ground-equipment",
+      "content": "My comment #1...",
+      "role":"user",
+      "action": "some action...."
+    }
+  ]
+}
