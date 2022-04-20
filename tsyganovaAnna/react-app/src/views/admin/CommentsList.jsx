@@ -7,7 +7,6 @@ import Dashboard from '../../components/Dashboard'
 import TableBlock from '../../components/TableBlock'
 import { getAllCommentsWithPageAndUser, deleteComment } from '../../store/actions/commentActions'
 import { authService } from '../../services/auth/authService'
-import { isValidElement } from 'react'
 
 export default function CommentsList() {
   const dispatch = useDispatch()

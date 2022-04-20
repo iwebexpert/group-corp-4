@@ -21,7 +21,6 @@ export const getAllCommentsWithPageAndUser = () => {
     dispatch(commentLoading())
     request(urls.commentsWithPageAndUser(), 'GET')
       .then((data) => {
-        console.log('data: ', data)
         return dispatch(response(COMMENTS_SUCCESS, data))
       })
       .catch((error) => dispatch(response(COMMENTS_ERROR, error)))

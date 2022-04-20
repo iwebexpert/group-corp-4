@@ -8,6 +8,7 @@ import { authService } from '../../services/auth/authService'
 
 export default function CommentForm({ comment, onChangeData, pageId }) {
   const [content, setComment] = useState(comment ? comment.content : '')
+  const [emptyComment, setEmptyComment] = useState(false)
   const handleCommentChange = (event) => setComment(event.target.value)
 
   const currentUser = authService.currentUser
@@ -19,13 +20,27 @@ export default function CommentForm({ comment, onChangeData, pageId }) {
   }
 
   const handleSubmit = () => {
-    setComment('')
-    onChangeData(commentData)
+    if (!content || content?.length === 0) setEmptyComment(true)
+    else setEmptyComment(false)
+
+    if (!emptyComment) {
+      setEmptyComment(false)
+      setComment('')
+      onChangeData(commentData)
+    }
   }
 
   return (
     <Box sx={{ mt: 1, mb: 1 }}>
-      <Input label="Content" value={content} multiline onChange={handleCommentChange} />
+      <Input
+        label="Content"
+        value={content}
+        multiline
+        required
+        error={emptyComment}
+        helperText={emptyComment ? 'Comment is empty' : ''}
+        onChange={handleCommentChange}
+      />
       <Button onClick={handleSubmit} variant="outlined" sx={{ mt: 1, mr: 1, pt: 1 }}>
         Save
       </Button>

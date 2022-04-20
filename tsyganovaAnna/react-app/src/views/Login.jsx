@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Container, Typography, Avatar, Button } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 
-import Input from '../components/Fields/Input.jsx'
+import Input from '../components/Fields/Input'
 import { authService } from '../services/auth/authService'
 
 export default function Login({ handleSuccessAuth }) {
@@ -16,7 +16,11 @@ export default function Login({ handleSuccessAuth }) {
 
   const handleSubmit = () => {
     if (login === '') setEmptyLogin(true)
+    else setEmptyLogin(false)
+
     if (password === '') setEmptyPassword(true)
+    else setEmptyPassword(false)
+
     if (login !== '' && password !== '') {
       authService.login(login, password, handleSuccessAuth)
 
@@ -38,7 +42,7 @@ export default function Login({ handleSuccessAuth }) {
         alignItems: 'center',
       }}
     >
-      <Avatar sx={{ m: 2 }}>
+      <Avatar sx={{ m: 2, background: '#7b9d20' }}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5" sx={{ color: 'gray', mb: 3 }}>

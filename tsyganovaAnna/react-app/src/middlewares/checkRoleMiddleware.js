@@ -1,19 +1,22 @@
-import { PAGE_ADD } from '../store/actions/pageActions'
 import { authService } from '../services/auth/authService'
-const textError =
-  'У пользователя недостаточно прав для добавления, редактирования или удаления страниц'
 
+const textError = 'The user has insufficient rights'
+const actionByNotAuth = [
+  'PAGE_LOADING',
+  'PAGE_GET_SUCCESS',
+  'PAGE_GET_ERROR',
+  'COMMENTS_LOADING',
+  'COMMENTS_GET_SUCCESS',
+  'COMMENTS_GET_ERROR',
+]
 export const checkRoleMiddleware = (store) => (next) => (action) => {
-  const isAdmin = authService.isAdmin
-
-  const res = next(action)
-  if (isAdmin) {
-    return res
-  } else {
-    // if (action.type === PAGE_ADD || action.type === PAGE_ADD || action.type === PAGE_ADD) {
-    //   return res
-    // } else {
+  const role = authService?.currentUserRole || null
+  if (role === null) {
+    if (actionByNotAuth.includes(action.type)) {
+      return next(action)
+    }
     throw new Error(textError)
-    // }
+  } else {
+    return next(action)
   }
 }

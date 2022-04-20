@@ -10,7 +10,6 @@ import { isDev } from '../../helpers/devProdMode'
 
 export default function Users() {
   const dispatch = useDispatch()
-
   const users = useSelector((state) => state.user.data)
   const loading = useSelector((state) => state.user.loading)
 
@@ -21,6 +20,7 @@ export default function Users() {
       dispatch(getAllUser())
     }
   }, [])
+  
   return (
     <>
       {loading ? (

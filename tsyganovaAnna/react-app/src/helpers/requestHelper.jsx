@@ -26,8 +26,7 @@ export const request = (api, method = 'GET', body = null, isAddToken = true) => 
   return fetch(api, getOptions(method, body, isAddToken)).then((response) => {
     if (!response.ok) {
       if (response.status !== 401) {
-        // authService.logout()
-        console.log('response.statusText: ', response.statusText)
+        authService.logout()
       }
       return Promise.reject(response.statusText)
     }

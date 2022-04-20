@@ -10,10 +10,21 @@ import { isDev } from '../../helpers/devProdMode'
 
 export default function Stats() {
   const dispatch = useDispatch()
-
   const stats = useSelector((state) => state.stats.data)
-  console.log('stats: ', stats)
   const loading = useSelector((state) => state.stats.loading)
+  const logs = []
+  
+  stats.forEach((item) =>
+    item?.logs.forEach((log) =>
+      logs.push({
+        id: log.id,
+        date: log.date,
+        action: log.action,
+        user: item.name,
+        role: item.role,
+      }),
+    ),
+  )
 
   useEffect(() => {
     if (isDev()) {
@@ -22,6 +33,7 @@ export default function Stats() {
       dispatch(getLogsOfUser())
     }
   }, [])
+
   return (
     <>
       {loading ? (
@@ -34,7 +46,11 @@ export default function Stats() {
             </Typography>
           </Toolbar>
           <Divider sx={{ mb: 2 }} />
-          <TableBlock titles={['Date', 'Action']} showFields={['date', 'action']} fields={stats} />
+          <TableBlock
+            titles={['Date', 'Action', 'User', 'Role']}
+            showFields={['date', 'action', 'user', 'role']}
+            fields={logs}
+          />
         </Dashboard>
       )}
     </>

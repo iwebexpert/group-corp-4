@@ -29,7 +29,9 @@ function getCurrentUser() {
 }
 
 function getCurrentUserRole() {
-  return getItem(localStorageKey).role
+  const user = getItem(localStorageKey)
+  if (user !== null) return user.role
+  return null
 }
 
 function getCurrentUserExist() {

@@ -13,14 +13,14 @@ const actionPending = [
 export const customLoggerMiddleware = (store) => (next) => (action) => {
   const id = authService?.currentUser?.id || 'Not auth'
 
-  // if (!actionPending.includes(action.type)) {
-  //   store.dispatch(
-  //     addStats({
-  //       userId: id,
-  //       date: new Date().toLocaleString('ru', optionsDate),
-  //       action: action.type,
-  //     }),
-  //   )
-  // }
+  if (!actionPending.includes(action.type)) {
+    store.dispatch(
+      addStats({
+        userId: id,
+        date: new Date().toLocaleString('ru', optionsDate),
+        action: action.type,
+      }),
+    )
+  }
   return next(action)
 }

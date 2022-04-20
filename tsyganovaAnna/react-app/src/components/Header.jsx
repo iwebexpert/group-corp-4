@@ -79,7 +79,7 @@ export default function Header({ HandleClick }) {
               edge="start"
               sx={{
                 marginRight: 2,
-                ...(!userExist && !isAdmin && { display: 'none' }),
+                ...((!userExist || !isAdmin) && { display: 'none' }),
               }}
             >
               <Menu />
@@ -96,16 +96,20 @@ export default function Header({ HandleClick }) {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Learn project
           </Typography>
-          {showList(headerMain, menuStyle)}
-          <Typography
-            onClick={handleClickMenu}
-            variant="h7"
-            aria-label="Pages"
-            tabIndex="0"
-            sx={{ cursor: 'pointer', mr: 2, fontFamily: ['Chilanka', 'cursive'].join(',') }}
-          >
-            Pages
-          </Typography>
+          {userExist && (
+            <>
+              {showList(headerMain, menuStyle)}
+              <Typography
+                onClick={handleClickMenu}
+                variant="h7"
+                aria-label="Pages"
+                tabIndex="0"
+                sx={{ cursor: 'pointer', mr: 2, fontFamily: ['Chilanka', 'cursive'].join(',') }}
+              >
+                Pages
+              </Typography>
+            </>
+          )}
           <Tooltip title={`${theme.palette.mode} mode`}>
             <IconButton color="inherit" onClick={colorMode.toogleColorMode}>
               {theme.palette.mode !== 'light' ? <LightMode /> : <Nightlight />}

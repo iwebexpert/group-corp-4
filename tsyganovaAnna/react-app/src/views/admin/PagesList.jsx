@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add'
 
 import Loading from '../../components/Loading/Loading'
 import Dashboard from '../../components/Dashboard'
-import PageForm from '../../components/Pages/PageForm'
+import PageForm from '../../components/PageForm'
 import TableBlock from '../../components/TableBlock'
 import { authService } from '../../services/auth/authService'
 import { getAllPage, addPage, editPage, deletePage } from '../../store/actions/pageActions'
@@ -18,7 +18,6 @@ export default function PagesList() {
 
   const isAdmin = authService.isAdmin
   const dispatch = useDispatch()
-
   const pages = useSelector((state) => state.page.data)
   const loading = useSelector((state) => state.page.loading)
 
@@ -67,7 +66,7 @@ export default function PagesList() {
             </Typography>
             {isAdmin && (
               <Tooltip title="Create a new page">
-                <IconButton onClick={openAddForm} sx={{ color: '#08bd93' }}>
+                <IconButton onClick={openAddForm} sx={{ color: '#7b9d20' }}>
                   <AddIcon />
                 </IconButton>
               </Tooltip>
@@ -77,7 +76,7 @@ export default function PagesList() {
           <TableBlock
             titles={['Url', 'Title', 'Content']}
             showFields={['url', 'title', 'content']}
-            linkFields={['url']}
+            // linkFields={['url']}
             fields={pages}
             showEdit={isAdmin}
             showDelete={isAdmin}
