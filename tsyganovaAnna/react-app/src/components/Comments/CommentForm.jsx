@@ -20,10 +20,10 @@ export default function CommentForm({ comment, onChangeData, pageId }) {
   }
 
   const handleSubmit = () => {
-    if (!content || content?.length === 0) setEmptyComment(true)
-    else setEmptyComment(false)
-
-    if (!emptyComment) {
+    if (!content || content.length === 0) {
+      setEmptyComment(true)
+    } else {
+      setEmptyComment(false)
       setComment('')
       onChangeData(commentData)
     }

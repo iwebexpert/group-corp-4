@@ -6,9 +6,9 @@ import Input from './Fields/Input'
 import { authService } from '../services/auth/authService'
 
 export default function PageForm({ isOpen, close, page, onChangeData }) {
-  const [url, setUrl] = useState(page ? page.url : '')
-  const [title, setTitle] = useState(page ? page.title : '')
-  const [content, setContent] = useState(page ? page.content : '')
+  const [url, setUrl] = useState(page?.url)
+  const [title, setTitle] = useState(page?.title)
+  const [content, setContent] = useState(page?.content)
   const [emptyUrl, setEmptyUrl] = useState(false)
   const [emptyTitle, setEmptyTitle] = useState(false)
 
@@ -29,7 +29,7 @@ export default function PageForm({ isOpen, close, page, onChangeData }) {
         name(false)
       }
     })
-    if (!emptyUrl && !emptyTitle) {
+    if (url && title) {
       handleSubmit()
     }
   }
@@ -43,8 +43,6 @@ export default function PageForm({ isOpen, close, page, onChangeData }) {
     }
     if (page) pageData.id = page.id
 
-    setEmptyUrl(false)
-    setEmptyTitle(false)
     setUrl('')
     setTitle('')
     setContent('')
