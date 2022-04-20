@@ -11,6 +11,7 @@ import {
   COMMENTS_GET_SUCCESS,
   COMMENTS_GET_ERROR,
 } from '../actions/commentActions'
+import { authService } from '../../services/auth/authService'
 
 const initialState = {
   data: [],
@@ -40,7 +41,10 @@ export const commentReducer = (state = initialState, action) => {
       case COMMENTS_ADD_SUCCESS:
         return {
           ...state,
-          commentsOnPage: [...state.commentsOnPage, action.payload],
+          commentsOnPage: [
+            ...state.commentsOnPage,
+            { ...action.payload, user: authService.currentUser },
+          ],
           loading: false,
         }
       case COMMENTS_EDIT_SUCCESS:

@@ -11,7 +11,6 @@ import { isDev } from '../../helpers/devProdMode'
 export default function Stats() {
   const dispatch = useDispatch()
   const stats = useSelector((state) => state.stats.data)
-  console.log('stats: ', stats)
   const loading = useSelector((state) => state.stats.loading)
   const logs = []
 
