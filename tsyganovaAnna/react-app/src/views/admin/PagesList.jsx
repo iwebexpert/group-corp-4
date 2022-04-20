@@ -76,7 +76,7 @@ export default function PagesList() {
           <TableBlock
             titles={['Url', 'Title', 'Content']}
             showFields={['url', 'title', 'content']}
-            // linkFields={['url']}
+            linkFields={['url']}
             fields={pages}
             showEdit={isAdmin}
             showDelete={isAdmin}

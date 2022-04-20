@@ -10,6 +10,7 @@ import {
   IconButton,
   Link,
 } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
 import { Edit, Delete } from '@mui/icons-material'
 export default function TableBlock({
   titles,
@@ -46,7 +47,9 @@ export default function TableBlock({
               {showFields.map((title) => (
                 <TableCell key={title}>
                   {linkFields.includes(title) ? (
-                    <Link to={`/${tabelItem[title]}`}>{tabelItem[title]}</Link>
+                    <Link component={RouterLink} to={`/${tabelItem[title]}`}>
+                      {tabelItem[title]}
+                    </Link>
                   ) : (
                     tabelItem[title]
                   )}
