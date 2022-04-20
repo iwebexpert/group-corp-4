@@ -1,6 +1,15 @@
 import React, { useEffect } from 'react'
-import { Box, SwipeableDrawer, List, ListItem, ListItemText } from '@mui/material'
+import {
+  Box,
+  SwipeableDrawer,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material'
+import { Dashboard, QueryStats, Comment, Group } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
+import { authService } from '../services/auth/authService'
 
 export default function LeftMunu({ isOpenLeftMenu, HandleClick }) {
   const anchor = 'left'
@@ -22,7 +31,15 @@ export default function LeftMunu({ isOpenLeftMenu, HandleClick }) {
     setState({ ...state, [anchor]: open })
   }
 
-  const navLink = [{ link: '/pages', name: 'Pages' }]
+  const isAdmin = authService.isAdmin
+  const adminLink = [
+    { link: '/admin/pages', name: 'Pages', icon: <Dashboard /> },
+    { link: '/admin/users', name: 'Users', icon: <Group /> },
+    { link: '/admin/comments', name: 'Comments', icon: <Comment /> },
+    { link: '/admin/stats', name: 'Stats', icon: <QueryStats /> },
+  ]
+  const userLink = []
+  const navLink = isAdmin ? [...userLink, ...adminLink] : userLink
 
   const list = (anchor) => (
     <Box
@@ -33,11 +50,10 @@ export default function LeftMunu({ isOpenLeftMenu, HandleClick }) {
     >
       <List>
         {navLink.map((text, index) => (
-          <Link to={text.link} key={index}>
-            <ListItem button>
-              <ListItemText>{text.name}</ListItemText>
-            </ListItem>
-          </Link>
+          <ListItemButton component={Link} to={text.link} key={index}>
+            <ListItemIcon>{text.icon}</ListItemIcon>
+            <ListItemText primary={text.name} />
+          </ListItemButton>
         ))}
       </List>
     </Box>

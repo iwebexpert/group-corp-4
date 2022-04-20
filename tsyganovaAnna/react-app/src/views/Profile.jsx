@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Divider, Grid, Typography } from '@mui/material'
+import { Toolbar, Divider, Grid, Typography } from '@mui/material'
 
 import { authService } from '../services/auth/authService'
 import Dashboard from '../components/Dashboard'
+import AvatarIcon from '../components/AvatarIcon'
 
 export default function Profile() {
   const { name, email, password, role } = authService.currentUser
@@ -37,9 +38,12 @@ export default function Profile() {
   }
   return (
     <Dashboard>
-      <Typography component="h3" variant="h3" gutterBottom>
-        {name}
-      </Typography>
+      <Toolbar sx={{ gap: '1rem', pl: { xs: 1, sm: 1 }, pt: 4, pb: 2 }}>
+        <AvatarIcon name={name} style={{ backgroundColor: '#7b9d20', width: 70, height: 70 }} />
+        <Typography component="h3" variant="h3" sx={{ pt: 1 }}>
+          {name}
+        </Typography>
+      </Toolbar>
       <Divider />
       <Grid container spacing={0}>
         {gridItemLine('Email', email)}

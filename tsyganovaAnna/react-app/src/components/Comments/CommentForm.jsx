@@ -1,66 +1,62 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
-import { Modal, Box, Button } from '@mui/material'
+import { Box, Button } from '@mui/material'
 
 import Input from '../Fields/Input.jsx'
 import { authService } from '../../services/auth/authService'
 
-export default function CommentForm({ isOpen, close, comment, onChangeData }) {
-  const [content, setPaageContent] = useState(comment ? comment.content : '')
-  const handleCommentContentChange = (event) => setPaageConcommenttent(event.target.value)
+export default function CommentForm({ comment, onChangeData, pageId }) {
+  const [content, setComment] = useState(comment?.content)
+  const [emptyComment, setEmptyComment] = useState(false)
+  const handleCommentChange = (event) => setComment(event.target.value)
 
   const currentUser = authService.currentUser
   const commentData = {
     id: comment.id ? comment.id : uuidv4(),
     content: content,
     userId: comment.userId ? comment.userId : currentUser.id,
+    pageId: pageId,
   }
 
   const handleSubmit = () => {
-    setPaageContent('')
-    onChangeData(commentData)
-  }
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 500,
-    bgcolor: 'background.paper',
-    p: 2,
+    if (!content || content.length === 0) {
+      setEmptyComment(true)
+    } else {
+      setEmptyComment(false)
+      setComment('')
+      onChangeData(commentData)
+    }
   }
 
   return (
-    <Modal open={isOpen} onClose={close}>
-      <Box sx={style}>
-        <Input
-          label="Content"
-          value={content}
-          rows={4}
-          multiline
-          onChange={handleCommentContentChange}
-        />
-        <Button onClick={handleSubmit} variant="outlined">
-          Save
-        </Button>
-      </Box>
-    </Modal>
+    <Box sx={{ mt: 1, mb: 1 }}>
+      <Input
+        label="Content"
+        value={content}
+        multiline
+        required
+        error={emptyComment}
+        helperText={emptyComment ? 'Comment is empty' : ''}
+        onChange={handleCommentChange}
+      />
+      <Button onClick={handleSubmit} variant="outlined" sx={{ mt: 1, mr: 1, pt: 1 }}>
+        Save
+      </Button>
+    </Box>
   )
 }
 CommentForm.defaultProps = {
-  isOpen: false,
-  close: () => {},
   comment: {},
   onChangeData: () => {},
+  pageId: null,
 }
 
 CommentForm.propTypes = {
-  isOpen: PropTypes.bool,
-  close: PropTypes.func.isRequired,
   comment: PropTypes.shape({
     id: PropTypes.number || PropTypes.string,
     content: PropTypes.string,
   }),
   onChangeData: PropTypes.func.isRequired,
+  pageId: PropTypes.number,
 }
