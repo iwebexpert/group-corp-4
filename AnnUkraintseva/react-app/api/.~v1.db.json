@@ -252,6 +252,14 @@
       "role": "admin",
       "action": "Просмотр действий",
       "access": true
+    },
+    {
+      "id": "eecb78de-928a-43b9-aaf9-10cca38e6ad9",
+      "name": "Anna",
+      "email": "anna1234@domain.local",
+      "role": "admin",
+      "action": "Просмотр действий",
+      "access": true
     }
   ]
 }

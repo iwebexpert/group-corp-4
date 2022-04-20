@@ -32,14 +32,6 @@ export default function PagesTableContainers(){
         dispatch(onePageFetch(url))  
         setCurrentPageVisible(true)
       }
-
-      // const getInitialDataOpen = ()=>{
-      //   if (currentIdOpen === null){
-      //             return null
-      //   }
-      //   let data=pages.filter((item:PagePayload)=>item.id === currentIdOpen)
-      //   return data.length === 1 ? data[0] : null
-      // }
      
     useEffect(() => {
         setTimeout(()=>{

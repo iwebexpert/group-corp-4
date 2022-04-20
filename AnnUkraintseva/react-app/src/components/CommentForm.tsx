@@ -41,20 +41,20 @@ export default function CommentForm({onePage}:CommentFormProps) {
     setCommentContent(event.target.value)
   }
 
-  let pageId:string
-
-  {onePage && (pageId = onePage.id)}
 
 
   const handleSubmitAddComment = () => {
+    if(onePage!==null)
+    {
     const data = {
       id: uuidv4(),
-      pageId: pageId,
+      pageId: onePage.id,
       userId: userId,
       content: commentContent,
     }
      dispatch(commentAddFetch(data))
     setCommentContent('')
+  }
   }
 
   return ( 

@@ -26,7 +26,7 @@ export const UserRoleMiddleware: Middleware = (store) => (next) => (action) => {
       action.type === AllUserActionTypes.ALL_USER_SUCCESS ||
       action.type === AllUserActionTypes.ALL_USER_ERROR)
   ) {
-    throw new Error('РЈ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅРµС‚ РґРѕСЃС‚СѓРїР° Рє РґР°РЅРЅС‹Рј РѕРїРµСЂР°С†РёСЏРј')
+    throw new Error('Вы не имеете доступа к данным страницам')
   } else {
     return res
   }

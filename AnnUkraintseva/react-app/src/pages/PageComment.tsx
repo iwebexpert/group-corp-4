@@ -8,18 +8,23 @@ import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import { Helmet } from 'react-helmet'
-import { CommentPayload } from 'actions/comments'
+import { commentAllFetch, CommentPayload } from 'actions/comments'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppState } from 'reducers/index'
 
 export default function PageComment() {
-  const [allComments, setAllComments] = useState<CommentPayload[]>([])
+
+  const dispatch = useDispatch()
+
+  const comment = useSelector((state: AppState) => state.comment.data)
+
+  console.log('comment', comment)
 
   useEffect(() => {
-    fetch('/api/comments')
-      .then((response) => response.json())
-      .then((data) => {
-        setAllComments(data)
-      })
-  }, [])
+    setTimeout(()=>{
+        dispatch(commentAllFetch())
+    },0)  
+},[])
 
   return (
     <>
@@ -38,7 +43,7 @@ export default function PageComment() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {allComments.map((obj, index) => (
+            {comment.map((obj, index) => (
               <TableRow key={index}>
                 <>
                   <TableCell>{index + 1}</TableCell>

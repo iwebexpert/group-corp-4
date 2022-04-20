@@ -75,9 +75,9 @@ export default function PagesTable({ pages, onDeletePages, getElemForChange, get
               <TableCellCustom>{obj.url}</TableCellCustom>
               <TableCellCustom>{obj.title}</TableCellCustom>
               <TableCellCustom>{obj.userName}</TableCellCustom>
-              {privileges === 'admin' ?(<TableCellCustom  onClick={() => onDeletePages(obj.id)}>
+              {privileges === 'admin' &&(<TableCellCustom  onClick={() => onDeletePages(obj.id)}>
                 <DeleteIconCusrom className="btn-delete" color="primary" />
-              </TableCellCustom>):null}
+              </TableCellCustom>)}
               {privileges === 'admin' ? (
                 <TableCell onClick={() => getElemForChange(obj.id)}>
                   <EditIconCustom color="primary" />

@@ -2,66 +2,66 @@ import { authServices } from '../services/auth/authServices'
 import { v4 as uuidv4 } from 'uuid'
 
 import { getCurrentUserRole, getCurrentName, getCurrentEmail } from '../services/auth/authServices'
-import {
-  PageActionTypes
-} from '../actions/page'
+import { PageActionTypes } from '../actions/page'
 
-import { ActiveActionTypes
-} from '../actions/activeUser'
+import { ActiveActionTypes } from '../actions/activeUser'
 
-import { CommentActionTypes
-} from '../actions/comments'
+import { CommentActionTypes } from '../actions/comments'
 
-import {AllUserActionTypes
-} from '../actions/allUser'
+import { AllUserActionTypes } from '../actions/allUser'
 import { Middleware } from 'redux'
 
-const actionActive = (action:any) => {
+const actionActive = (action: any) => {
   switch (action.type) {
     case PageActionTypes.PAGE_PENDING:
     case PageActionTypes.PAGE_SUCCESS:
     case PageActionTypes.PAGE_ERROR:
-      return 'Р Р°Р±РѕС‚Р° СЃРѕ СЃС‚СЂР°РЅРёС†Р°РјРё'
+      return 'Работа со страницами'
 
     case PageActionTypes.PAGE_DELETE_ERROR:
     case PageActionTypes.PAGE_DELETE_SUCCESS:
-      return 'РЈРґР°Р»РµРЅРёРµ СЃС‚СЂР°РЅРёС†С‹'
+      return 'Удаление страниц'
 
     case PageActionTypes.PAGE_ADD_ERROR:
     case PageActionTypes.PAGE_ADD_SUCCESS:
-      return 'Р”РѕР±Р°РІР»РµРЅРёРµ СЃС‚СЂР°РЅРёС†С‹'
+      return 'Добавление страниц'
 
     case PageActionTypes.PAGE_FORM_EDIT_START:
     case PageActionTypes.PAGE_FORM_EDIT_SAVE:
     case PageActionTypes.PAGE_FORM_EDIT_RESET:
-      return 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЃС‚СЂР°РЅРёС†'
+      return 'Редактирование страниц'
 
     case ActiveActionTypes.ACTIVE_PENDING:
     case ActiveActionTypes.ACTIVE_SUCCESS:
     case ActiveActionTypes.ACTIVE_ERROR:
-        return 'РџСЂРѕСЃРјРѕС‚СЂ РґРµР№СЃС‚РІРёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№'
+      return 'Просмотр действий'
 
     case PageActionTypes.ONE_PAGE_PENDING:
     case PageActionTypes.ONE_PAGE_SUCCESS:
     case PageActionTypes.ONE_PAGE_ERROR:
-        return 'РџСЂРѕСЃРјРѕС‚СЂ СЃС‚СЂР°РЅРёС†С‹'
+      return 'Просмотр страницы'
 
     case CommentActionTypes.COMMENT_PENDING:
     case CommentActionTypes.COMMENT_SUCCESS:
     case CommentActionTypes.COMMENT_ERROR:
-      return 'РџСЂРѕСЃРјРѕС‚СЂ РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ'
+      return 'Просмотр комментария'
 
     case CommentActionTypes.COMMENT_ADD_SUCCESS:
     case CommentActionTypes.COMMENT_ADD_ERROR:
-      return 'Р”РѕР±Р°РІР»РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ'
-    
+      return 'Добавление комментария'
+
     case AllUserActionTypes.ALL_USER_PENDING:
     case AllUserActionTypes.ALL_USER_SUCCESS:
     case AllUserActionTypes.ALL_USER_ERROR:
-      return 'РџСЂРѕСЃРјРѕС‚СЂ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№'
+      return 'Просмотр всех пользователей'
+
+    case CommentActionTypes.COMMENT_ALL_PENDING:
+    case CommentActionTypes.COMMENT_ALL_SUCCESS:
+    case CommentActionTypes.COMMENT_ALL_ERROR:
+      return 'Просмотр всех комментариев'
 
     default:
-      return 'РўР°РєРѕРіРѕ РґРµР№СЃС‚РІРёСЏ РЅРµ РЅР°Р№РґРµРЅРѕ'
+      return 'Такого действия не найдено'
   }
 }
 
@@ -75,20 +75,18 @@ export const loggerUserMiddleware: Middleware = (store) => (next) => (action) =>
   let access
   const actionUser = actionActive(action)
   if (
-    (role === 'user' &&
-    (
-      action.type === PageActionTypes.PAGE_ADD_SUCCESS ||
+    role === 'user' &&
+    (action.type === PageActionTypes.PAGE_ADD_SUCCESS ||
       action.type === PageActionTypes.PAGE_DELETE_SUCCESS ||
       action.type === PageActionTypes.PAGE_FORM_EDIT_START ||
       action.type === PageActionTypes.PAGE_FORM_EDIT_SAVE ||
       action.type === PageActionTypes.PAGE_FORM_EDIT_RESET ||
       action.type === ActiveActionTypes.ACTIVE_PENDING ||
-      action.type === ActiveActionTypes.ACTIVE_SUCCESS||
-      action.type === ActiveActionTypes.ACTIVE_ERROR|| 
-      action.type ===AllUserActionTypes.ALL_USER_PENDING||
-      action.type ===AllUserActionTypes.ALL_USER_SUCCESS||
-      action.type ===AllUserActionTypes.ALL_USER_ERROR
-      ))
+      action.type === ActiveActionTypes.ACTIVE_SUCCESS ||
+      action.type === ActiveActionTypes.ACTIVE_ERROR ||
+      action.type === AllUserActionTypes.ALL_USER_PENDING ||
+      action.type === AllUserActionTypes.ALL_USER_SUCCESS ||
+      action.type === AllUserActionTypes.ALL_USER_ERROR)
   ) {
     access = false
   } else {
