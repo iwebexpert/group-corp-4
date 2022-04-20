@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Copyright should be renderer 1`] = `
+<p
+  className="MuiTypography-root MuiTypography-body2 MuiTypography-alignCenter css-pi4kka-MuiTypography-root"
+>
+  Copyright © 
+  <a
+    className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1kgfegd-MuiTypography-root-MuiLink-root"
+    href="https://mui.com/"
+    onBlur={[Function]}
+    onFocus={[Function]}
+  >
+    Учебный проект
+  </a>
+   
+  2022
+  .
+</p>
+`;

@@ -4,14 +4,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
-  entry: path.join(__dirname, 'src', 'index.js'),
+  entry: path.join(__dirname, 'src', 'index.tsx'),
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'webpack.bundle.js',
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx','.js', '.jsx'],
     alias: {
       components: path.join(__dirname, 'src', 'components'),
       actions: path.join(__dirname, 'src', 'actions'),
@@ -40,6 +40,8 @@ module.exports = {
           },
         },
       },
+      { test: /\.tsx?$/, loader: "ts-loader" },
+
       {
         test: /\.s?css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader','sass-loader'],
@@ -61,7 +63,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
-      title: 'AnnUkraintseva APP1',
+      title: 'Ann Ukraintseva',
+      favicon: path.join(__dirname, 'computer.png')
     }),
 
     new MiniCssExtractPlugin({
