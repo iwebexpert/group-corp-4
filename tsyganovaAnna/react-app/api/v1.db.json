@@ -80,12 +80,6 @@
       "pageId": 4,
       "userId": 2,
       "content": "My comment #3..."
-    },
-    {
-      "id": "3d47816d-2e33-45c5-a594-a7043ae09fa8",
-      "content": "r435",
-      "userId": 2,
-      "pageId": 3
     }
   ],
   "settings": [
@@ -539,12 +533,6 @@
       "id": 72
     },
     {
-      "userId": "Not auth",
-      "date": "20.04.2022, 16:54:25",
-      "action": "PAGE_ERROR",
-      "id": 73
-    },
-    {
       "userId": 2,
       "date": "20.04.2022, 16:54:40",
       "action": "PAGE_GET_ERROR",
@@ -621,18 +609,6 @@
       "date": "20.04.2022, 16:56:14",
       "action": "COMMENTS_GET_SUCCESS",
       "id": 86
-    },
-    {
-      "userId": "Not auth",
-      "date": "20.04.2022, 16:56:23",
-      "action": "PAGE_ERROR",
-      "id": 87
-    },
-    {
-      "userId": "Not auth",
-      "date": "20.04.2022, 16:56:25",
-      "action": "PAGE_ERROR",
-      "id": 88
     }
   ]
 }

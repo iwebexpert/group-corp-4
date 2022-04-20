@@ -94,7 +94,6 @@ export default function Page(props) {
                       <>
                         <Divider sx={{ mb: 1 }} />
                         {comments?.map((comment, index) => {
-                          console.log('comment: ', comment)
                           return <CommentBlock key={index} comment={comment} />
                         })}
                       </>
