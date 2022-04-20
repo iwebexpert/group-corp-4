@@ -1,0 +1,404 @@
+openapi: 3.0.3
+info:
+  title: Api Documentation
+  description: Api Documentation
+  termsOfService: urn:tos
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: '1.0'
+servers:
+  - url: http://localhost:8080
+    description: Inferred Url
+tags:
+  - name: auth-controller
+    description: Auth Controller
+  - name: basic-error-controller
+    description: Basic Error Controller
+  - name: request-controller
+    description: Request Controller
+paths:
+  /api/v1/user/login:
+    post:
+      tags:
+        - auth-controller
+      summary: Авторизация пользователя
+      operationId: loginUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+      responses:
+        '200':
+          description: Запрос принят
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '201':
+          description: Created
+        '400':
+          description: Невалидный запрос
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Внутренняя ошибка сервера
+  /api/v1/user/logout:
+    post:
+      tags:
+        - auth-controller
+      summary: Выход пользователя
+      operationId: logoutUsingPOST
+      responses:
+        '200':
+          description: Запрос принят
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/equipment-request:
+    get:
+      tags:
+        - request-controller
+      summary: Получение всех заявок на оборудование
+      operationId: allRequestsUsingGET
+      responses:
+        '200':
+          description: Запрос принят
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EquipmentRequest'
+        '400':
+          description: Невалидный запрос
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Внутренняя ошибка сервера
+    post:
+      tags:
+        - request-controller
+      summary: Заявка на получение оборудования
+      operationId: newRequestUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EquipmentRequest'
+      responses:
+        '200':
+          description: Запрос принят
+        '201':
+          description: Created
+        '400':
+          description: Невалидный запрос
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Внутренняя ошибка сервера
+  /api/v1/equipment-request/{id}:
+    get:
+      tags:
+        - request-controller
+      summary: Получение заявки по id
+      operationId: getOneUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Запрос принят
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EquipmentRequest'
+        '400':
+          description: Невалидный запрос
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Внутренняя ошибка сервера
+    put:
+      tags:
+        - request-controller
+      summary: Редактирование заявки
+      operationId: updateUsingPUT
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Запрос принят
+        '201':
+          description: Created
+        '400':
+          description: Невалидный запрос
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Внутренняя ошибка сервера
+    delete:
+      tags:
+        - request-controller
+      summary: Удаление заявки
+      operationId: deleteUsingDELETE
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Запрос принят
+        '204':
+          description: No Content
+        '400':
+          description: Невалидный запрос
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Внутренняя ошибка сервера
+  /api/v1/equipment-request/{id}/approve:
+    post:
+      tags:
+        - request-controller
+      summary: Удовлетворение заявки
+      operationId: approveUsingPOST
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Запрос принят
+        '201':
+          description: Created
+        '400':
+          description: Невалидный запрос
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Внутренняя ошибка сервера
+  /api/v1/equipment-request/{id}/reject:
+    post:
+      tags:
+        - request-controller
+      summary: Отказ по заявке
+      operationId: rejectUsingPOST
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Запрос принят
+        '201':
+          description: Created
+        '400':
+          description: Невалидный запрос
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Внутренняя ошибка сервера
+components:
+  schemas:
+    Credentials:
+      title: Credentials
+      type: object
+      properties:
+        login:
+          type: string
+        pass:
+          type: string
+    EquipmentRequest:
+      title: EquipmentRequest
+      type: object
+      properties:
+        amount:
+          type: integer
+          format: int32
+          example: 3
+        comment:
+          type: string
+        date:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+          example: fd891389-332b-4f35-b347-549c5f0b1542
+        title:
+          type: string
+          example: Бур педальный
+        type:
+          type: string
+          example: underground-equipment
+          enum:
+            - GROUND
+            - UNDERGROUND
+    ModelAndView:
+      title: ModelAndView
+      type: object
+      properties:
+        empty:
+          type: boolean
+        model:
+          type: object
+        modelMap:
+          type: object
+          additionalProperties:
+            type: object
+        reference:
+          type: boolean
+        status:
+          type: string
+          enum:
+            - ACCEPTED
+            - ALREADY_REPORTED
+            - BAD_GATEWAY
+            - BAD_REQUEST
+            - BANDWIDTH_LIMIT_EXCEEDED
+            - CHECKPOINT
+            - CONFLICT
+            - CONTINUE
+            - CREATED
+            - DESTINATION_LOCKED
+            - EXPECTATION_FAILED
+            - FAILED_DEPENDENCY
+            - FORBIDDEN
+            - FOUND
+            - GATEWAY_TIMEOUT
+            - GONE
+            - HTTP_VERSION_NOT_SUPPORTED
+            - IM_USED
+            - INSUFFICIENT_SPACE_ON_RESOURCE
+            - INSUFFICIENT_STORAGE
+            - INTERNAL_SERVER_ERROR
+            - I_AM_A_TEAPOT
+            - LENGTH_REQUIRED
+            - LOCKED
+            - LOOP_DETECTED
+            - METHOD_FAILURE
+            - METHOD_NOT_ALLOWED
+            - MOVED_PERMANENTLY
+            - MOVED_TEMPORARILY
+            - MULTIPLE_CHOICES
+            - MULTI_STATUS
+            - NETWORK_AUTHENTICATION_REQUIRED
+            - NON_AUTHORITATIVE_INFORMATION
+            - NOT_ACCEPTABLE
+            - NOT_EXTENDED
+            - NOT_FOUND
+            - NOT_IMPLEMENTED
+            - NOT_MODIFIED
+            - NO_CONTENT
+            - OK
+            - PARTIAL_CONTENT
+            - PAYLOAD_TOO_LARGE
+            - PAYMENT_REQUIRED
+            - PERMANENT_REDIRECT
+            - PRECONDITION_FAILED
+            - PRECONDITION_REQUIRED
+            - PROCESSING
+            - PROXY_AUTHENTICATION_REQUIRED
+            - REQUESTED_RANGE_NOT_SATISFIABLE
+            - REQUEST_ENTITY_TOO_LARGE
+            - REQUEST_HEADER_FIELDS_TOO_LARGE
+            - REQUEST_TIMEOUT
+            - REQUEST_URI_TOO_LONG
+            - RESET_CONTENT
+            - SEE_OTHER
+            - SERVICE_UNAVAILABLE
+            - SWITCHING_PROTOCOLS
+            - TEMPORARY_REDIRECT
+            - TOO_EARLY
+            - TOO_MANY_REQUESTS
+            - UNAUTHORIZED
+            - UNAVAILABLE_FOR_LEGAL_REASONS
+            - UNPROCESSABLE_ENTITY
+            - UNSUPPORTED_MEDIA_TYPE
+            - UPGRADE_REQUIRED
+            - URI_TOO_LONG
+            - USE_PROXY
+            - VARIANT_ALSO_NEGOTIATES
+        view:
+          $ref: '#/components/schemas/View'
+        viewName:
+          type: string
+    Token:
+      title: Token
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJJQlMiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNjQ4Mzk5NDkyfQ.Ff1hDO0UQH_3ISeT45sH9Wkk74E-p-hVXXeEEw8brKM
+    View:
+      title: View
+      type: object
+      properties:
+        contentType:
+          type: string
