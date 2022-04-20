@@ -211,10 +211,33 @@ export const pageFormEditStart: ActionCreator<PageFormEditStartAction> = (id) =>
   type: PageActionTypes.PAGE_FORM_EDIT_START,
   payload:id,
 })
-export const pageFormEditSave: ActionCreator<PageFormEditSaveAction> = (data) => ({
+export const pageFormEditSave: ActionCreator<PageFormEditSaveAction> = (data) => {
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'Cache-Control': 'no-cache',
+      'Content-Type': 'application/json',
+      Authentication: `Bearer ${authServices.token}`,
+    },
+    body: JSON.stringify(data),
+
+  }
+  fetch(`/api/pages/${data.id}`, options)
+    .then((result) => result.json())
+    .then((result) => {
+      if (result.error) {
+        throw result.error
+      }
+      return result
+    })
+    .catch((error) => {
+      // console.log('error', error)
+    })
+  return{
   type: PageActionTypes.PAGE_FORM_EDIT_SAVE,
   payload: data,
-})
+  }
+}
 export const pageFormEditReset: ActionCreator<PageFormEditResetAction> = () => ({
   type: PageActionTypes.PAGE_FORM_EDIT_RESET,
 })

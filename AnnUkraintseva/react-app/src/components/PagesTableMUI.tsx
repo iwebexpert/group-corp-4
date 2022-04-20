@@ -33,8 +33,6 @@ const KeyboardArrowRightIconCustom = styled(KeyboardArrowRightIcon)`
   color: rgb(0, 174, 255);
   cursor: pointer;
 `
-
-
 export type PageItem={
   id: string
   url: string
@@ -54,6 +52,7 @@ type PagesTableProps={
 export default function PagesTable({ pages, onDeletePages, getElemForChange, getElemForOpen }:PagesTableProps) {
   const privileges = authServices.userRole
 
+
   return (
     <>
       <Typography component="h2">Заявки на оборудование</Typography>
@@ -70,7 +69,7 @@ export default function PagesTable({ pages, onDeletePages, getElemForChange, get
           </TableRow>
         </TableHead>
         <TableBody>
-          {pages && pages.map((obj: PageItem, index) => (
+          {pages && pages.map((obj: PageItem, index:number) => (
             <TableRow key={index}>
               <TableCellCustom>{index + 1}</TableCellCustom>
               <TableCellCustom>{obj.url}</TableCellCustom>

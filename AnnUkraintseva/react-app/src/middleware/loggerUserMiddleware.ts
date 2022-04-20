@@ -21,47 +21,47 @@ const actionActive = (action:any) => {
     case PageActionTypes.PAGE_PENDING:
     case PageActionTypes.PAGE_SUCCESS:
     case PageActionTypes.PAGE_ERROR:
-      return 'Работа со страницами'
+      return 'Р Р°Р±РѕС‚Р° СЃРѕ СЃС‚СЂР°РЅРёС†Р°РјРё'
 
     case PageActionTypes.PAGE_DELETE_ERROR:
     case PageActionTypes.PAGE_DELETE_SUCCESS:
-      return 'Удаление страницы'
+      return 'РЈРґР°Р»РµРЅРёРµ СЃС‚СЂР°РЅРёС†С‹'
 
     case PageActionTypes.PAGE_ADD_ERROR:
     case PageActionTypes.PAGE_ADD_SUCCESS:
-      return 'Добавление страницы'
+      return 'Р”РѕР±Р°РІР»РµРЅРёРµ СЃС‚СЂР°РЅРёС†С‹'
 
     case PageActionTypes.PAGE_FORM_EDIT_START:
     case PageActionTypes.PAGE_FORM_EDIT_SAVE:
     case PageActionTypes.PAGE_FORM_EDIT_RESET:
-      return 'Редактирование страниц'
+      return 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЃС‚СЂР°РЅРёС†'
 
     case ActiveActionTypes.ACTIVE_PENDING:
     case ActiveActionTypes.ACTIVE_SUCCESS:
     case ActiveActionTypes.ACTIVE_ERROR:
-        return 'Просмотр действий пользователей'
+        return 'РџСЂРѕСЃРјРѕС‚СЂ РґРµР№СЃС‚РІРёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№'
 
     case PageActionTypes.ONE_PAGE_PENDING:
     case PageActionTypes.ONE_PAGE_SUCCESS:
     case PageActionTypes.ONE_PAGE_ERROR:
-        return 'Просмотр страницы'
+        return 'РџСЂРѕСЃРјРѕС‚СЂ СЃС‚СЂР°РЅРёС†С‹'
 
     case CommentActionTypes.COMMENT_PENDING:
     case CommentActionTypes.COMMENT_SUCCESS:
     case CommentActionTypes.COMMENT_ERROR:
-      return 'Просмотр комментариев'
+      return 'РџСЂРѕСЃРјРѕС‚СЂ РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ'
 
     case CommentActionTypes.COMMENT_ADD_SUCCESS:
     case CommentActionTypes.COMMENT_ADD_ERROR:
-      return 'Добавление комментария'
+      return 'Р”РѕР±Р°РІР»РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ'
     
     case AllUserActionTypes.ALL_USER_PENDING:
     case AllUserActionTypes.ALL_USER_SUCCESS:
     case AllUserActionTypes.ALL_USER_ERROR:
-      return 'Просмотр пользователей'
+      return 'РџСЂРѕСЃРјРѕС‚СЂ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№'
 
     default:
-      return 'Такого действия не найдено'
+      return 'РўР°РєРѕРіРѕ РґРµР№СЃС‚РІРёСЏ РЅРµ РЅР°Р№РґРµРЅРѕ'
   }
 }
 

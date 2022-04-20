@@ -1,28 +1,30 @@
 import { Reducer } from 'redux'
-import {
-  PageActionTypes, PageActions, PagePayload
+import { PageActionTypes, PageActions, PagePayload } from '../actions/page'
 
-} from '../actions/page'
 
-export type PageReduserState={
-  loading: boolean,
-  data: PagePayload[],
-  oneData:PagePayload[] | [],
-  error: Error | null,
-  currentID: string | null,
-  url: string | null,
+
+export type PageReduserState = {
+  loading: boolean
+  data: PagePayload[]
+  oneData: PagePayload[] | []
+  error: Error | null
+  currentID: string | null
+  url: string | null
 }
 
 const initialState: PageReduserState = {
   loading: false,
   data: [],
-  oneData:[],
+  oneData: [],
   error: null,
   currentID: null,
   url: null,
 }
 
-export const pageReducer: Reducer<PageReduserState, PageActions > = (state = initialState, action) => {
+export const pageReducer: Reducer<PageReduserState, PageActions> = (
+  state = initialState,
+  action,
+) => {
   switch (action.type) {
     case PageActionTypes.PAGE_PENDING:
       return {
@@ -44,6 +46,7 @@ export const pageReducer: Reducer<PageReduserState, PageActions > = (state = ini
     case PageActionTypes.PAGE_DELETE_SUCCESS:
       return {
         ...state,
+        loading: false,
       }
     case PageActionTypes.PAGE_DELETE_ERROR:
       return {
@@ -60,7 +63,6 @@ export const pageReducer: Reducer<PageReduserState, PageActions > = (state = ini
     case PageActionTypes.PAGE_ADD_ERROR:
       return {
         ...state,
-        loading: false,
         error: action.payload,
       }
     case PageActionTypes.PAGE_FORM_EDIT_START:
@@ -72,30 +74,33 @@ export const pageReducer: Reducer<PageReduserState, PageActions > = (state = ini
       return {
         ...state,
         currentID: null,
-        data: state.data.map((item: PagePayload) => (item.id === state.currentID ? action.payload : item)),
+        data: state.data.map((item: PagePayload) =>
+          item.id === state.currentID ? {...item,...action.payload}: item,
+        ),
       }
     case PageActionTypes.PAGE_FORM_EDIT_RESET:
       return {
         ...state,
         currentID: null,
       }
-      case PageActionTypes.ONE_PAGE_PENDING:
-        return {
-          ...state,
-          loading: true,
-        }
-      case PageActionTypes.ONE_PAGE_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          oneData: action.payload,
-        }
-      case PageActionTypes.ONE_PAGE_ERROR:
-        return {
-          ...state,
-          loading: false,
-          error: action.payload,
-        }
+    case PageActionTypes.ONE_PAGE_PENDING:
+      return {
+        ...state,
+        loading: true,
+      }
+    case PageActionTypes.ONE_PAGE_SUCCESS:
+      console.log('!action.payload', action.payload)
+      return {
+        ...state,
+        loading: false,
+        oneData: action.payload,
+      }
+    case PageActionTypes.ONE_PAGE_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      }
 
     default:
       return state

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { pageFetch, pageDeleteFetch, pageFormEditStart, PagePayload} from "../actions/page"
+import { pageFetch, pageDeleteFetch, PagePayload, pageFormEditStart} from "../actions/page"
 import PagesTable from "../components/PagesTableMUI"
 import { pageCurrent } from "../page/pageCurrent"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -19,6 +19,8 @@ export default function PagesTableContainers(){
     const currentPage = currentPageState[0]
 
     const getElemForChange = (id: string) => {
+        console.log('Change id', id)
+
         dispatch(pageFormEditStart(id))
       }
 
